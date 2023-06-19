@@ -9,12 +9,10 @@ export class NavbarComponent implements OnInit {
   constructor() { }
   ngOnInit(): void { }
   toggleClass(list: HTMLDivElement):void {
-    if (list.style.right == '0') {
-      list.style.right = '100%'
+    if (list.style.right == '0px') {
+      list.style.right = '-100%'
     } else {
-      list.style.right = '0'
+      list.style.right = '0px'
     }
-    console.log(list.style.right)
-    console.log("hellow");
   }
 }
