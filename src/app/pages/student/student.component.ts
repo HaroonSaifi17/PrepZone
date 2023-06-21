@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleApiService, UserInfo } from 'src/app/services/google-api.service';
 
 @Component({
   selector: 'app-student',
@@ -8,11 +7,7 @@ import { GoogleApiService, UserInfo } from 'src/app/services/google-api.service'
 })
 export class StudentComponent implements OnInit {
 
-  userInfo?: UserInfo
-  constructor(private googleApi:GoogleApiService) {
-      googleApi.userProfileSubject.subscribe(info=>{
-         this.userInfo=info
-    })
+  constructor() {
 }
 
   ngOnInit(): void {

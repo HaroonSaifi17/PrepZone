@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc'
-import { Subject } from 'rxjs'
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks'
 
 const oAuthConfig: AuthConfig = {
   issuer: 'https://accounts.google.com',
@@ -9,42 +9,29 @@ const oAuthConfig: AuthConfig = {
   clientId:
     '94004341890-n5p6bivcp3hgi04q8ssavsst61vpp55a.apps.googleusercontent.com',
   scope: 'openid profile email',
-}
-export interface UserInfo {
-  info: {
-    sub: string
-    email: string
-    name: string
-    picture: string
-  }
+  responseType: 'id_token token',
+  oidc: true,
 }
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleApiService {
-  userProfileSubject = new Subject<UserInfo>()
-  constructor(private readonly oAuthService: OAuthService) {}
-  LoggedIn(): void {
-    this.oAuthService.configure(oAuthConfig)
-    this.oAuthService.logoutUrl = 'https://www.google.com?accounts?Logout'
-    this.oAuthService.loadDiscoveryDocument().then(() => {
-      this.oAuthService.tryLoginImplicitFlow().then(() => {
-        if (!this.oAuthService.hasValidIdToken()) {
-          this.oAuthService.initLoginFlow()
-        } else {
-          this.oAuthService.loadUserProfile().then((userProfile) => {
-            this.userProfileSubject.next(userProfile as UserInfo)
-          })
-        }
-      })
-    })
+  constructor(private oauthService: OAuthService) {
+    this.configureOAuth();
   }
 
-  isLoggedIn(): boolean {
-    return this.oAuthService.hasValidIdToken()
+  loginWithGoogle() {
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndLogin();
+    this.oauthService.events.subscribe((event) => {
+    console.log('OAuth Event:', event);
+      setTimeout(()=>{
+this.oauthService.getAccessToken()
+      },2000)
+  });
   }
 
-  signout() {
-    this.oAuthService.logOut()
+  private configureOAuth() {
+    this.oauthService.configure(oAuthConfig);
   }
 }
