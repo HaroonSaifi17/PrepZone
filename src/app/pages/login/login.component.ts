@@ -8,9 +8,10 @@ import { GoogleApiService } from 'src/app/services/google-api.service'
 })
 export class LoginComponent implements OnInit {
   constructor(private readonly googleApi: GoogleApiService) {
+    googleApi.checkLoggedIn()
   }
-  LoggedIn(): void {
-    this.googleApi.loginWithGoogle()
+logIn(): void {
+    this.googleApi.loggedIn()
   }
 
   ngOnInit(): void {}
