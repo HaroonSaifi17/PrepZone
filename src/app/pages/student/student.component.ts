@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
+import { Student } from 'src/app/services/student.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,12 +11,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
- apiResponse$: Observable<boolean>=of(false);
-  constructor(private api:ApiService) {
+ userData$?: Observable<Student>;
+  constructor(private api:ApiService, private router:Router) {
 }
 
   ngOnInit(): void {
-    this.apiResponse$ = this.api.checkNewUser();
+    this.userData$ = this.api.userData();
   }
 
   userLogout():void{

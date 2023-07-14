@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { StudentComponent } from './pages/student/student.component';
 import { CorsInterceptor } from './services/cors.interceptor';
-import { CookieService } from 'ngx-cookie-service';
+import { LoginCallbackComponent } from './pages/login-callback/login-callback.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
     NavbarComponent,
     HeroSectionComponent,
     StudentComponent,
+    LoginCallbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { CookieService } from 'ngx-cookie-service';
       provide: HTTP_INTERCEPTORS,
       useClass: CorsInterceptor,
       multi: true
-    },CookieService],
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
