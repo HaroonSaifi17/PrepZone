@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { StudentComponent } from './pages/student/student.component';
 import { CorsInterceptor } from './services/cors.interceptor';
 import { LoginCallbackComponent } from './pages/login-callback/login-callback.component';
+import { StudentNavBarComponent } from './pages/student/student-nav-bar/student-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginCallbackComponent } from './pages/login-callback/login-callback.co
     HeroSectionComponent,
     StudentComponent,
     LoginCallbackComponent,
+    StudentNavBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,7 @@ export class CorsInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error) => {
+          localStorage.removeItem('token')
           window.location.href=environment.trinityApiUrl + '/login'
         return throwError(error);
       })
