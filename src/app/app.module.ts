@@ -12,6 +12,10 @@ import { StudentComponent } from './pages/student/student.component';
 import { CorsInterceptor } from './services/cors.interceptor';
 import { LoginCallbackComponent } from './pages/login-callback/login-callback.component';
 import { StudentNavBarComponent } from './pages/student/student-nav-bar/student-nav-bar.component';
+import { StudentDashboardComponent } from './pages/student/student-dashboard/student-dashboard.component';
+import { StudentTestComponent } from './pages/student/student-test/student-test.component';
+import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component';
+import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { StudentNavBarComponent } from './pages/student/student-nav-bar/student-
     StudentComponent,
     LoginCallbackComponent,
     StudentNavBarComponent,
+    StudentDashboardComponent,
+    StudentTestComponent,
+    StudentNotesComponent,
+    StudentSettingsComponent,
   ],
   imports: [
     BrowserModule,

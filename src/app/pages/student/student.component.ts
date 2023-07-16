@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { Student } from 'src/app/services/student.interface';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-student',

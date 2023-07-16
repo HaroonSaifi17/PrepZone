@@ -1,1 +1,6 @@
-<app-student-nav-bar></app-student-nav-bar>
+<div class="max-w-screen-xl mx-auto" >
+<app-student-nav-bar [profileImg]="(userData$ | async)?.profileImg"></app-student-nav-bar>
+</div>
+<div class="mt-16">
+  <router-outlet></router-outlet>
+</div>
