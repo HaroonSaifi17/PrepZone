@@ -1,0 +1,25 @@
+<h1 class="font-bold text-xl">Performance</h1>
+<div class="flex flex-wrap">
+  <div>
+    <div class="w-24 relative">
+      <canvas id="MyChart">{{ topChart }}</canvas>
+      <p
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      >
+        220/300
+      </p>
+    </div>
+    <p class="text-xs text-center">Highest Score</p>
+  </div>
+  <div>
+    <div class="w-24 relative">
+      <canvas id="MyChart2">{{ averageChart }}</canvas>
+      <p
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      >
+        120/300
+      </p>
+    </div>
+    <p class="text-xs text-center">Average Score</p>
+  </div>
+</div>

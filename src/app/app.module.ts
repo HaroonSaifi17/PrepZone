@@ -15,6 +15,9 @@ import { StudentDashboardComponent } from './pages/student/student-dashboard/stu
 import { StudentTestComponent } from './pages/student/student-test/student-test.component';
 import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component';
 import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component';
+import { NeetDashboardComponent } from './pages/student/student-dashboard/neet-dashboard/neet-dashboard.component';
+import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-dashboard/jee-dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,12 +31,15 @@ import { StudentSettingsComponent } from './pages/student/student-settings/stude
     StudentTestComponent,
     StudentNotesComponent,
     StudentSettingsComponent,
+    NeetDashboardComponent,
+    JeeDashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    NgChartsModule
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { environment } from 'src/environments/environment'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-navbar',
@@ -7,16 +7,16 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit(): void { }
-  toggleClass(list: HTMLDivElement):void {
+  toggleClass(list: HTMLDivElement): void {
     if (list.style.right == '0px') {
       list.style.right = '-100%'
     } else {
       list.style.right = '0px'
     }
   }
-navigateToRoute() {
-    window.location.href = environment.trinityApiUrl + '/login'
-}
+  navigateToRoute() {
+    this.router.navigateByUrl('logincallback')
+  }
 }
