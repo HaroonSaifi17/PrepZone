@@ -1,17 +1,20 @@
+<div class="p-4">
 <div class="flex">
   <a
           routerLink="jee"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-    class="flex-1 text-center mr-2 bg-red-200 rounded-md">
+    class="flex-1 text-center mr-2 bg-red-200 rounded-md p-2">
     JEE
   </a>
   <a
           routerLink="neet"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-    class="flex-1 text-center ml-2 bg-red-200 radius rounded-md">
+    class="flex-1 text-center ml-2 bg-red-200 radius rounded-md p-2">
     NEET
   </a>
 </div>
 <router-outlet></router-outlet>
+</div>
+<app-student-footer></app-student-footer>
