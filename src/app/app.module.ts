@@ -20,6 +20,7 @@ import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-das
 import { NgChartsModule } from 'ng2-charts';
 import { StudentFooterComponent } from './pages/student/student-footer/student-footer.component';
 import { StudentResultComponent } from './pages/student/student-result/student-result.component';
+import { NewStudentComponent } from './pages/new-student/new-student.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { StudentResultComponent } from './pages/student/student-result/student-r
     JeeDashboardComponent,
     StudentFooterComponent,
     StudentResultComponent,
+    NewStudentComponent,
   ],
   imports: [
     BrowserModule,

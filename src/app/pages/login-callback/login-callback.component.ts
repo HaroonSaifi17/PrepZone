@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { Observable, Subscription } from 'rxjs'
+import { ApiService } from 'src/app/services/api.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -7,11 +9,16 @@ import { environment } from 'src/environments/environment'
   templateUrl: './login-callback.component.html',
   styleUrls: ['./login-callback.component.scss'],
 })
-export class LoginCallbackComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) {}
-
+export class LoginCallbackComponent implements OnInit, OnDestroy {
+  public apiSubscription: Subscription | undefined
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) { }
   ngOnInit(): void {
-    let token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+
     if (token) {
       this.router.navigate(['/student'], {
         queryParams: {
@@ -19,11 +26,20 @@ export class LoginCallbackComponent implements OnInit {
         },
         queryParamsHandling: 'merge',
       })
-    } else {
-      this.route.queryParams.subscribe((params) => {
-        token = params['token']
-        if (token) {
-          localStorage.setItem('token', token)
+      return
+    }
+
+    this.route.queryParams.subscribe((params) => {
+      const tokenFromParams = params['token']
+      if (!tokenFromParams) {
+        window.location.href = environment.trinityApiUrl + '/login'
+        return
+      }
+
+      localStorage.setItem('token', tokenFromParams)
+      this.apiSubscription = this.api.checkNew().subscribe((data) => {
+        if (data.isNew) {
+          console.log('ddd')
           this.router.navigate(['/student'], {
             queryParams: {
               token: null,
@@ -31,9 +47,21 @@ export class LoginCallbackComponent implements OnInit {
             queryParamsHandling: 'merge',
           })
         } else {
-          window.location.href = environment.trinityApiUrl + '/login'
+          this.router.navigate(['/newStudent'], {
+            state: {
+              viaNavigate: true,
+            },
+            queryParams: {
+              token: null,
+            },
+            queryParamsHandling: 'merge',
+          })
         }
       })
-    }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.apiSubscription?.unsubscribe()
   }
 }

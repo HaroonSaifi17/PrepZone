@@ -27,4 +27,7 @@ export class ApiService {
   neetData():Observable<NeetData>{
   return this.http.get<NeetData>(environment.trinityApiUrl + '/student/neetData')
   }
+  checkNew():Observable<{isNew:boolean}>{
+    return this.http.get<{isNew:boolean}>(environment.trinityApiUrl + '/student/checkNew')
+  }
 }
