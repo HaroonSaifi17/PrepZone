@@ -19,6 +19,7 @@ import { NeetDashboardComponent } from './pages/student/student-dashboard/neet-d
 import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-dashboard/jee-dashboard.component';
 import { NgChartsModule } from 'ng2-charts';
 import { StudentFooterComponent } from './pages/student/student-footer/student-footer.component';
+import { StudentResultComponent } from './pages/student/student-result/student-result.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { StudentFooterComponent } from './pages/student/student-footer/student-f
     NeetDashboardComponent,
     JeeDashboardComponent,
     StudentFooterComponent,
+    StudentResultComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,14 @@ module.exports = {
     "./src/app/pages/**/**/*.{html,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        offWhite:'#F1F6F9',
+        grey:'#9BA4B5',
+        navy:'#394867',
+        darkNavy:'#212A3E'
+      }
+    },
   },
   plugins: [],
 }

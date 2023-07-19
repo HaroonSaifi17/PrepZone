@@ -6,6 +6,7 @@ import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-das
 import { NeetDashboardComponent } from './pages/student/student-dashboard/neet-dashboard/neet-dashboard.component'
 import { StudentDashboardComponent } from './pages/student/student-dashboard/student-dashboard.component'
 import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component'
+import { StudentResultComponent } from './pages/student/student-result/student-result.component'
 import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component'
 import { StudentTestComponent } from './pages/student/student-test/student-test.component'
 import { StudentComponent } from './pages/student/student.component'
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'settings',
         component: StudentSettingsComponent,
+      },
+      {
+        path: 'result',
+        component: StudentResultComponent,
       },
       { path: '**', redirectTo: 'dashboard' },
     ],

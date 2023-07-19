@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Chart } from 'chart.js'
+import { Subscription } from 'rxjs'
+import { ApiService } from 'src/app/services/api.service'
+import { JeeData } from 'src/app/services/jeeData.interface'
 
 @Component({
   selector: 'app-jee-dashboard',
   templateUrl: './jee-dashboard.component.html',
   styleUrls: ['./jee-dashboard.component.scss'],
 })
-export class JeeDashboardComponent implements OnInit {
+export class JeeDashboardComponent implements OnInit, OnDestroy {
   public averageChart: any
   public topChart: any
   public overollAccuracyChart: any
@@ -14,17 +17,36 @@ export class JeeDashboardComponent implements OnInit {
   public physicsAccuracyChart: any
   public chemistryAccuracyChart: any
   public timmingChart: any
-  public topMarks:number=0
-  public averageMarks:number=0
-  public totalMarks:number=300
-  public physicsAccuracy:number=75
-  public chmistryAccuracy:number=80
-  public mathAccuracy:number=50
+  public dataSubscription: Subscription | undefined
 
-  
-  constructor() { }
+  public name:string=''
+  public topMarks: number = 0
+  public averageMarks: number = 0
+  public totalMarks: number = 300
+  public physicsAccuracy: number = 0
+  public chemistryAccuracy: number = 0
+  public mathAccuracy: number = 0
+  public mathTime: number = 0
+  public chemistryTime: number = 0
+  public physicsTime: number = 0
+  public totalAccuracy = 0
+
+  constructor(private api:ApiService){}
 
   ngOnInit(): void {
+    this.dataSubscription = this.api.jeeData().subscribe((data:JeeData) => {
+      this.name=data.name
+      this.topMarks = data.topMarks
+      this.averageMarks = data.averageMarks
+      this.physicsAccuracy = data.physicsAccuracy
+      this.chemistryAccuracy = data.chemistryAccuracy
+      this.mathAccuracy = data.mathAccuracy
+      this.mathTime = data.mathTime
+      this.chemistryTime = data.chemistryTime
+      this.physicsTime = data.physicsTime
+      this.totalAccuracy = Math.round(
+        (this.physicsAccuracy + this.chemistryAccuracy + this.mathAccuracy) / 3
+      )
     this.createAverageChart()
     this.createTopChart()
     this.overollAccChart()
@@ -32,20 +54,18 @@ export class JeeDashboardComponent implements OnInit {
     this.chemistryAccChart()
     this.mathAccChart()
     this.timeChart()
+    })
   }
 
   createTopChart() {
-    const marksObtained = 220
-    const totalMarks = 300
-    const remainingMarks = totalMarks - marksObtained
-    const percentage = ((marksObtained / totalMarks) * 100).toFixed(2)
+    const remainingMarks = this.totalMarks - this.topMarks
     this.topChart = new Chart('MyChart', {
       type: 'doughnut',
       data: {
         labels: ['Marks Obtained', 'Remaining Marks'],
         datasets: [
           {
-            data: [marksObtained, remainingMarks],
+            data: [this.topMarks, remainingMarks],
             backgroundColor: ['red', 'gray'],
           },
         ],
@@ -62,16 +82,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   createAverageChart() {
-    const marksObtained = 120
-    const totalMarks = 300
-    const remainingMarks = totalMarks - marksObtained
+    const remainingMarks = this.totalMarks - this.averageMarks
     this.averageChart = new Chart('MyChart2', {
       type: 'doughnut',
       data: {
         labels: ['Marks Obtained', 'Remaining Marks'],
         datasets: [
           {
-            data: [marksObtained, remainingMarks],
+            data: [this.averageMarks, remainingMarks],
             backgroundColor: ['red', 'gray'],
           },
         ],
@@ -88,15 +106,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   overollAccChart() {
-    const correct = 75
-    const wrong = 25
+    const wrong = 100 - this.totalAccuracy
     this.overollAccuracyChart = new Chart('MyChart3', {
       type: 'doughnut',
       data: {
         labels: ['Correct', 'Wrong'],
         datasets: [
           {
-            data: [correct, wrong],
+            data: [this.totalAccuracy, wrong],
             backgroundColor: ['blue', 'gray'],
           },
         ],
@@ -113,15 +130,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   physicsAccChart() {
-    const correct = 80
-    const wrong = 20
+    const wrong = 100 - this.physicsAccuracy
     this.physicsAccuracyChart = new Chart('MyChart4', {
       type: 'doughnut',
       data: {
         labels: ['Correct', 'Wrong'],
         datasets: [
           {
-            data: [correct, wrong],
+            data: [this.physicsAccuracy, wrong],
             backgroundColor: ['blue', 'gray'],
           },
         ],
@@ -138,15 +154,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   chemistryAccChart() {
-    const correct = 85
-    const wrong = 20
+    const wrong = 100 - this.chemistryAccuracy
     this.chemistryAccuracyChart = new Chart('MyChart5', {
       type: 'doughnut',
       data: {
         labels: ['Correct', 'Wrong'],
         datasets: [
           {
-            data: [correct, wrong],
+            data: [this.chemistryAccuracy, wrong],
             backgroundColor: ['blue', 'gray'],
           },
         ],
@@ -163,15 +178,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   mathAccChart() {
-    const correct = 50
-    const wrong = 50
+    const wrong = 100 - this.mathAccuracy
     this.mathAccuracyChart = new Chart('MyChart6', {
       type: 'doughnut',
       data: {
         labels: ['Correct', 'Wrong'],
         datasets: [
           {
-            data: [correct, wrong],
+            data: [this.mathAccuracy, wrong],
             backgroundColor: ['blue', 'gray'],
           },
         ],
@@ -188,17 +202,14 @@ export class JeeDashboardComponent implements OnInit {
     })
   }
   timeChart() {
-    const physic = 1.25
-    const chemistry = 2
-    const math = 3.2
     this.timmingChart = new Chart('MyChart7', {
       type: 'bar',
       data: {
-        labels: ['Physics', 'Chemistry','Math'],
+        labels: ['Physics', 'Chemistry', 'Math'],
         datasets: [
           {
-            data: [physic, chemistry,math],
-            backgroundColor: ['yellow','green','blue'],
+            data: [this.physicsTime, this.chemistryTime, this.mathTime],
+            backgroundColor: ['yellow', 'green', 'blue'],
           },
         ],
       },
@@ -212,5 +223,7 @@ export class JeeDashboardComponent implements OnInit {
       },
     })
   }
-
+  ngOnDestroy(): void {
+    this.dataSubscription?.unsubscribe()
+  }
 }

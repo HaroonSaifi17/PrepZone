@@ -1,11 +1,11 @@
 <nav
-  class="flex h-16 justify-between items-center p-4 mx-auto max-w-screen-xl bg-red-300"
+  class="flex h-16 justify-between items-center p-4 mx-auto max-w-screen-xl bg-darkNavy"
 >
   <div>
     <a class="mr-4 sm:hidden" (click)="addClassToElement()">
       <i class="fa-solid fa-bars fa-xl"></i>
     </a>
-    <a href="#home">Trinity</a>
+    <a class="text-white" href="#home">Trinity</a>
   </div>
   <div>
     <img
@@ -16,14 +16,13 @@
   </div>
 </nav>
 <div class="flex max-w-screen-xl mx-auto">
-  <div class="bg-red-200 left-nav">
+  <div class="bg-navy left-nav">
     <ul class="m-4 max-sm:m-2">
-      <li>
+      <li class="my-4">
         <a
           class="p-2"
           routerLink="dashboard"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
           ><span class="w-5"><i class="fa-solid fa-house"></i></span
           ><span
             [ngClass]="{ navToggle: isClassAdded }"
@@ -32,15 +31,12 @@
           ></a
         >
       </li>
-    </ul>
-    <ul class="m-4 max-sm:m-2">
-      <li>
+      <li class="my-4">
         <a
           class="p-2"
           routerLink="notes"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          ><span><i class="fa-solid fa-file"></i></span
+          ><span><i class="fa-solid fa-file mx-[3px]"></i></span
           ><span
             [ngClass]="{ navToggle: isClassAdded }"
             class="pl-2 max-sm:hidden"
@@ -48,15 +44,12 @@
           ></a
         >
       </li>
-    </ul>
-    <ul class="m-4 max-sm:m-2">
-      <li>
+      <li class="my-4">
         <a
           class="p-2"
           routerLink="test"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          ><span><i class="fa-solid fa-square-pen"></i></span
+          ><span><i class="fa-solid fa-square-pen mx-[2px]"></i></span
           ><span
             [ngClass]="{ navToggle: isClassAdded }"
             class="pl-2 max-sm:hidden"
@@ -64,15 +57,25 @@
           ></a
         >
       </li>
-    </ul>
-    <ul class="m-4 max-sm:m-2">
-      <li>
+      <li class="my-4">
+        <a
+          class="p-2"
+          routerLink="result"
+          routerLinkActive="active"
+          ><span><i class="fa-solid fa-square-poll-vertical mx-[2px]"></i></span
+          ><span
+            [ngClass]="{ navToggle: isClassAdded }"
+            class="pl-2 max-sm:hidden"
+            >Result</span
+          ></a
+        >
+      </li>
+      <li class="my-4">
         <a
           class="p-2"
           routerLink="settings"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          ><span><i class="fa-solid fa-gear"></i></span
+          ><span><i class="fa-solid fa-gear mx-[1px]"></i></span
           ><span
             [ngClass]="{ navToggle: isClassAdded }"
             class="pl-2 max-sm:hidden"
@@ -82,7 +85,7 @@
       </li>
     </ul>
   </div>
-  <div class="main-content bg-green-50 flex-1 overflow-y-auto">
+  <div class="main-content bg-offWhite flex-1 overflow-y-auto">
     <router-outlet></router-outlet>
   </div>
 </div>

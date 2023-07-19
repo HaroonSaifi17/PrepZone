@@ -1,3 +1,6 @@
+<h1 class="font-bold text-2xl my-4">
+  Welcome {{name}}
+</h1>
 <h1 class="font-bold text-xl my-4">Performance</h1>
 <div class="flex flex-wrap flex-1 justify-around">
   <div class="w-1/4 min-w-[100px] max-w-[160px]">
@@ -6,7 +9,7 @@
       <p
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        220/300
+        {{topMarks}}/{{totalMarks}}
       </p>
     </div>
     <p class="text-xs text-center">Highest Score</p>
@@ -17,7 +20,7 @@
       <p
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        120/300
+        {{averageMarks}}/{{totalMarks}}
       </p>
     </div>
     <p class="text-xs text-center">Average Score</p>
@@ -31,7 +34,7 @@
       <p
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        75%
+        {{ totalAccuracy}}%
       </p>
     </div>
     <p class="text-xs text-center">overoll</p>
@@ -43,7 +46,7 @@
         <p
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         >
-          80%
+          {{physicsAccuracy}}%
         </p>
       </div>
       <p class="text-xs text-center">Physics</p>
@@ -54,7 +57,7 @@
         <p
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         >
-          85%
+          {{chemistryAccuracy}}%
         </p>
       </div>
       <p class="text-xs text-center">Chemistry</p>
@@ -65,7 +68,7 @@
         <p
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         >
-          50%
+          {{mathAccuracy}}%
         </p>
       </div>
       <p class="text-xs text-center">Math</p>

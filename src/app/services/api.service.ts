@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { JeeData } from './jeeData.interface';
+import { NeetData } from './neetData.interface';
 import { Student } from './student.interface';
 
 @Injectable({
@@ -18,5 +20,11 @@ export class ApiService {
   }
   userData():Observable<Student>{
   return this.http.get<Student>(environment.trinityApiUrl + '/student/data')
+  }
+  jeeData():Observable<JeeData>{
+  return this.http.get<JeeData>(environment.trinityApiUrl + '/student/jeeData')
+  }
+  neetData():Observable<NeetData>{
+  return this.http.get<NeetData>(environment.trinityApiUrl + '/student/neetData')
   }
 }
