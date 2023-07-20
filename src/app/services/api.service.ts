@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JeeData } from './jeeData.interface';
 import { NeetData } from './neetData.interface';
-import { Student } from './student.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +13,11 @@ export class ApiService {
   constructor(private http: HttpClient,private router:Router) {
   }
   logout():void{
-   this.http.get(environment.trinityApiUrl + '/logout')
    localStorage.removeItem('token')
    this.router.navigate(['/'])
   }
-  userData():Observable<Student>{
-  return this.http.get<Student>(environment.trinityApiUrl + '/student/data')
+  userImg():Observable<{profileImg:string}>{
+  return this.http.get<{profileImg:string}>(environment.trinityApiUrl + '/student/profileImg')
   }
   jeeData():Observable<JeeData>{
   return this.http.get<JeeData>(environment.trinityApiUrl + '/student/jeeData')
@@ -27,7 +25,11 @@ export class ApiService {
   neetData():Observable<NeetData>{
   return this.http.get<NeetData>(environment.trinityApiUrl + '/student/neetData')
   }
-  checkNew():Observable<{isNew:boolean}>{
-    return this.http.get<{isNew:boolean}>(environment.trinityApiUrl + '/student/checkNew')
+  checkNew():Observable<{isNew:boolean,name:string}>{
+    return this.http.get<{isNew:boolean,name:string}>(environment.trinityApiUrl + '/student/checkNew')
+  }
+  newStudentPost(formData:{name:string,phoneNumber:number,prep:string}){
+    console.log(formData)
+    return this.http.post(environment.trinityApiUrl + '/student/newStudentPost',formData)
   }
 }

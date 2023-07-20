@@ -21,6 +21,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { StudentFooterComponent } from './pages/student/student-footer/student-footer.component';
 import { StudentResultComponent } from './pages/student/student-result/student-result.component';
 import { NewStudentComponent } from './pages/new-student/new-student.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NewStudentComponent } from './pages/new-student/new-student.component';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,

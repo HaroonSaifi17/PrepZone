@@ -1,2 +1,65 @@
-<p>new-student works!</p>
-helllo
+<div class="w-full h-[100vh] relative p-2">
+  <div
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 p-4 pb-6 rounded-md max-w-[400px] w-[80vw]"
+  >
+    <h3 class="my-5 text-xl font-bold text-center">Complete your profile</h3>
+    <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm" ngNativeValidate>
+      <label for="input" class="text-gray-500">Name</label>
+      <input
+        ngModel
+        class="mb-2 w-full rounded-sm p-1"
+        type="text"
+        name="name"
+        [value]="name"
+        required
+      />
+      <label for="input" class="text-gray-500">Phone Number</label>
+      <input
+        ngModel
+        class="mb-3 w-full rounded-sm p-1"
+        type="number"
+        name="phoneNumber"
+        value=""
+        required
+        min="1000000000"
+        max="10000000000"
+      />
+      <label class="text-gray-500" for=""> Preparing For </label>
+      <div class="mb-6 mt-2">
+        <span class="bg-gray-400 p-2 px-0 rounded-l-sm">
+          <input
+            ngModel
+            class="peer hidden appearance-none outline-none"
+            type="radio"
+            name="prep"
+            value="Neet"
+            id="neet"
+          />
+          <label
+            class="cursor-pointer select-none p-2 rounded-l-sm text-center peer-checked:bg-gray-800 peer-checked:font-bold peer-checked:text-white"
+            for="neet"
+            >Neet</label
+          >
+        </span>
+        <span class="bg-gray-400 p-2 px-0 rounded-r-sm">
+          <input
+            ngModel
+            class="peer hidden appearance-none outline-none"
+            type="radio"
+            name="prep"
+            value="Jee"
+            id="jee"
+          />
+          <label
+            class="cursor-pointer select-none p-2 rounded-r-sm text-center peer-checked:bg-gray-800 peer-checked:font-bold peer-checked:text-white"
+            for="jee"
+            >Jee</label
+          >
+        </span>
+      </div>
+      <button type="submit" class="p-2 bg-slate-800 text-white mt-4 rounded-md">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>

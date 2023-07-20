@@ -50,6 +50,7 @@ export class LoginCallbackComponent implements OnInit, OnDestroy {
           this.router.navigate(['/newStudent'], {
             state: {
               viaNavigate: true,
+              name:data.name
             },
             queryParams: {
               token: null,
