@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { ApiService } from 'src/app/services/api.service'
+import { ProfileData } from 'src/app/services/profileData.interface'
 
 @Component({
   selector: 'app-student-settings',
   templateUrl: './student-settings.component.html',
-  styleUrls: ['./student-settings.component.scss']
+  styleUrls: ['./student-settings.component.scss'],
 })
 export class StudentSettingsComponent implements OnInit {
-
-  constructor() { }
+  public profileData$: Observable<ProfileData> | undefined
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.profileData$ = this.api.profileData()
   }
-
+  logout():void{
+    this.api.logout()
+  }
 }
