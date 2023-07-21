@@ -52,4 +52,31 @@ export class ApiService {
       formData
     )
   }
+  pdfData(): Observable<{
+    error: boolean
+    total: number
+    page: number
+    limit: number
+    pdfs: [
+      {
+        name: string
+        url: string
+      }
+    ]
+    pageno: number
+  }> {
+    return this.http.get<{
+      error: boolean
+      total: number
+      page: number
+      limit: number
+      pdfs: [
+        {
+          name: string
+          url: string
+        }
+      ]
+      pageno: number
+    }>(environment.trinityApiUrl + '/notes/pdfs')
+  }
 }
