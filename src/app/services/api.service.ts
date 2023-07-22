@@ -47,7 +47,6 @@ export class ApiService {
     phoneNumber: number
     prep: string
   }) {
-    console.log(formData)
     return this.http.post(
       environment.trinityApiUrl + '/student/newStudentPost',
       formData

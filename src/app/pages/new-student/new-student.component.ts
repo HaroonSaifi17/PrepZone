@@ -18,7 +18,6 @@ export class NewStudentComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log('Form Data:', form.value)
     this.api.newStudentPost(form.value).subscribe(
       (response) => {
         this.router.navigate(['/student/dashboard/jee'])
