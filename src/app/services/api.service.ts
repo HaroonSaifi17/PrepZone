@@ -6,12 +6,13 @@ import { environment } from 'src/environments/environment'
 import { JeeData } from './jeeData.interface'
 import { NeetData } from './neetData.interface'
 import { ProfileData } from './profileData.interface'
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
   logout(): void {
     localStorage.removeItem('token')
     this.router.navigate(['/'])
@@ -52,7 +53,7 @@ export class ApiService {
       formData
     )
   }
-  pdfData(): Observable<{
+  pdfData(query:string): Observable<{
     error: boolean
     total: number
     page: number
@@ -63,7 +64,7 @@ export class ApiService {
         url: string
       }
     ]
-    pageno: number
+    pageno: [number]
   }> {
     return this.http.get<{
       error: boolean
@@ -76,7 +77,22 @@ export class ApiService {
           url: string
         }
       ]
-      pageno: number
-    }>(environment.trinityApiUrl + '/notes/pdfs')
+      pageno: [number]
+    }>(environment.trinityApiUrl + '/notes/pdfs' + query)
+  }
+  pdfDownload(url: string): Observable<void> {
+    return this.http
+      .get(environment.trinityApiUrl + '/notes/pdf/' + url, {
+        responseType: 'blob',
+      })
+      .pipe(
+        map((data: Blob) => {
+          const downloadLink = document.createElement('a')
+          downloadLink.href = URL.createObjectURL(data)
+          downloadLink.download = 'notes.pdf'
+          downloadLink.click()
+          URL.revokeObjectURL(downloadLink.href)
+        })
+      )
   }
 }

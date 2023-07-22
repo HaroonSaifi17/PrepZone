@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/api.service'
   styleUrls: ['./student-notes.component.scss'],
 })
 export class StudentNotesComponent implements OnInit {
-  pdfData$:
+  public pdfData$:
     | Observable<{
       error: boolean
       total: number
@@ -20,14 +20,22 @@ export class StudentNotesComponent implements OnInit {
           url: string
         }
       ]
-      pageno: number
+      pageno: [number]
     }>
     | undefined
+ public search:string=''
+ public subject:string='All'
+ public page:number=1
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.pdfData$=this.api.pdfData()
+    this.getData()
   }
   getData():void{
+    let query:string='?search=' + this.search + '&subject=' + this.subject + '&page=' + this.page  
+    this.pdfData$=this.api.pdfData(query)
+  }
+  pdfDownload(url:string):void{
+      this.api.pdfDownload(url).subscribe()
   }
 }

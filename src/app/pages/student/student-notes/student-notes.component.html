@@ -3,27 +3,41 @@
     <h2 class="font-bold text-xl mb-5 text-center">NOTES</h2>
     <div class="flex justify-center">
       <div class="bg-gray-200 p-1 rounded-full">
-        <input
-          type="search"
-          class="p-2 max-w-[250px] w-[50vw] rounded-full bg-gray-300"
-          placeholder="Search"
-        />
-        <a
-          class="py-2 px-3 w-[40px] inline-block rounded-full bg-gray-300 ml-4"
-        >
+        <input #f (search)="search = f.value;page=1; getData()" type="search"
+          class="p-2 max-w-[250px] w-[50vw] rounded-full bg-gray-300" placeholder="Search" />
+        <a (click)="search = f.value;page=1; getData()" class="py-2 px-3 w-[40px] inline-block rounded-full bg-gray-300 ml-4">
           <i class="fa-solid fa-magnifying-glass"></i>
         </a>
       </div>
     </div>
-    <div class="flex flex-wrap mt-3">
-      <a class="p-2 bg-gray-200 m-2 rounded-full">Physics</a>
-      <a class="p-2 bg-gray-200 m-2 rounded-full">Biology</a>
-      <a class="p-2 bg-gray-200 m-2 rounded-full">Chemistry</a>
-      <a class="p-2 bg-gray-200 m-2 rounded-full">Math</a>
+    <div class="flex flex-wrap mt-3 mb-4">
+      <a [class.dark]="subject == 'All'" (click)="subject = 'All';page=1; getData()"
+        class="p-2 bg-gray-200 m-2 my-1 rounded-full">All</a>
+      <a [class.dark]="subject == 'physics'" (click)="subject = 'physics';page=1; getData()"
+        class="p-2 bg-gray-200 m-2 my-1 rounded-full">Physics</a>
+      <a [class.dark]="subject == 'biology'" (click)="subject = 'biology';page=1; getData()"
+        class="p-2 bg-gray-200 m-2 my-1 rounded-full">Biology</a>
+      <a [class.dark]="subject == 'chemistry'" (click)="subject = 'chemistry';page=1; getData()"
+        class="p-2 bg-gray-200 m-2 my-1 rounded-full">Chemistry</a>
+      <a [class.dark]="subject == 'math'" (click)="subject = 'math';page=1; getData()"
+        class="p-2 bg-gray-200 m-2 my-1 rounded-full">Math</a>
     </div>
-  <div>
-    {{(pdfData$ | async)?.total}}
-  </div>
+    <div *ngIf="pdfData$ | async as pdfData">
+      <div class="p-2 m-1 bg-slate-200" *ngFor="let pdf of pdfData.pdfs" (click)="pdfDownload(pdf.url)">
+        <i class="fa-solid fa-file-pdf mx-3"></i>
+        <span>{{ pdf.name }}</span>
+      </div>
+    <div class="flex justify-center mt-4 flex-wrap">
+      <a *ngFor="let page1 of pdfData.pageno"
+        [class.dark]="page1 == page"
+        (click)="page = page1; getData()"
+          class="rounded-full mx-2 bg-gray-200"
+        ><span class="m-2 aspect-square">{{
+            page1
+            }}</span></a
+      >
+    </div>
+    </div>
   </div>
   <div>
     <app-student-footer></app-student-footer>
