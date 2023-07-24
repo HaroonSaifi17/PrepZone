@@ -22,6 +22,9 @@ import { StudentFooterComponent } from './pages/student/student-footer/student-f
 import { StudentResultComponent } from './pages/student/student-result/student-result.component';
 import { NewStudentComponent } from './pages/new-student/new-student.component';
 import { FormsModule } from '@angular/forms';
+import { StudentTestListComponent } from './pages/student/student-test/student-test-list/student-test-list.component';
+import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component';
+import { BeforeCommaPipe } from './services/before-comma.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { FormsModule } from '@angular/forms';
     StudentFooterComponent,
     StudentResultComponent,
     NewStudentComponent,
+    StudentTestListComponent,
+    StudentGiveTestComponent,
+    BeforeCommaPipe,
   ],
   imports: [
     BrowserModule,

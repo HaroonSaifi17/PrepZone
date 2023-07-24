@@ -94,4 +94,35 @@ export class ApiService {
         })
       )
   }
+  testList(query:string): Observable<{
+    error: boolean
+    total: number
+    page: number
+    limit: number
+    tests: [
+      {
+        name: string
+        exam: string
+        date: string
+        totalQuestions:number
+      }
+    ]
+    pageno: [number]
+  }> {
+    return this.http.get<{
+      error: boolean
+      total: number
+      page: number
+      limit: number
+      tests: [
+        {
+          name: string
+          exam: string
+          date: string
+        totalQuestions:number
+        }
+      ]
+      pageno: [number]
+    }>(environment.trinityApiUrl + '/student/getTest' + query)
+  }
 }

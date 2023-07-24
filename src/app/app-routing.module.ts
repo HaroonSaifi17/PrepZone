@@ -9,6 +9,8 @@ import { StudentDashboardComponent } from './pages/student/student-dashboard/stu
 import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component'
 import { StudentResultComponent } from './pages/student/student-result/student-result.component'
 import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component'
+import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component'
+import { StudentTestListComponent } from './pages/student/student-test/student-test-list/student-test-list.component'
 import { StudentTestComponent } from './pages/student/student-test/student-test.component'
 import { StudentComponent } from './pages/student/student.component'
 import { AuthGuard } from './services/auth.guard'
@@ -53,6 +55,18 @@ const routes: Routes = [
       {
         path: 'test',
         component: StudentTestComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: StudentTestListComponent,
+          },
+          {
+            path: 'give',
+            component: StudentGiveTestComponent,
+          },
+          { path: '**', redirectTo: 'list' },
+        ],
       },
       {
         path: 'settings',
