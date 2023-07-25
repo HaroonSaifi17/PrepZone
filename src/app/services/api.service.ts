@@ -144,4 +144,13 @@ export class ApiService {
         questionIds: [string]
     }>(environment.trinityApiUrl + '/student/getTest/' + id)
   }
+  getquestion(query:string): Observable<{
+    questionText:string
+    options:[string]
+  }> {
+    return this.http.get<{
+    questionText:string
+    options:[string]
+    }>(environment.trinityApiUrl + '/student/getQuestion' + query)
+  }
 }
