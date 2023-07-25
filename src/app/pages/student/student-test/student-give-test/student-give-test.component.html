@@ -1,1 +1,12 @@
-<p>student-give-test works!</p>
+<div class="p-4 pt-6">
+  <div>
+    <a (click)="cancelTest()" class="bg-gray-600 p-2 rounded-md text-white mt-2"
+      >Cancel</a
+    >
+  </div>
+  <div *ngIf="testData$ | async as testData">
+    <div>
+
+    </div>
+  </div>
+</div>

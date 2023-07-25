@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators'
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
   logout(): void {
     localStorage.removeItem('token')
     this.router.navigate(['/'])
@@ -52,7 +52,7 @@ export class ApiService {
       formData
     )
   }
-  pdfData(query:string): Observable<{
+  pdfData(query: string): Observable<{
     error: boolean
     total: number
     page: number
@@ -94,7 +94,7 @@ export class ApiService {
         })
       )
   }
-  testList(query:string): Observable<{
+  testList(query: string): Observable<{
     error: boolean
     total: number
     page: number
@@ -104,7 +104,8 @@ export class ApiService {
         name: string
         exam: string
         date: string
-        totalQuestions:number
+        totalQuestions: number
+        _id: string
       }
     ]
     pageno: [number]
@@ -119,10 +120,28 @@ export class ApiService {
           name: string
           exam: string
           date: string
-        totalQuestions:number
+          totalQuestions: number
+          _id: string
         }
       ]
       pageno: [number]
-    }>(environment.trinityApiUrl + '/student/getTest' + query)
+    }>(environment.trinityApiUrl + '/student/getTests' + query)
+  }
+  gettest(id: string): Observable<{
+        name: string
+        exam: string
+        subject: string
+        date: string
+        totalQuestions: number
+        questionIds: [string]
+  }> {
+    return this.http.get<{
+        name: string
+        exam: string
+        subject: string
+        date: string
+        totalQuestions: number
+        questionIds: [string]
+    }>(environment.trinityApiUrl + '/student/getTest/' + id)
   }
 }

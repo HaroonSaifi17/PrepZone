@@ -62,7 +62,7 @@ const routes: Routes = [
             component: StudentTestListComponent,
           },
           {
-            path: 'give',
+            path: ':id',
             component: StudentGiveTestComponent,
           },
           { path: '**', redirectTo: 'list' },
