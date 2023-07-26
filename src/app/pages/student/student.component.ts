@@ -17,8 +17,14 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     this.profileImg$ = this.api.userImg()
   }
-  addClassToElement(): void {
+  addClassToElement(b:any): void {
     this.isClassAdded = !this.isClassAdded
+    if(b.style.marginRight=='0px' || b.style.marginRight=='')
+  {
+     b.style.marginRight='-90.46px'
+    }else{
+      b.style.marginRight='0px'
+    }
   }
 
   userLogout(): void {

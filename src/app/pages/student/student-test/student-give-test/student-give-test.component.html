@@ -1,20 +1,40 @@
-  <div class="pt-2">
-    <a (click)="cancelTest()" class="bg-gray-600 p-2 rounded-md text-white mt-2"
-      >Cancel</a
-    >
+<div>
+  <div class="flex flex-wrap items-center">
+    <h1 class="font-semibold text-xl">
+      {{ testData.name }}
+      <span class="bg-gray-600 text-sm text-white ml-3 rounded-full p-2 py-1">{{
+        testData.exam
+        }}</span>
+    </h1>
   </div>
-  <div *ngIf="testData$ | async as testData">
-    <div *ngIf="questionData$ | async as questionData" class="mt-4">
-      <p class="text-gray-600">
-      Question: {{index1 + 1}}
+  <div class="pt-2 flex justify-between flex-wrap items-center">
+    <a (click)="cancelTest()" class="bg-red-800 p-2 rounded-md text-white mt-2">Cancel</a>
+    <span class="bg-gray-600 text-white rounded-full px-1">{{ index1 + 1 }} / {{ testData.totalQuestions }}</span>
+    <span>{{ timeDisplay }}</span>
+  </div>
+  <div *ngIf="questionData$ | async as questionData" class="mt-4">
+    <div class="bg-gray-300 rounded-md">
+      <p class="text-gray-600 p-2 pb-0">Question: {{ index1 + 1 }}</p>
+      <p class="p-2">
+        {{ questionData.questionText }}
       </p>
-      <p class="p-2 bg-gray-300 rounded-md">
-     {{ questionData.questionText}}
-      </p>
-      <div class="my-3" >
-        <div *ngFor="let option of questionData.options;let i=index" class=" my-4">
-          <span class="p-2 bg-gray-300 flex-auto rounded-xl">{{i+1}}: {{option}}</span>
-        </div>
+    </div>
+    <div class="my-3">
+      <div *ngFor="let option of questionData.options; let i = index" class="my-4">
+        <span class="p-2 bg-gray-300 flex-auto rounded-xl">
+          <span class="text-gray-600"> {{ i + 1 }}: </span>
+          {{ option }}</span>
+      </div>
+    </div>
+    <div class="mt-9 flex flex-wrap items-center justify-between">
+      <div class="mb-5">
+        <a (click)="index1 = index1 - 1; getQuestion()" class="bg-gray-600 p-2 rounded-md text-white">Previous</a>
+        <a class="bg-gray-600 p-2 rounded-md text-white ml-2">Clear</a>
+        <a (click)="index1 = index1 + 1; getQuestion()" class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>
+      </div>
+      <div class="mb-5">
+        <a class="bg-blue-800 p-2 rounded-md text-white">Submit</a>
       </div>
     </div>
   </div>
+</div>

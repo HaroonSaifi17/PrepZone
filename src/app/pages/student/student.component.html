@@ -2,7 +2,7 @@
   class="flex h-16 justify-between items-center p-4 mx-auto max-w-screen-xl bg-darkNavy"
 >
   <div>
-    <a class="mr-4 sm:hidden" (click)="addClassToElement()">
+    <a class="mr-4 sm:hidden" (click)="addClassToElement(b)">
       <i class="fa-solid fa-bars fa-xl"></i>
     </a>
     <a class="text-white" href="#home">Trinity</a>
@@ -16,8 +16,8 @@
     />
   </div>
 </nav>
-<div class="flex max-w-screen-xl mx-auto">
-  <div class="bg-navy left-nav max-sm:fixed z-10">
+<div class="flex max-w-screen-xl mx-auto overflow-x-hidden">
+  <div class="bg-navy left-nav duration-100">
     <ul class="m-4 max-sm:m-2">
       <li class="my-4">
         <a
@@ -86,7 +86,7 @@
       </li>
     </ul>
   </div>
-  <div class="main-content bg-offWhite flex-1 overflow-y-auto max-sm:ml-[50px]">
+  <div #b class="main-content bg-offWhite flex-1 overflow-y-auto">
     <router-outlet></router-outlet>
   </div>
 </div>
