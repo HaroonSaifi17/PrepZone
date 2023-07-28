@@ -164,7 +164,7 @@ export class ApiService {
     options:[string]
     }>(environment.trinityApiUrl + '/student/getnQuestion' + query)
   }
-  sendResult(testId:string,choosenOption:[number],time:number):void{
-    this.http.post(environment.trinityApiUrl + '/student/result' ,{testId,choosenOption,time})
+  sendResult(testId:string,choosenOption:[number],time:number){
+    return this.http.post(environment.trinityApiUrl + '/student/result' ,{testId:testId,choosenOption:choosenOption,time:time})
   }
 }

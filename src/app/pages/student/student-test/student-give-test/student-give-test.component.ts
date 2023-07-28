@@ -76,7 +76,7 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.mul = this.testData.totalQuestions - this.testData.num
         this.getQuestion()
         for (let i = 0; i < data.totalQuestions; i++) {
-          this.choosenOption.push(4)
+          this.choosenOption.push(999)
         }
       },
       (error) => {
@@ -170,7 +170,14 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
   }
   makeResult(): void {
     this.stop()
-    this.api.sendResult(this.testId, this.choosenOption, this.elapsedTime)
+    this.api.sendResult(this.testId, this.choosenOption, this.elapsedTime).subscribe(
+      (response) => {
+        console.log("success")
+      },
+      (error) => {
+        console.error('Error updating data:', error);
+      }
+    );
   }
   goSubject(): void {
     switch (this.subIndex) {
