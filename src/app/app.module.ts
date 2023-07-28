@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { StudentTestListComponent } from './pages/student/student-test/student-test-list/student-test-list.component';
 import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component';
 import { BeforeCommaPipe } from './services/before-comma.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { BeforeCommaPipe } from './services/before-comma.pipe';
     HttpClientModule,
     CommonModule,
     NgChartsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,

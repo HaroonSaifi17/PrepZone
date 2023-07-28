@@ -133,6 +133,7 @@ export class ApiService {
         subject: string
         date: string
         totalQuestions: number
+        num:number
         questionIds: [string]
   }> {
     return this.http.get<{
@@ -141,6 +142,7 @@ export class ApiService {
         subject: string
         date: string
         totalQuestions: number
+        num:number
         questionIds: [string]
     }>(environment.trinityApiUrl + '/student/getTest/' + id)
   }
@@ -152,5 +154,17 @@ export class ApiService {
     questionText:string
     options:[string]
     }>(environment.trinityApiUrl + '/student/getQuestion' + query)
+  }
+  getnquestion(query:string): Observable<{
+    questionText:string
+    options:[string]
+  }> {
+    return this.http.get<{
+    questionText:string
+    options:[string]
+    }>(environment.trinityApiUrl + '/student/getnQuestion' + query)
+  }
+  sendResult(testId:string,choosenOption:[number],time:number):void{
+    this.http.post(environment.trinityApiUrl + '/student/result' ,{testId,choosenOption,time})
   }
 }
