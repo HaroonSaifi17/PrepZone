@@ -63,7 +63,8 @@ MathjaxModule.forRoot({
       "load": ["output/svg", "[tex]/require", "[tex]/ams"]
     },
     "tex": {
-      "inlineMath": [["$", "$"]],
+      "inlineMath": [["\\(", "\\)"],["$","$"]],
+      "displayMath":[["$$","$$"]],
       "packages": ["base", "require", "ams"]
     },
     "svg": { "fontCache": "global" }

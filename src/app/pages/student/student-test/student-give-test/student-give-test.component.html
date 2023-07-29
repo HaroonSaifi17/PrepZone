@@ -30,7 +30,7 @@
       <div *ngFor="let option of questionData.options; let i = index" class="my-4">
 <span class="bg-gray-300 p-2 rounded-md" [class.choose]="i == choosenOption[index1]" (click)="choosenOption[index1] = i">
           <span class="text-gray-600"> {{ i + 1 }}: </span>
-        <span [mathjax]="option" 
+        <span [mathjax]="option"
           ></span>
         </span>
       </div>
