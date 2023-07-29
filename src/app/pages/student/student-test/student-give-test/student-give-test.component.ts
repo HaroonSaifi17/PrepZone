@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable, Subscription } from 'rxjs'
 import { ApiService } from 'src/app/services/api.service'
 import { trigger, state, style, animate, transition } from '@angular/animations'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-student-give-test',
@@ -44,20 +45,20 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     | Observable<{
         questionText: string
         options: [string]
-        img:string
+        img: string
       }>
     | undefined
   public query: string = ''
   public subscription: Subscription = new Subscription()
   public index1: number = 0
   public choosenOption: [number] = [999]
-  public mul: Number = 0
+  public mul: number = 0
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
     private router: Router
   ) {}
-
+  public apiurl:string=environment.trinityApiUrl + '/student/getImg/'
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const idFromUrl = params.get('id')
@@ -65,7 +66,6 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     })
     this.getTest()
     this.start()
-    
   }
   cancelTest(): void {
     this.router.navigate(['student/test/list'])
@@ -90,23 +90,45 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
   getQuestion(): void {
     const { exam, subject, totalQuestions, questionIds } = this.testData
 
+    let subjectParam = subject[this.subIndex] || ''
+    let questionIdParam = questionIds[this.index1] || ''
+    let query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
     if (subject.length > 1) {
-      if (this.index1 > totalQuestions / 3) {
+      let num = (totalQuestions - this.mul) / 3
+      let first = this.mul / 3
+      let second = first + num + this.mul / 3
+      let third = second + num + this.mul / 3
+      if (this.index1 < totalQuestions / 3) {
+        this.subIndex = 0
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < first
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
+      } else if (this.index1 < totalQuestions / 1.5) {
         this.subIndex = 1
-      } else if (this.index1 > totalQuestions / 1.5) {
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < second
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
+      } else {
         this.subIndex = 2
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < third
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
       }
+    } else {
+      this.questionData$ =
+        this.index1 < this.mul
+          ? this.api.getquestion(query)
+          : this.api.getnquestion(query)
     }
-
-    const subjectParam = subject[this.subIndex] || ''
-    const questionIdParam = questionIds[this.index1] || ''
-
-    const query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
-
-    this.questionData$ =
-      this.index1 < this.mul
-        ? this.api.getquestion(query)
-        : this.api.getnquestion(query)
   }
   private timer: any
   private isRunning: boolean = false
@@ -170,19 +192,21 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
     this.stop()
   }
-  private isResult:boolean=true
+  private isResult: boolean = true
   makeResult(): void {
-    if(this.isResult){
-    this.isResult=false
-    this.stop()
-    this.api.sendResult(this.testId, this.choosenOption, this.elapsedTime).subscribe(
-      (response) => {
-          this.router.navigate(['student/result'])
-      },
-      (error) => {
-        console.error('Error updating data:', error);
-      }
-    );
+    if (this.isResult) {
+      this.isResult = false
+      this.stop()
+      this.api
+        .sendResult(this.testId, this.choosenOption, this.elapsedTime)
+        .subscribe(
+          (response) => {
+            this.router.navigate(['student/result'])
+          },
+          (error) => {
+            console.error('Error updating data:', error)
+          }
+        )
     }
   }
   goSubject(): void {
@@ -193,17 +217,20 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
       case 1:
         this.index1 = this.testData.totalQuestions / 3
         break
-      default:
+      case 2:
         this.index1 = this.testData.totalQuestions / 1.5
+        break
+      default:
+        this.index1 = 0
     }
     this.getQuestion()
   }
-  public inputValue:string =''
- onInputChange() {
-    if (this.inputValue == '' || this.inputValue==null) {
-      this.choosenOption[this.index1] = 999;
+  public inputValue: string = ''
+  onInputChange() {
+    if (this.inputValue == '' || this.inputValue == null) {
+      this.choosenOption[this.index1] = 999
     } else {
-      this.choosenOption[this.index1] = +this.inputValue;
+      this.choosenOption[this.index1] = +this.inputValue
     }
   }
 }

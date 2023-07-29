@@ -8,8 +8,8 @@
     </h1>
   </div>
   <div class="mt-5 flex flex-wrap mx-4 border-y-gray-200 border-y-2"
-    *ngFor="let sub of testData.subject; let i = index">
-    <a class="p-2 mr-2 my-1" (click)="goSubject()" [style.background]="subIndex == i ? '#cbd5e1' : 'white'">{{ sub
+    >
+    <a *ngFor="let sub of testData.subject; let i = index"class="p-2 mr-2 my-1" (click)="subIndex=i;goSubject()" [style.background]="subIndex == i ? '#cbd5e1' : 'white'">{{ sub
       }}</a>
   </div>
   <div class="pt-2 px-4 flex justify-between flex-wrap items-center">
@@ -24,7 +24,7 @@
       </p>
     </div>
     <div *ngIf="questionData.img" class="mt-4 max-w-[300px] max-h-[300px]">
-      <img [src]="questionData.img" alt="Image" />
+      <img [src]="apiurl + questionData.img" alt="Image" />
     </div>
     <div *ngIf="questionData.options" class="my-3">
       <div *ngFor="let option of questionData.options; let i = index" class="my-4">
