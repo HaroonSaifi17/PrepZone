@@ -36,14 +36,14 @@ export class JeeDashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSubscription = this.api.jeeData().subscribe((data:JeeData) => {
       this.name=data.name
-      this.topMarks = data.topMarks
-      this.averageMarks = data.averageMarks
-      this.physicsAccuracy = data.physicsAccuracy
-      this.chemistryAccuracy = data.chemistryAccuracy
-      this.mathAccuracy = data.mathAccuracy
-      this.mathTime = data.mathTime
-      this.chemistryTime = data.chemistryTime
-      this.physicsTime = data.physicsTime
+      this.topMarks = Math.floor(data.topMarks)
+      this.averageMarks = Math.floor(data.averageMarks)
+      this.physicsAccuracy = Math.floor(data.physicsAccuracy)
+      this.chemistryAccuracy = Math.floor(data.chemistryAccuracy)
+      this.mathAccuracy = Math.floor(data.mathAccuracy)
+      this.mathTime = Math.floor(data.mathTime)
+      this.chemistryTime = Math.floor(data.chemistryTime)
+      this.physicsTime = Math.floor(data.physicsTime)
       this.totalAccuracy = Math.round(
         (this.physicsAccuracy + this.chemistryAccuracy + this.mathAccuracy) / 3
       )
