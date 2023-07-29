@@ -1,3 +1,5 @@
+<div class="p-4">
+
 <h2 class="font-bold text-xl mb-5 text-center">TESTS</h2>
 <div class="flex justify-center">
   <div class="bg-gray-200 p-1 rounded-full">
@@ -53,4 +55,5 @@
     <a *ngFor="let page1 of testList.pageno" [class.dark]="page1 == page" (click)="page = page1; getData()"
       class="rounded-full mx-2 bg-gray-200"><span class="m-2 aspect-square">{{ page1 }}</span></a>
   </div>
+</div>
 </div>

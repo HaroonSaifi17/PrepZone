@@ -44,12 +44,13 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     | Observable<{
         questionText: string
         options: [string]
+        img:string
       }>
     | undefined
   public query: string = ''
   public subscription: Subscription = new Subscription()
   public index1: number = 0
-  public choosenOption: [number] = [4]
+  public choosenOption: [number] = [999]
   public mul: Number = 0
   constructor(
     private route: ActivatedRoute,
@@ -64,6 +65,7 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     })
     this.getTest()
     this.start()
+    
   }
   cancelTest(): void {
     this.router.navigate(['student/test/list'])
@@ -168,16 +170,20 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
     this.stop()
   }
+  private isResult:boolean=true
   makeResult(): void {
+    if(this.isResult){
+    this.isResult=false
     this.stop()
     this.api.sendResult(this.testId, this.choosenOption, this.elapsedTime).subscribe(
       (response) => {
-        console.log("success")
+          this.router.navigate(['student/result'])
       },
       (error) => {
         console.error('Error updating data:', error);
       }
     );
+    }
   }
   goSubject(): void {
     switch (this.subIndex) {
@@ -191,5 +197,13 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.index1 = this.testData.totalQuestions / 1.5
     }
     this.getQuestion()
+  }
+  public inputValue:string =''
+ onInputChange() {
+    if (this.inputValue == '' || this.inputValue==null) {
+      this.choosenOption[this.index1] = 999;
+    } else {
+      this.choosenOption[this.index1] = +this.inputValue;
+    }
   }
 }

@@ -39,7 +39,6 @@ export class LoginCallbackComponent implements OnInit, OnDestroy {
       localStorage.setItem('token', tokenFromParams)
       this.apiSubscription = this.api.checkNew().subscribe((data) => {
         if (data.isNew) {
-          console.log('ddd')
           this.router.navigate(['/student'], {
             queryParams: {
               token: null,

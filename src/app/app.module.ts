@@ -26,6 +26,7 @@ import { StudentTestListComponent } from './pages/student/student-test/student-t
 import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component';
 import { BeforeCommaPipe } from './services/before-comma.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MathjaxModule } from 'mathjax-angular';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     NgChartsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+MathjaxModule.forRoot({
+  "config": {
+    "loader": {
+      "load": ["output/svg", "[tex]/require", "[tex]/ams"]
+    },
+    "tex": {
+      "inlineMath": [["$", "$"]],
+      "packages": ["base", "require", "ams"]
+    },
+    "svg": { "fontCache": "global" }
+  },
+  "src": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/startup.js"
+})
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,

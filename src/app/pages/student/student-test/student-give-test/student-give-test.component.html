@@ -1,5 +1,5 @@
 <div class="duration-100">
-  <div class="flex flex-wrap items-center">
+  <div class="flex flex-wrap items-center px-4 py-2 mt-4 bg-slate-200">
     <h1 class="font-semibold text-2xl">
       {{ testData.name }}
       <span class="bg-gray-600 text-sm text-white ml-3 rounded-full p-2 py-1">{{
@@ -7,41 +7,50 @@
         }}</span>
     </h1>
   </div>
-  <div class="pt-2 flex justify-between flex-wrap items-center">
+  <div class="mt-5 flex flex-wrap mx-4 border-y-gray-200 border-y-2"
+    *ngFor="let sub of testData.subject; let i = index">
+    <a class="p-2 mr-2 my-1" (click)="goSubject()" [style.background]="subIndex == i ? '#cbd5e1' : 'white'">{{ sub
+      }}</a>
+  </div>
+  <div class="pt-2 px-4 flex justify-between flex-wrap items-center">
     <a (click)="cancelTest()" class="bg-red-800 p-2 rounded-md text-white mt-2">Cancel</a>
     <span class="bg-gray-600 text-white rounded-full px-1">{{ index1 + 1 }} / {{ testData.totalQuestions }}</span>
     <span>{{ timeDisplay }}</span>
   </div>
-  <div class="mt-5 flex flex-wrap" *ngFor='let sub of testData.subject;let i = index'>
-    <a class=" p-2 rounded-md text-white mr-2" (click)="goSubject()" [style.background]="subIndex==i?'#1f2937' : '#4b5563'">{{sub}}</a>
-  </div>
-  <div @in *ngIf="questionData$ | async as questionData" class="mt-4">
+  <div @in *ngIf="questionData$ | async as questionData" class="mt-4 px-4">
     <div class="bg-gray-300 rounded-md">
       <p class="text-gray-600 p-2 pb-0">Question: {{ index1 + 1 }}</p>
-      <p class="p-2">
-        {{ questionData.questionText }}
+      <p [mathjax]="questionData.questionText" class="p-2">
       </p>
     </div>
-    <div class="my-3">
-      <div  *ngFor="let option of questionData.options; let i = index" class="my-4">
-        <span [class.choose]="i == choosenOption[index1]" (click)="choosenOption[index1] = i"
-          class="p-2 bg-gray-300 flex-auto rounded-xl">
+    <div *ngIf="questionData.img" class="mt-4 max-w-[300px] max-h-[300px]">
+      <img [src]="questionData.img" alt="Image" />
+    </div>
+    <div *ngIf="questionData.options" class="my-3">
+      <div *ngFor="let option of questionData.options; let i = index" class="my-4">
+<span class="bg-gray-300 p-2 rounded-md" [class.choose]="i == choosenOption[index1]" (click)="choosenOption[index1] = i">
           <span class="text-gray-600"> {{ i + 1 }}: </span>
-          {{ option }}</span>
+        <span [mathjax]="option" 
+          ></span>
+        </span>
       </div>
     </div>
-  <div class="mt-7  clear-both flex flex-wrap items-center justify-between">
-    <div class="mb-5">
-      <a #p (click)="previousQuestion(p)" [style.background]="index1 === 0 ? 'lightgray' : '#4b5563'"
-        class="bg-gray-600 p-2 rounded-md text-white">Previous</a>
-      <a (click)="choosenOption[index1] = 4" class="bg-gray-600 p-2 rounded-md text-white ml-2">Clear</a>
-      <a #n (click)="nextQuestion(n)" [style.background]="
-          index1 === testData.totalQuestions - 1 ? 'lightgray' : '#4b5563'
-        " class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>
+    <div class="my-3" *ngIf="!questionData.options">
+      <input name="numAnswer" [(ngModel)]='inputValue' (input)="onInputChange()" type="number" class="p-2 max-w-[250px] w-[50vw] rounded-sm bg-gray-300"
+        placeholder="Answer" />
     </div>
-    <div class="mb-5">
-      <a (click)="makeResult()" class="bg-blue-800 p-2 rounded-md text-white">Submit</a>
+    <div class="mt-7 clear-both flex flex-wrap items-center justify-between">
+      <div class="mb-5">
+        <a #p (click)="previousQuestion(p)" [style.background]="index1 === 0 ? 'lightgray' : '#4b5563'"
+          class="bg-gray-600 p-2 rounded-md text-white">Previous</a>
+        <a (click)="choosenOption[index1] = 999;inputValue=''" class="bg-gray-600 p-2 rounded-md text-white ml-2">Clear</a>
+        <a #n (click)="nextQuestion(n)" [style.background]="
+            index1 === testData.totalQuestions - 1 ? 'lightgray' : '#4b5563'
+          " class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>
+      </div>
+      <div class="mb-5">
+        <a (click)="makeResult()" class="bg-blue-800 p-2 rounded-md text-white">Submit</a>
+      </div>
     </div>
-  </div>
   </div>
 </div>

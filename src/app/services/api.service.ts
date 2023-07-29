@@ -149,19 +149,23 @@ export class ApiService {
   getquestion(query:string): Observable<{
     questionText:string
     options:[string]
+    img:string
   }> {
     return this.http.get<{
     questionText:string
     options:[string]
+    img:string
     }>(environment.trinityApiUrl + '/student/getQuestion' + query)
   }
   getnquestion(query:string): Observable<{
     questionText:string
     options:[string]
+    img:string
   }> {
     return this.http.get<{
     questionText:string
     options:[string]
+    img:string
     }>(environment.trinityApiUrl + '/student/getnQuestion' + query)
   }
   sendResult(testId:string,choosenOption:[number],time:number){
