@@ -27,6 +27,8 @@ import { StudentGiveTestComponent } from './pages/student/student-test/student-g
 import { BeforeCommaPipe } from './services/before-comma.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MathjaxModule } from 'mathjax-angular';
+import { StudentResultListComponent } from './pages/student/student-result/student-result-list/student-result-list.component';
+import { StudentResultDetailComponent } from './pages/student/student-result/student-result-detail/student-result-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { MathjaxModule } from 'mathjax-angular';
     StudentTestListComponent,
     StudentGiveTestComponent,
     BeforeCommaPipe,
+    StudentResultListComponent,
+    StudentResultDetailComponent,
   ],
   imports: [
     BrowserModule,

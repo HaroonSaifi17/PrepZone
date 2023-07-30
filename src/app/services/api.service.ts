@@ -171,4 +171,35 @@ export class ApiService {
   sendResult(testId:string,choosenOption:[number],time:number){
     return this.http.post(environment.trinityApiUrl + '/student/result' ,{testId:testId,choosenOption:choosenOption,time:time})
   }
+  resultList(query: string): Observable<{
+    error: boolean
+    total: number
+    page: number
+    limit: number
+    results: [
+      {
+        name: string
+        date: string
+        _id: string
+         marks:number
+      }
+    ]
+    pageno: [number]
+  }> {
+    return this.http.get<{
+      error: boolean
+      total: number
+      page: number
+      limit: number
+      results: [
+        {
+          name: string
+          date: string
+          _id: string
+         marks:number
+        }
+      ]
+      pageno: [number]
+    }>(environment.trinityApiUrl + '/student/getResultList' + query)
+  }
 }

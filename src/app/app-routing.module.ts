@@ -7,6 +7,8 @@ import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-das
 import { NeetDashboardComponent } from './pages/student/student-dashboard/neet-dashboard/neet-dashboard.component'
 import { StudentDashboardComponent } from './pages/student/student-dashboard/student-dashboard.component'
 import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component'
+import { StudentResultDetailComponent } from './pages/student/student-result/student-result-detail/student-result-detail.component'
+import { StudentResultListComponent } from './pages/student/student-result/student-result-list/student-result-list.component'
 import { StudentResultComponent } from './pages/student/student-result/student-result.component'
 import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component'
 import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component'
@@ -75,6 +77,18 @@ const routes: Routes = [
       {
         path: 'result',
         component: StudentResultComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: StudentResultListComponent,
+          },
+          {
+            path: ':id',
+            component: StudentResultDetailComponent,
+          },
+          { path: '**', redirectTo: 'list' },
+        ],
       },
       { path: '**', redirectTo: 'dashboard' },
     ],
@@ -95,4 +109,4 @@ const extraOptions: ExtraOptions = {
   imports: [RouterModule.forRoot(routes, extraOptions)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
