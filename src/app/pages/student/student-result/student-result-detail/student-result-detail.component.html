@@ -1,1 +1,37 @@
-<p>student-result-detail works!</p>
+<div  *ngIf='resultData$ | async as resultData'>
+  <div class="my-6 mx-4">
+    <a 
+      (click)='back()'
+      class="p-3 bg-slate-500 text-white rounded-full">
+      <i class="fa-solid fa-arrow-left fa-lg"></i>
+       Back
+    </a>
+  </div>
+  <div class="flex flex-wrap items-center px-4 py-2 my-4 bg-slate-200">
+    <h1 class="font-semibold text-2xl">
+      {{ resultData.results.name }}
+      <span class="bg-gray-600 text-sm text-white ml-3 rounded-full p-2 py-1">{{
+        resultData.test.exam
+        }}</span>
+    </h1>
+  </div>
+  <p class="flex items-center mb-2">
+   <span class="aspect-square rounded-full bg-red-500 mx-4"></span> 
+    Correct
+  </p>
+  <p class="flex items-center mb-2">
+   <span class="aspect-square rounded-full bg-emerald-500 mx-4"></span> 
+    Wrong
+  </p>
+  <p class="flex items-center mb-5">
+   <span class="aspect-square rounded-full bg-slate-400 mx-4"></span> 
+  Not Answered
+  </p>
+  <div class="mx-4">
+  <span [style.background]="answer === resultData.results.result[i] ? '#10b981' : (resultData.results.result[i] === 999 ? '#94a3b8' : '#ef4444')" class=" aspect-square bg-gray-300 rounded-full mr-3 mb-3"  *ngFor='let answer of resultData.test.answers;let i = index'>
+    <span >
+           {{i + 1}}
+    </span>
+  </span>
+  </div>
+</div>

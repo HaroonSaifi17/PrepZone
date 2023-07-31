@@ -128,48 +128,55 @@ export class ApiService {
     }>(environment.trinityApiUrl + '/student/getTests' + query)
   }
   gettest(id: string): Observable<{
-        name: string
-        exam: string
-        subject: string
-        date: string
-        totalQuestions: number
-        num:number
-        questionIds: [string]
+    name: string
+    exam: string
+    subject: string
+    date: string
+    totalQuestions: number
+    num: number
+    questionIds: [string]
   }> {
     return this.http.get<{
-        name: string
-        exam: string
-        subject: string
-        date: string
-        totalQuestions: number
-        num:number
-        questionIds: [string]
+      name: string
+      exam: string
+      subject: string
+      date: string
+      totalQuestions: number
+      num: number
+      questionIds: [string]
     }>(environment.trinityApiUrl + '/student/getTest/' + id)
   }
-  getquestion(query:string): Observable<{
-    questionText:string
-    options:[string]
-    img:string
+  getquestion(query: string): Observable<{
+    questionText: string
+    options: [string]
+    img: string
   }> {
     return this.http.get<{
-    questionText:string
-    options:[string]
-    img:string
+      questionText: string
+      options: [string]
+      img: string
     }>(environment.trinityApiUrl + '/student/getQuestion' + query)
   }
-  getnquestion(query:string): Observable<{
-    questionText:string
-    options:[string]
-    img:string
+  getnquestion(query: string): Observable<{
+    questionText: string
+    options: [string]
+    img: string
   }> {
     return this.http.get<{
-    questionText:string
-    options:[string]
-    img:string
+      questionText: string
+      options: [string]
+      img: string
     }>(environment.trinityApiUrl + '/student/getnQuestion' + query)
   }
-  sendResult(testId:string,choosenOption:[number],time:number){
-    return this.http.post(environment.trinityApiUrl + '/student/result' ,{testId:testId,choosenOption:choosenOption,time:time})
+  sendResult(
+    testId: string,
+    choosenOption: [number],
+    time: number
+  ): Observable<{ _id: string }> {
+    return this.http.post<{ _id: string }>(
+      environment.trinityApiUrl + '/student/result',
+      { testId: testId, choosenOption: choosenOption, time: time }
+    )
   }
   resultList(query: string): Observable<{
     error: boolean
@@ -181,7 +188,7 @@ export class ApiService {
         name: string
         date: string
         _id: string
-         marks:number
+        marks: number
       }
     ]
     pageno: [number]
@@ -196,10 +203,47 @@ export class ApiService {
           name: string
           date: string
           _id: string
-         marks:number
+          marks: number
         }
       ]
       pageno: [number]
     }>(environment.trinityApiUrl + '/student/getResultList' + query)
+  }
+  getresult(id: string): Observable<{
+    test: {
+      exam: string
+      questionIds: [string]
+      totalQuestions: number
+      answers: [number]
+    }
+    results: {
+      name: string
+      subject: string
+      date: string
+      marks: number
+      correct: [number]
+      wrong: [number]
+      result: [number]
+      time: number
+    }
+  }> {
+    return this.http.get<{
+      test: {
+        exam: string
+        questionIds: [string]
+        totalQuestions: number
+        answers: [number]
+      }
+      results: {
+        name: string
+        subject: string
+        date: string
+        marks: number
+        correct: [number]
+        wrong: [number]
+        result: [number]
+        time: number
+      }
+    }>(environment.trinityApiUrl + '/student/getResult/' + id)
   }
 }

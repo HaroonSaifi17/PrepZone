@@ -201,7 +201,7 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         .sendResult(this.testId, this.choosenOption, this.elapsedTime)
         .subscribe(
           (response) => {
-            this.router.navigate(['student/result'])
+            this.router.navigate(['student/result/' + response._id])
           },
           (error) => {
             console.error('Error updating data:', error)
