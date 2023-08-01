@@ -41,11 +41,7 @@
 <div *ngIf="resultList$ | async as resultList">
   <div (click)="navigate(result._id)" class="p-2 m-1 bg-slate-200" *ngFor="let result of resultList.results">
     <div class="flex justify-between items-center">
-      <span class="font-semibold">{{ result.name }}</span><span class="px-2 rounded-full bg-gray-600 text-white">Marks: {{
-        result.marks
-        }}</span>
-    </div>
-    <div class="flex justify-between items-center">
+      <span class="font-semibold text-xl">{{ result.name }}</span>
         <span class="text-gray-600 text-sm">{{
         result.date | beforeComma }}</span>
     </div>

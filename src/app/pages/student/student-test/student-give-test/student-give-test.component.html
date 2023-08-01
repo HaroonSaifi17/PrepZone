@@ -36,14 +36,14 @@
       </div>
     </div>
     <div class="my-3" *ngIf="!questionData.options">
-      <input name="numAnswer" [(ngModel)]='inputValue' (input)="onInputChange()" type="number" class="p-2 max-w-[250px] w-[50vw] rounded-sm bg-gray-300"
+      <input [disabled]="!disabled1 && choosenOption[index1]==999" name="numAnswer" [(ngModel)]='inputValue[index1]' (input)="onInputChange()" type="number" class="p-2 max-w-[250px] w-[50vw] rounded-sm bg-gray-300"
         placeholder="Answer" />
     </div>
     <div class="mt-7 clear-both flex flex-wrap items-center justify-between">
       <div class="mb-5">
         <a #p (click)="previousQuestion(p)" [style.background]="index1 === 0 ? 'lightgray' : '#4b5563'"
           class="bg-gray-600 p-2 rounded-md text-white">Previous</a>
-        <a (click)="choosenOption[index1] = 999;inputValue=''" class="bg-gray-600 p-2 rounded-md text-white ml-2">Clear</a>
+        <a (click)="choosenOption[index1] = 999;inputValue[index1]=''" class="bg-gray-600 p-2 rounded-md text-white ml-2">Clear</a>
         <a #n (click)="nextQuestion(n)" [style.background]="
             index1 === testData.totalQuestions - 1 ? 'lightgray' : '#4b5563'
           " class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>

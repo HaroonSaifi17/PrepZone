@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { ApiService } from 'src/app/services/api.service'
 
 @Component({
@@ -8,10 +8,10 @@ import { ApiService } from 'src/app/services/api.service'
   templateUrl: './student-result-detail.component.html',
   styleUrls: ['./student-result-detail.component.scss'],
 })
-export class StudentResultDetailComponent implements OnInit {
+export class StudentResultDetailComponent implements OnInit,OnDestroy {
   private testId: string = ''
-  public resultData$:
-    | Observable<{
+  private apisub:Subscription |undefined
+  public resultData:{
       test: {
         exam: string
         questionIds: [string]
@@ -28,7 +28,7 @@ export class StudentResultDetailComponent implements OnInit {
         result: [number]
         time: number
       }
-    }>
+    }
     | undefined
 
   constructor(private route: ActivatedRoute, private api: ApiService,private router:Router) { }
@@ -37,10 +37,17 @@ export class StudentResultDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const idFromUrl = params.get('id')
       this.testId = idFromUrl !== null ? idFromUrl : ''
-      this.resultData$ = this.api.getresult(this.testId)
+      this.apisub=this.api.getresult(this.testId).subscribe((data)=>{
+        this.resultData=data
+      },(error)=>{
+          console.log(error)
+        })
     })
   }
   back():void{
     this.router.navigate(['student/result/list'])
+  }
+  ngOnDestroy(): void {
+      this.apisub?.unsubscribe()
   }
 }
