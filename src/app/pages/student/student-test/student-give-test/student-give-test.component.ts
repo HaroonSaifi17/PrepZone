@@ -58,7 +58,7 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     private api: ApiService,
     private router: Router
   ) {}
-  public apiurl:string=environment.trinityApiUrl + '/student/getImg/'
+  public apiurl: string = environment.trinityApiUrl + '/student/getImg/'
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const idFromUrl = params.get('id')
@@ -79,12 +79,14 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         for (let i = 0; i < data.totalQuestions; i++) {
           this.choosenOption.push(999)
         }
-        if(this.testData.subject.length==3){
-          this.tindexs[0]=this.testData.totalQuestions/3 -this.testData.num/3
-          this.tindexs[1]=this.tindexs[0] + this.mul/3 + this.testData.num/3
-          this.tindexs[2]=this.testData.totalQuestions - this.testData.num/3
-        }else{
-          this.sindexs=this.mul
+        if (this.testData.subject.length == 3) {
+          this.tindexs[0] =
+            this.testData.totalQuestions / 3 - this.testData.num / 3
+          this.tindexs[1] =
+            this.tindexs[0] + this.mul / 3 + this.testData.num / 3
+          this.tindexs[2] = this.testData.totalQuestions - this.testData.num / 3
+        } else {
+          this.sindexs = this.mul
         }
         this.getQuestion()
       },
@@ -93,8 +95,8 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
       }
     )
   }
- public tindexs:[number,number,number]=[0,0,0]
-  public sindexs:number=0
+  public tindexs: [number, number, number] = [0, 0, 0]
+  public sindexs: number = 0
   getQuestion(): void {
     const { exam, subject, totalQuestions, questionIds } = this.testData
 
@@ -113,7 +115,8 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.questionData$ =
           this.index1 < first
             ? this.api.getquestion(query)
-            : this.api.getnquestion(query);this.checkM()
+            : this.api.getnquestion(query)
+        this.checkM()
       } else if (this.index1 < totalQuestions / 1.5) {
         this.subIndex = 1
         subjectParam = subject[this.subIndex] || ''
@@ -121,7 +124,8 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.questionData$ =
           this.index1 < second
             ? this.api.getquestion(query)
-            : this.api.getnquestion(query);this.checkM()
+            : this.api.getnquestion(query)
+        this.checkM()
       } else {
         this.subIndex = 2
         subjectParam = subject[this.subIndex] || ''
@@ -129,13 +133,15 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.questionData$ =
           this.index1 < third
             ? this.api.getquestion(query)
-            : this.api.getnquestion(query);this.checkM()
+            : this.api.getnquestion(query)
+        this.checkM()
       }
     } else {
       this.questionData$ =
         this.index1 < this.mul
           ? this.api.getquestion(query)
-          : this.api.getnquestion(query);this.checkM()
+          : this.api.getnquestion(query)
+      this.checkM()
     }
   }
   private timer: any
@@ -189,7 +195,6 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
       this.index1 = this.index1 - 1
       this.getQuestion()
     }
-
   }
   nextQuestion(f: HTMLAnchorElement): void {
     if (this.index1 < this.testData.totalQuestions - 1) {
@@ -236,41 +241,58 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
   }
   public inputValue: [string] = ['']
   onInputChange() {
-    if (this.inputValue[this.index1] == '' || this.inputValue[this.index1] == null) {
+    if (
+      this.inputValue[this.index1] == '' ||
+      this.inputValue[this.index1] == null
+    ) {
       this.choosenOption[this.index1] = 999
     } else {
       this.choosenOption[this.index1] = parseInt(this.inputValue[this.index1])
     }
   }
-  public disabled1=true
-  checkM():void{
-    if(this.testData.subject.length==3){
-    let num1:number=this.testData.num/3
-    if( this.index1<this.tindexs[0]+num1){
-        this.disabled1=this.halfEqualTo999(this.choosenOption,this.tindexs[0],this.tindexs[0]+num1)
+  public disabled1 = true
+  checkM(): void {
+    if (this.testData.subject.length == 3) {
+      let num1: number = this.testData.num / 3
+      if (this.index1 < this.tindexs[0] + num1) {
+        this.disabled1 = this.halfEqualTo999(
+          this.choosenOption,
+          this.tindexs[0],
+          this.tindexs[0] + num1
+        )
+      } else if (this.index1 < this.tindexs[1] + num1) {
+        this.disabled1 = this.halfEqualTo999(
+          this.choosenOption,
+          this.tindexs[1],
+          this.tindexs[1] + num1
+        )
+      } else if (this.index1 < this.tindexs[2] + num1) {
+        this.disabled1 = this.halfEqualTo999(
+          this.choosenOption,
+          this.tindexs[2],
+          this.tindexs[2] + num1
+        )
       }
-      else if( this.index1<this.tindexs[1]+num1){
-
-        this.disabled1=this.halfEqualTo999(this.choosenOption,this.tindexs[1],this.tindexs[1]+num1)
-
-
-      } else if(this.index1<this.tindexs[2]+num1){
-
-        this.disabled1=this.halfEqualTo999(this.choosenOption,this.tindexs[2],this.tindexs[2]+num1)
-      }
-    }else{
-        this.disabled1=this.halfEqualTo999(this.choosenOption,this.sindexs,this.sindexs+this.testData.num)
+    } else {
+      this.disabled1 = this.halfEqualTo999(
+        this.choosenOption,
+        this.sindexs,
+        this.sindexs + this.testData.num
+      )
     }
   }
   halfEqualTo999(arr: number[], x: number, y: number): boolean {
-  if (x < 0 || y >= arr.length || x > y) {
-    throw new Error('Invalid input: x and y must be valid indices within the array.');
+    if (x < 0 || y >= arr.length || x > y) {
+      throw new Error(
+        'Invalid input: x and y must be valid indices within the array.'
+      )
+    }
+
+    const elementsInRange = y - x
+    const elementsEqualTo999 = arr
+      .slice(x, y)
+      .filter((element) => element === 999).length
+
+    return elementsEqualTo999 >= Math.ceil(elementsInRange / 2)
   }
-
-  const elementsInRange = y - x ;
-  const elementsEqualTo999 = arr.slice(x, y).filter(element => element === 999).length;
-
-  return elementsEqualTo999 >= Math.ceil(elementsInRange / 2);
-}
-
 }

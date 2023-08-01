@@ -215,10 +215,11 @@ export class ApiService {
       questionIds: [string]
       totalQuestions: number
       answers: [number]
+        num:number
     }
     results: {
       name: string
-      subject: string
+      subject: [string]
       date: string
       marks: number
       correct: [number]
@@ -233,10 +234,11 @@ export class ApiService {
         questionIds: [string]
         totalQuestions: number
         answers: [number]
+        num:number
       }
       results: {
         name: string
-        subject: string
+        subject: [string]
         date: string
         marks: number
         correct: [number]
