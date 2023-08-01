@@ -3,11 +3,25 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Chart } from 'chart.js'
 import { Observable, Subscription } from 'rxjs'
 import { ApiService } from 'src/app/services/api.service'
+import { environment } from 'src/environments/environment'
+import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'app-student-result-detail',
   templateUrl: './student-result-detail.component.html',
   styleUrls: ['./student-result-detail.component.scss'],
+  animations: [
+    trigger('in', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0 }),
+        animate('100ms 50ms ease-in', style({ height: '*', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: '*', opacity: 0 }),
+        animate('50ms ease-in', style({ height: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class StudentResultDetailComponent implements OnInit, OnDestroy {
   public scoreChart: any
@@ -64,6 +78,7 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
       this.apisub = this.api.getresult(this.testId).subscribe(
         (data: any) => {
           this.resultData = data
+        this.mul = this.resultData.test.totalQuestions - this.resultData.test.num
           let i: number = this.resultData.results.subject.length
           if (i == 3) {
             this.totalMark =
@@ -91,6 +106,7 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
           this.unattemped = data.test.totalQuestions - this.correct - this.wrong
           this.accuracy=Math.round(this.correct/(this.correct+this.wrong)*100)
           this.createScoreChart()
+          this.getQuestion()
         },
         (error) => {
           console.log(error)
@@ -131,5 +147,96 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
         cutout: '50%',
       },
     })
+  }
+  public query: string = ''
+  public index1: number = 0
+  public mul: number = 0
+  public subIndex: number = 0
+  public questionData$:
+    | Observable<{
+        questionText: string
+        options: [string]
+        img: string
+      }>
+    | undefined
+  public apiurl: string = environment.trinityApiUrl + '/student/getImg/'
+  getQuestion(): void {
+    const { exam, totalQuestions, questionIds } = this.resultData.test
+    const subject= this.resultData.results.subject
+    let subjectParam = subject[this.subIndex] || ''
+    let questionIdParam = questionIds[this.index1] || ''
+    let query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+    if (subject.length > 1) {
+      let num = (totalQuestions - this.mul) / 3
+      let first = this.mul / 3
+      let second = first + num + this.mul / 3
+      let third = second + num + this.mul / 3
+      if (this.index1 < totalQuestions / 3) {
+        this.subIndex = 0
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < first
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
+      } else if (this.index1 < totalQuestions / 1.5) {
+        this.subIndex = 1
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < second
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
+      } else {
+        this.subIndex = 2
+        subjectParam = subject[this.subIndex] || ''
+        query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
+        this.questionData$ =
+          this.index1 < third
+            ? this.api.getquestion(query)
+            : this.api.getnquestion(query)
+      }
+    } else {
+      this.questionData$ =
+        this.index1 < this.mul
+          ? this.api.getquestion(query)
+          : this.api.getnquestion(query)
+    }
+  }
+  previousQuestion(f: HTMLAnchorElement): void {
+    if (this.index1 > 0) {
+      this.index1 = this.index1 - 1
+      this.getQuestion()
+    }
+  }
+  nextQuestion(f: HTMLAnchorElement): void {
+    if (this.index1 < this.resultData.test.totalQuestions - 1) {
+      this.index1 = this.index1 + 1
+      this.getQuestion()
+    }
+  }
+  getColor(i:number):string{
+    if(this.resultData.test.answers[this.index1]===this.resultData.results.result[this.index1] && i===this.resultData.test.answers[this.index1]){
+      return '#10b981'
+    }
+    else if(i===this.resultData.results.result[this.index1] && this.resultData.test.answers[this.index1]!==this.resultData.results.result[this.index1]){
+      return '#ef4444'
+    }
+    else if(i===this.resultData.test.answers[this.index1] && this.resultData.test.answers[this.index1]!==this.resultData.results.result[this.index1]){
+      return '#94a3b8'
+    }
+    else{
+      return '#d1d5db'
+    }
+  }
+  public inputValue: string = ''
+  onInputChange() {
+    if (
+      this.resultData.results.result[this.index1] == 999
+    ) {
+      this.inputValue='empty'
+    } else {
+      this.inputValue=this.resultData.results.result[this.index1].toString()
+    }
   }
 }
