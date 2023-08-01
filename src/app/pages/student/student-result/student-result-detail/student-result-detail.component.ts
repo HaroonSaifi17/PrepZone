@@ -89,6 +89,7 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
             this.wrong = data.wrong[0]
           }
           this.unattemped = data.test.totalQuestions - this.correct - this.wrong
+          this.accuracy=Math.round(this.correct/(this.correct+this.wrong)*100)
           this.createScoreChart()
         },
         (error) => {
@@ -107,6 +108,7 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
   correct: number = 0
   wrong: number = 0
   unattemped: number = 0
+  accuracy: number = 0
   createScoreChart() {
     this.scoreChart = new Chart('MyChart', {
       type: 'doughnut',

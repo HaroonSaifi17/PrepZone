@@ -1,4 +1,4 @@
-<div *ngIf="resultData.test.totalQuestions !== 0">
+<div >
   <div class="my-6 mx-4">
     <a (click)="back()" class="p-3 bg-slate-500 text-white rounded-full">
       <i class="fa-solid fa-arrow-left fa-lg"></i>
@@ -10,51 +10,63 @@
       {{ resultData.results.name }}
       <span class="bg-gray-600 text-sm text-white ml-3 rounded-full p-2 py-1">{{
         resultData.test.exam
-        }}</span>
+      }}</span>
     </h1>
   </div>
-  <div class="m-4 my-7 text-xl font-semibold flex justify-center">
-    <span class="p-2 bg-yellow-600 text-white mr-2 rounded-xl"><span class="text-center">Score: </span>
-      <span class="text-center">{{ resultData.results.marks }}/{{ totalMark }}</span>
+  <div class="mx-4 my-7 text-xl font-semibold flex justify-center">
+    <span class="p-2 bg-yellow-600 text-white mr-2 rounded-xl"
+      ><span class="text-center">Score: </span>
+      <span class="text-center"
+        >{{ resultData.results.marks }}/{{ totalMark }}</span
+      >
     </span>
     <div></div>
   </div>
-  <div>
-    <div>
+  <div class="flex flex-wrap justify-center mx-4">
+  <div class="w-1/4 min-w-[100px] max-w-[160px] mb-4">
+      <canvas id="MyChart">{{ scoreChart }}</canvas>
+    </div>
+    <div class="my-auto ml-4">
       <p class="flex items-center mb-2">
-        <span class="aspect-square rounded-full bg-emerald-500 mx-4">{{
+        <span class="aspect-square rounded-full bg-emerald-500 mr-2">{{
           correct
-          }}</span>
+        }}</span>
         Correct
       </p>
       <p class="flex items-center mb-2">
-        <span class="aspect-square rounded-full bg-red-500 mx-4">{{
+        <span class="aspect-square rounded-full bg-red-500 mr-2">{{
           wrong
-          }}</span>
+        }}</span>
         Wrong
       </p>
       <p class="flex items-center mb-5">
-        <span class="aspect-square rounded-full bg-slate-400 mx-4">{{ unattemped }}
+        <span class="aspect-square rounded-full bg-slate-400 mr-2"
+          >{{ unattemped }}
         </span>
         Not Answered
       </p>
     </div>
   </div>
-  <div class="mx-4 border-b-gray-200 border-b-2">
-    <span [style.background]="
+  <div class="mx-4 border-b-gray-200 border-b-2 mt-8 flex flex-wrap justify-center">
+    <span
+      [style.background]="
         answer === resultData.results.result[i]
           ? '#10b981'
           : resultData.results.result[i] === 999
           ? '#94a3b8'
           : '#ef4444'
-      " class="aspect-square bg-gray-300 rounded-full mr-3 mb-3"
-      *ngFor="let answer of resultData.test.answers; let i = index">
+      "
+      class="aspect-square bg-gray-300 rounded-full mr-3 mb-3"
+      *ngFor="let answer of resultData.test.answers; let i = index"
+    >
       <span>
         {{ i + 1 }}
       </span>
     </span>
   </div>
-</div>
-<div class="w-1/4 min-w-[100px] max-w-[160px] aspect-w-1 aspect-h-1">
-  <canvas class="w-full h-full" id="MyChart">{{ scoreChart }}</canvas>
+  <div class="flex flex-wrap m-4 justify-between">
+    <div class="mr-2"><p class="font-semibold">Time</p><p>{{resultData.results.time}}s</p></div>
+    <div class="mr-2"><p class="font-semibold">Accuracy</p><p>{{accuracy}}%</p></div>
+    <div class="mr-2"><p class="font-semibold">Negative Marks</p><p>{{wrong}}</p></div>
+  </div>
 </div>
