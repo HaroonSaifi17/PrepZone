@@ -46,30 +46,30 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
       time: number
     }
   } = {
-    test: {
-      exam: '',
-      questionIds: [''],
-      totalQuestions: 0,
-      answers: [0],
-      num: 0,
-    },
-    results: {
-      name: '',
-      subject: [''],
-      date: '',
-      marks: 0,
-      correct: [0],
-      wrong: [0],
-      result: [0],
-      time: 0,
-    },
-  }
+      test: {
+        exam: '',
+        questionIds: [''],
+        totalQuestions: 0,
+        answers: [0],
+        num: 0,
+      },
+      results: {
+        name: '',
+        subject: [''],
+        date: '',
+        marks: 0,
+        correct: [0],
+        wrong: [0],
+        result: [0],
+        time: 0,
+      },
+    }
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -78,14 +78,11 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
       this.apisub = this.api.getresult(this.testId).subscribe(
         (data: any) => {
           this.resultData = data
-        this.mul = this.resultData.test.totalQuestions - this.resultData.test.num
+          this.mul =
+            this.resultData.test.totalQuestions - this.resultData.test.num
           let i: number = this.resultData.results.subject.length
           if (i == 3) {
-            this.totalMark =
-              12 *
-              (this.resultData.test.totalQuestions / 3 -
-                (this.resultData.test.num / 3 -
-                  Math.round(this.resultData.test.num / 6)))
+            this.totalMark =12*(this.resultData.test.totalQuestions/3-Math.round(this.resultData.test.num/6))
             this.correct =
               data.results.correct[0] +
               data.results.correct[1] +
@@ -97,14 +94,14 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
           } else {
             this.totalMark =
               4 *
-              (this.resultData.test.totalQuestions -
-                (this.resultData.test.num -
-                  Math.round(this.resultData.test.num / 2)))
-            this.correct = data.correct[0]
-            this.wrong = data.wrong[0]
+              (this.resultData.test.totalQuestions - Math.round(this.resultData.test.num / 2))
+            this.correct = data.results.correct[0]
+            this.wrong = data.results.wrong[0]
           }
           this.unattemped = data.test.totalQuestions - this.correct - this.wrong
-          this.accuracy=Math.round(this.correct/(this.correct+this.wrong)*100)
+          this.accuracy = Math.round(
+            (this.correct / (this.correct + this.wrong)) * 100
+          )
           this.createScoreChart()
           this.getQuestion()
         },
@@ -154,15 +151,15 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
   public subIndex: number = 0
   public questionData$:
     | Observable<{
-        questionText: string
-        options: [string]
-        img: string
-      }>
+      questionText: string
+      options: [string]
+      img: string
+    }>
     | undefined
   public apiurl: string = environment.trinityApiUrl + '/student/getImg/'
   getQuestion(): void {
     const { exam, totalQuestions, questionIds } = this.resultData.test
-    const subject= this.resultData.results.subject
+    const subject = this.resultData.results.subject
     let subjectParam = subject[this.subIndex] || ''
     let questionIdParam = questionIds[this.index1] || ''
     let query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
@@ -215,28 +212,38 @@ export class StudentResultDetailComponent implements OnInit, OnDestroy {
       this.getQuestion()
     }
   }
-  getColor(i:number):string{
-    if(this.resultData.test.answers[this.index1]===this.resultData.results.result[this.index1] && i===this.resultData.test.answers[this.index1]){
+  getColor(i: number): string {
+    if (
+      this.resultData.test.answers[this.index1] ===
+      this.resultData.results.result[this.index1] &&
+      i === this.resultData.test.answers[this.index1]
+    ) {
       return '#10b981'
-    }
-    else if(i===this.resultData.results.result[this.index1] && this.resultData.test.answers[this.index1]!==this.resultData.results.result[this.index1]){
+    } else if (
+      i === this.resultData.results.result[this.index1] &&
+      this.resultData.test.answers[this.index1] !==
+      this.resultData.results.result[this.index1]
+    ) {
       return '#ef4444'
-    }
-    else if(i===this.resultData.test.answers[this.index1] && this.resultData.test.answers[this.index1]!==this.resultData.results.result[this.index1]){
+    } else if (
+      i === this.resultData.test.answers[this.index1] &&
+      this.resultData.test.answers[this.index1] !==
+      this.resultData.results.result[this.index1]
+    ) {
       return '#94a3b8'
-    }
-    else{
+    } else {
       return '#d1d5db'
     }
   }
   public inputValue: string = ''
   onInputChange() {
-    if (
-      this.resultData.results.result[this.index1] == 999
-    ) {
-      this.inputValue='empty'
+    if (this.resultData.results.result[this.index1] == 999) {
+      this.inputValue = 'empty'
     } else {
-      this.inputValue=this.resultData.results.result[this.index1].toString()
+      this.inputValue = this.resultData.results.result[this.index1].toString()
     }
+  }
+  mathF(i: number): number {
+    return Math.round(i)
   }
 }

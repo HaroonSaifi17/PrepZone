@@ -32,21 +32,21 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     num: number
     questionIds: [string]
   } = {
-    name: '',
-    exam: '',
-    subject: '',
-    date: '',
-    num: 0,
-    totalQuestions: 0,
-    questionIds: [''],
-  }
+      name: '',
+      exam: '',
+      subject: '',
+      date: '',
+      num: 0,
+      totalQuestions: 0,
+      questionIds: [''],
+    }
   testId: string = ''
   public questionData$:
     | Observable<{
-        questionText: string
-        options: [string]
-        img: string
-      }>
+      questionText: string
+      options: [string]
+      img: string
+    }>
     | undefined
   public query: string = ''
   public subscription: Subscription = new Subscription()
@@ -57,7 +57,7 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private api: ApiService,
     private router: Router
-  ) {}
+  ) { }
   public apiurl: string = environment.trinityApiUrl + '/student/getImg/'
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -112,36 +112,40 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
         this.subIndex = 0
         subjectParam = subject[this.subIndex] || ''
         query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
-        this.questionData$ =
-          this.index1 < first
-            ? this.api.getquestion(query)
-            : this.api.getnquestion(query)
-        this.checkM()
+        if (this.index1 < first) {
+          this.questionData$ = this.api.getquestion(query)
+        } else {
+          this.questionData$ = this.api.getnquestion(query)
+          this.checkM()
+        }
       } else if (this.index1 < totalQuestions / 1.5) {
         this.subIndex = 1
         subjectParam = subject[this.subIndex] || ''
         query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
-        this.questionData$ =
-          this.index1 < second
-            ? this.api.getquestion(query)
-            : this.api.getnquestion(query)
-        this.checkM()
+        if (this.index1 < second) {
+          this.questionData$ = this.api.getquestion(query)
+        } else {
+          this.questionData$ = this.api.getnquestion(query)
+          this.checkM()
+        }
       } else {
         this.subIndex = 2
         subjectParam = subject[this.subIndex] || ''
         query = `?exam=${exam}&subject=${subjectParam}&id=${questionIdParam}`
-        this.questionData$ =
-          this.index1 < third
-            ? this.api.getquestion(query)
-            : this.api.getnquestion(query)
-        this.checkM()
+        if (this.index1 < third) {
+          this.questionData$ = this.api.getquestion(query)
+        } else {
+          this.questionData$ = this.api.getnquestion(query)
+          this.checkM()
+        }
       }
     } else {
-      this.questionData$ =
-        this.index1 < this.mul
-          ? this.api.getquestion(query)
-          : this.api.getnquestion(query)
-      this.checkM()
+        if (this.index1 < this.mul) {
+          this.questionData$ = this.api.getquestion(query)
+        } else {
+          this.questionData$ = this.api.getnquestion(query)
+          this.checkM()
+        }
     }
   }
   private timer: any
@@ -242,12 +246,13 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
   public inputValue: [string] = ['']
   onInputChange() {
     if (
-      this.inputValue[this.index1] == '' ||
+      (this.inputValue[this.index1] == '' &&
+        this.inputValue[this.index1] != '0') ||
       this.inputValue[this.index1] == null
     ) {
       this.choosenOption[this.index1] = 999
     } else {
-      this.choosenOption[this.index1] = parseInt(this.inputValue[this.index1])
+      this.choosenOption[this.index1] = parseFloat(this.inputValue[this.index1])
     }
   }
   public disabled1 = true
@@ -293,6 +298,6 @@ export class StudentGiveTestComponent implements OnInit, OnDestroy {
       .slice(x, y)
       .filter((element) => element === 999).length
 
-    return elementsEqualTo999 >= Math.ceil(elementsInRange / 2)
+    return elementsEqualTo999 > Math.ceil(elementsInRange / 2)
   }
 }

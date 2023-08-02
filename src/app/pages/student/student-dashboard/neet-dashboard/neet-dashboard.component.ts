@@ -139,7 +139,7 @@ export class NeetDashboardComponent implements OnInit, OnDestroy {
         datasets: [
           {
             data: [this.physicsAccuracy, wrong],
-            backgroundColor: ['blue', 'gray'],
+            backgroundColor: ['#f43f5e', 'gray'],
           },
         ],
       },
@@ -163,7 +163,7 @@ export class NeetDashboardComponent implements OnInit, OnDestroy {
         datasets: [
           {
             data: [this.chemistryAccuracy, wrong],
-            backgroundColor: ['blue', 'gray'],
+            backgroundColor: ['#a855f7', 'gray'],
           },
         ],
       },
@@ -187,7 +187,7 @@ export class NeetDashboardComponent implements OnInit, OnDestroy {
         datasets: [
           {
             data: [this.bioAccuracy, wrong],
-            backgroundColor: ['blue', 'gray'],
+            backgroundColor: ['#0ea5e9', 'gray'],
           },
         ],
       },
@@ -210,7 +210,7 @@ export class NeetDashboardComponent implements OnInit, OnDestroy {
         datasets: [
           {
             data: [this.physicsTime, this.chemistryTime, this.bioTime],
-            backgroundColor: ['yellow', 'green', 'blue'],
+            backgroundColor: ['#f43f5e', '#a855f7', '#0ea5e9'],
           },
         ],
       },

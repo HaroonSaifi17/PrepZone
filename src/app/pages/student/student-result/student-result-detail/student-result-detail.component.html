@@ -47,7 +47,7 @@
       </p>
     </div>
   </div>
-  <div class="mx-4 border-b-gray-200 border-b-2 mt-8 flex flex-wrap justify-center">
+  <div class="mx-4 border-b-gray-200 border-b-2 mt-8 mb-4 flex flex-wrap justify-center">
     <span (click)="index1=i;getQuestion()" [class.boxS]="index1==i"
       [style.background]="
         answer === resultData.results.result[i]
@@ -64,15 +64,10 @@
       </span>
     </span>
   </div>
-  <div class="flex flex-wrap m-4 justify-between border-b-2 border-b-gray-200 pb-3">
-    <div class="mr-2"><p class="font-semibold">Time</p><p>{{resultData.results.time}}s</p></div>
-    <div class="mr-2"><p class="font-semibold">Accuracy</p><p>{{accuracy}}%</p></div>
-    <div class="mr-2"><p class="font-semibold">Negative Marks</p><p>{{wrong}}</p></div>
-  </div>
   <div class="pt-2 px-4 flex justify-center flex-wrap items-center">
     <span class="bg-gray-600 text-white rounded-full px-1">{{ index1 + 1 }} / {{ resultData.test.totalQuestions }}</span>
   </div>
-  <div @in *ngIf="questionData$ | async as questionData" class="mt-4 px-4">
+  <div @in *ngIf="questionData$ | async as questionData" class="mt-4 px-4 mb-4">
     <div class="bg-gray-300 rounded-md">
       <p class="text-gray-600 p-2 pb-0">Question: {{ index1 + 1 }}</p>
       <p [mathjax]="questionData.questionText" class="p-2">
@@ -116,6 +111,24 @@
       </div>
       <div class="mb-5">
       </div>
+    </div>
+  </div>
+        <span class="mx-4 font-semibold text-xl">Overoll</span>
+  <div class="flex flex-wrap m-4 justify-around border-b-2 border-b-gray-200 pb-3">
+    <div class="mr-2"><p class="font-semibold">Time</p><p>{{resultData.results.time}}s</p></div>
+    <div class="mr-2"><p class="font-semibold">Accuracy</p><p>{{accuracy}}%</p></div>
+  </div>
+  <div>
+    <div *ngIf='resultData.results.subject.length>1'>
+  <div  *ngFor=' let subject of resultData.results.subject;let i=index' >
+        <span class="mx-4 font-semibold text-xl">{{subject}}</span>
+        <div class="flex flex-wrap m-4 justify-around border-b-2 border-b-gray-200 pb-3">
+      <div class="mr-2"><p class="font-semibold">Marks</p><p>{{resultData.results.correct[i]*4}}</p></div>
+        <div class="mr-2"><p class="font-semibold">Accuracy</p><p>{{mathF(resultData.results.correct[i]/(resultData.results.correct[i]+resultData.results.wrong[i])*100)}}%</p></div>
+
+        </div>
+  </div>
+
     </div>
   </div>
 </div>
