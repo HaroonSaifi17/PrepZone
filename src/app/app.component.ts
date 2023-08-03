@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import eruda from 'eruda';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +8,7 @@ import eruda from 'eruda';
 export class AppComponent implements OnInit {
   title = 'Trinity';
   constructor(){
-    eruda.init()
   }
   ngOnInit(): void {
-    
   }
 }

@@ -17,7 +17,6 @@ import { StudentGiveTestComponent } from './pages/student/student-test/student-g
 import { StudentTestListComponent } from './pages/student/student-test/student-test-list/student-test-list.component'
 import { StudentTestComponent } from './pages/student/student-test/student-test.component'
 import { StudentComponent } from './pages/student/student.component'
-import { AdminAuthGuard } from './services/admin-auth.guard'
 import { AuthGuard } from './services/auth.guard'
 import { NewStudentGuard } from './services/new-student.guard'
 
@@ -102,7 +101,6 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [AdminAuthGuard],
     component: AdminComponent,
   },
   {

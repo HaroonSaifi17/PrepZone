@@ -19,6 +19,7 @@ export class CorsInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token')
+    const adminToken = localStorage.getItem('admintoken')
 
     if (token) {
       request = request.clone({
@@ -28,24 +29,41 @@ export class CorsInterceptor implements HttpInterceptor {
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
           'Access-Control-Max-Age': '86400',
           Authorization: `Bearer ${token}`,
+          AdminToken: `${adminToken}`,
         },
       })
     }
 
     return next.handle(request).pipe(
       catchError((error: any) => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.status === 401) {
-            localStorage.removeItem('token')
-            window.location.href = environment.trinityApiUrl + '/login'
-            return new Observable<HttpEvent<any>>()
+        if (this.router.url.slice(0,5) == '/admin') {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 401) {
+              localStorage.removeItem('admintoken')
+              this.router.navigate(['/adminlogin'])
+              return new Observable<HttpEvent<any>>()
+            } else {
+              this.router.navigate(['/'])
+              return throwError(error)
+            }
           } else {
             this.router.navigate(['/'])
             return throwError(error)
           }
         } else {
-          this.router.navigate(['/'])
-          return throwError(error)
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 401) {
+              localStorage.removeItem('token')
+              window.location.href = environment.trinityApiUrl + '/login'
+              return new Observable<HttpEvent<any>>()
+            } else {
+              this.router.navigate(['/'])
+              return throwError(error)
+            }
+          } else {
+            this.router.navigate(['/'])
+            return throwError(error)
+          }
         }
       })
     )

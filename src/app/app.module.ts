@@ -29,6 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MathjaxModule } from 'mathjax-angular';
 import { StudentResultListComponent } from './pages/student/student-result/student-result-list/student-result-list.component';
 import { StudentResultDetailComponent } from './pages/student/student-result/student-result-detail/student-result-detail.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { StudentResultDetailComponent } from './pages/student/student-result/stu
     BeforeCommaPipe,
     StudentResultListComponent,
     StudentResultDetailComponent,
+    AdminLoginComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
