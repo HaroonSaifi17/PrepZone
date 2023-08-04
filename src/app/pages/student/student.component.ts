@@ -30,4 +30,7 @@ export class StudentComponent implements OnInit {
   userLogout(): void {
     this.api.logout()
   }
+  goHome():void{
+    this.router.navigate(['/'])
+  }
 }

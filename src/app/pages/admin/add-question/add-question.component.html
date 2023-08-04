@@ -3,38 +3,67 @@
     <h2 class="text-center font-bold text-xl">ADD QUESTIONS</h2>
     <p>Exam</p>
     <div class=" flex flex-wrap mb-4">
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Jee</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Neet</span>
+      <span (click)="exam='jee'" [class.dark]="exam=='jee'" class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Jee</span>
+      <span (click)="exam='neet'" [class.dark]="exam=='neet'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Neet</span>
     </div>
     <p>Subject</p>
     <div class=" flex flex-wrap mb-4">
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Physics</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Chemistry</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Math</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">bio</span>
+      <span (click)="subject='physics'" [class.dark]="subject=='physics'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Physics</span>
+      <span (click)="subject='chemistry'" [class.dark]="subject=='chemistry'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Chemistry</span>
+      <span (click)="subject='math'" [class.dark]="subject=='math'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Math</span>
+      <span (click)="subject='bio'" [class.dark]="subject=='bio'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">bio</span>
     </div>
     <p>Difficulty</p>
     <div class=" flex flex-wrap mb-4">
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Easy</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Medium</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Hard</span>
+      <span (click)="difficulty='Easy'" [class.dark]="difficulty=='Easy'"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Easy</span>
+      <span (click)="difficulty='Medium'" [class.dark]="difficulty=='Medium'" class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Medium</span>
+      <span (click)="difficulty='Hard'" [class.dark]="difficulty=='Hard'" class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Hard</span>
     </div>
     <p>Type</p>
     <div class=" flex flex-wrap mb-4">
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Multiple Choice</span>
-      <span class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Numberical</span>
+      <span (click)="multipleType=true" [class.dark]="multipleType==true" class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Multiple Choice</span>
+      <span  (click)="multipleType=false" [class.dark]="multipleType==false" class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Numberical</span>
     </div>
-    <form>
-      <div class="mb-4"><textarea rows="5" placeholder="Question" ></textarea></div>
-      <div class="mb-2"><input placeholder="Option 1" type="text"></div>
-      <div class="mb-2"><input placeholder="Option 2" type="text"></div>
-      <div class="mb-2"><input placeholder="Option 3" type="text"></div>
-      <div class="mb-2"><input placeholder="Option 4" type="text"></div>
+    <div class="bg-gray-300 rounded-sm pt-2 mb-2">
+      <p class="ml-2 text-gray-600">Overview</p>
+      <p class="p-2 bg-gray-300 mb-2 rounded-sm" [mathjax]="questionText">
+      </p>
+      <div *ngIf="multipleType">
+      <div  *ngFor="let option of options"><p class="bg-gray-300 p-2 rounded-sm" [mathjax]="option"></p></div>
+    </div>
+      </div>
+    <form >
+      <div class="mb-4"><textarea #f (ngModel)="questionText" (input)="questionText=f.value" class="w-full p-2 border border-gray-600 rounded-sm" rows="5" placeholder="Question" ></textarea></div>
+      <div *ngIf="multipleType">
+
+      <div class="mb-2"><input #f2 (ngModel)="options[0]" (input)="options[0]=f2.value" class="min-w-[200px] border border-gray-600 p-2 rounded-sm"  placeholder="Option 1" type="text"></div>
+      <div class="mb-2"><input #f3 (ngModel)="options[1]" (input)="options[1]=f3.value"  class="min-w-[200px] p-2 rounded-sm border border-gray-600"  placeholder="Option 2" type="text"></div>
+      <div class="mb-2"><input #f4 (ngModel)="options[2]" (input)="options[2]=f4.value"  class="min-w-[200px] p-2 rounded-sm border border-gray-600"  placeholder="Option 3" type="text"></div>
+      <div class="mb-2"><input #f5 (ngModel)="options[3]" (input)="options[3]=f5.value"  class="min-w-[200px] p-2 rounded-sm border border-gray-600"  placeholder="Option 4" type="text"></div>
+    <p>Correct option</p>
+      </div>
+    <div *ngIf="multipleType" class=" flex flex-wrap mb-4">
+      <span (click)="correctOption=0" [class.dark]="correctOption==0"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">1</span>
+      <span (click)="correctOption=1" [class.dark]="correctOption==1"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">2</span>
+      <span (click)="correctOption=2" [class.dark]="correctOption==2"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">3</span>
+      <span (click)="correctOption=3" [class.dark]="correctOption==3"  class="p-2 bg-gray-300 mr-2 rounded-md mb-2">4</span>
+    </div>
+      <div *ngIf="!multipleType">
+
+      <p>Answer</p>
+      <div class="mb-2"><input #f7 (ngModel)="correctOption" (input)="correctOption=intCon(f7.value)"  class="min-w-[200px] p-2 rounded-sm border border-gray-600"  placeholder="Answer" type="number"></div>
+      </div>
+      <div class="flex justify-center"><a class="p-3 px-4 rounded-full bg-green-700 text-white border-2 border-green-400" (click)="addQuestion()">Add</a></div>
     </form>
+  </div>
+  <div>
+    <p>Guide</p>
+    <p *ngFor="let m of mathEx"><span>{{m}}</span> <span [mathjax]="m"></span></p>
   </div>
   <div>
     <footer class="bg-darkNavy text-center text-white py-4 px-2">
       <p>© 2023 Trinity. All rights reserved.</p>
     </footer>
   </div>
+  $ x/y $
 </div>
