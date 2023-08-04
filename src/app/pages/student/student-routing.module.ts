@@ -16,6 +16,7 @@ import { StudentComponent } from './student.component'
 
 const routes: Routes = [
   {
+    path:'',
     component: StudentComponent,
     canActivate: [AuthGuard],
     children: [

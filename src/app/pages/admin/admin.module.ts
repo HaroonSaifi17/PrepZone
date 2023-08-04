@@ -6,12 +6,10 @@ import { MathjaxModule } from 'mathjax-angular'
 import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddQuestionComponent } from './add-question/add-question.component'
-import { StudentFooterComponent } from '../student/student-footer/student-footer.component'
 
 @NgModule({
   declarations: [
     AddQuestionComponent,
-    StudentFooterComponent
   ],
   imports: [
     CommonModule,
