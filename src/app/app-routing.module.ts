@@ -1,24 +1,9 @@
 import { NgModule } from '@angular/core'
 import { ExtraOptions, RouterModule, Routes } from '@angular/router'
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component'
-import { AdminComponent } from './pages/admin/admin.component'
 import { HomeComponent } from './pages/home/home.component'
 import { LoginCallbackComponent } from './pages/login-callback/login-callback.component'
 import { NewStudentComponent } from './pages/new-student/new-student.component'
-import { JeeDashboardComponent } from './pages/student/student-dashboard/jee-dashboard/jee-dashboard.component'
-import { NeetDashboardComponent } from './pages/student/student-dashboard/neet-dashboard/neet-dashboard.component'
-import { StudentDashboardComponent } from './pages/student/student-dashboard/student-dashboard.component'
-import { StudentNotesComponent } from './pages/student/student-notes/student-notes.component'
-import { StudentResultDetailComponent } from './pages/student/student-result/student-result-detail/student-result-detail.component'
-import { StudentResultListComponent } from './pages/student/student-result/student-result-list/student-result-list.component'
-import { StudentResultComponent } from './pages/student/student-result/student-result.component'
-import { StudentSettingsComponent } from './pages/student/student-settings/student-settings.component'
-import { StudentGiveTestComponent } from './pages/student/student-test/student-give-test/student-give-test.component'
-import { StudentTestListComponent } from './pages/student/student-test/student-test-list/student-test-list.component'
-import { StudentTestComponent } from './pages/student/student-test/student-test.component'
-import { StudentComponent } from './pages/student/student.component'
-import { AdminAuthGuard } from './services/admin-auth.guard'
-import { AuthGuard } from './services/auth.guard'
 import { NewStudentGuard } from './services/new-student.guard'
 
 const routes: Routes = [
@@ -33,81 +18,19 @@ const routes: Routes = [
   },
   {
     path: 'student',
-    component: StudentComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {
-        path: 'dashboard',
-        component: StudentDashboardComponent,
-        children: [
-          { path: '', redirectTo: 'jee', pathMatch: 'full' },
-          {
-            path: 'jee',
-            component: JeeDashboardComponent,
-          },
-          {
-            path: 'neet',
-            component: NeetDashboardComponent,
-          },
-          { path: '**', redirectTo: 'jee' },
-        ],
-      },
-      {
-        path: 'notes',
-        component: StudentNotesComponent,
-      },
-      {
-        path: 'test',
-        component: StudentTestComponent,
-        children: [
-          { path: '', redirectTo: 'list', pathMatch: 'full' },
-          {
-            path: 'list',
-            component: StudentTestListComponent,
-          },
-          {
-            path: ':id',
-            component: StudentGiveTestComponent,
-          },
-          { path: '**', redirectTo: 'list' },
-        ],
-      },
-      {
-        path: 'settings',
-        component: StudentSettingsComponent,
-      },
-      {
-        path: 'result',
-        component: StudentResultComponent,
-        children: [
-          { path: '', redirectTo: 'list', pathMatch: 'full' },
-          {
-            path: 'list',
-            component: StudentResultListComponent,
-          },
-          {
-            path: ':id',
-            component: StudentResultDetailComponent,
-          },
-          { path: '**', redirectTo: 'list' },
-        ],
-      },
-      { path: '**', redirectTo: 'dashboard' },
-    ],
+    loadChildren: () => import('./pages/student/student.module').then(m => m.StudentModule)
   },
   {
     path: 'logincallback',
     component: LoginCallbackComponent,
   },
   {
-    path: 'admin',
-    canActivate: [AdminAuthGuard],
-    component: AdminComponent,
-  },
-  {
     path: 'adminlogin',
     component: AdminLoginComponent,
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
   },
   { path: '**', redirectTo: '/' },
 ]

@@ -1,1 +1,35 @@
-<p>admin works!</p>
+<nav
+  class="flex h-16 justify-between items-center p-4 mx-auto max-w-screen-xl bg-darkNavy"
+>
+  <div>
+    <a class="mr-4 sm:hidden" (click)="addClassToElement(b)">
+      <i class="fa-solid fa-bars fa-xl"></i>
+    </a>
+    <a class="text-white" href="#home">Trinity</a>
+  </div>
+  <div>
+    <a (click)="logout()" class=" p-2 text-white bg-navy rounded-md ">Logout</a>
+  </div>
+</nav>
+<div class="flex max-w-screen-xl mx-auto overflow-x-hidden">
+  <div class="bg-navy left-nav duration-100">
+    <ul class="m-4 max-sm:m-2">
+      <li class="my-4">
+        <a
+          class="p-2"
+          routerLink="add"
+          routerLinkActive="active"
+          ><span><i class="fa-solid fa-plus"></i></span
+          ><span
+            [ngClass]="{ navToggle: isClassAdded }"
+            class="pl-2 max-sm:hidden"
+            >Add Questions</span
+          ></a
+        >
+      </li>
+    </ul>
+  </div>
+  <div #b class="main-content bg-slate-50 flex-1 overflow-y-auto">
+    <router-outlet></router-outlet>
+  </div>
+</div>

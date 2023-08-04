@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+  public isClassAdded:Boolean=false
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+  addClassToElement(b:any): void {
+    this.isClassAdded = !this.isClassAdded
+    if(b.style.marginRight=='0px' || b.style.marginRight=='')
+  {
+     b.style.marginRight='-90.46px'
+    }else{
+      b.style.marginRight='0px'
+    }
+  }
+  logout():void{
+    localStorage.removeItem('admintoken')
+    this.router.navigate(['adminlogin'])
   }
 
 }
