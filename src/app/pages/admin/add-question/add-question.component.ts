@@ -14,7 +14,6 @@ export class AddQuestionComponent implements OnInit {
   difficulty: string = 'Medium'
   multipleType: boolean = true
   correctOption: number = 0
-  img: any
   mathEx = [
     'x^2 + y^2 = r^2$',
     'e^{ipi} + 1 = 0$',
@@ -36,51 +35,52 @@ export class AddQuestionComponent implements OnInit {
     'P(A|B) = \\frac{P(A \\cap B)}{P(B)}$',
   ]
 
-  constructor(private adminApi: AdminApiService) { }
+  constructor(private adminApi: AdminApiService) {}
   sucess: string = ''
   timeout: boolean = true
-  ngOnInit(): void { }
-  addQuestion(): void {
+  ngOnInit(): void {}
+  addQuestion(img: any): void {
     if (this.timeout) {
-      this.timeout=false
+      this.timeout = false
       if (this.multipleType) {
-        this.adminApi
-          .addMQuestion(
-            this.difficulty,
-            this.questionText,
-            this.subject,
-            this.exam,
-            this.options,
-            this.correctOption,
-            this.img
-          )
-          .subscribe(() => {
-            this.sucess = 'Sucessfully Added'
-            this.questionText = ''
-            this.options = ['', '', '', '']
-            this.img = null
-            this.correctOption = 0
-            setTimeout(() => {
-              this.sucess = ''
-            }, 5000)
-          })
-      } else {
-        this.adminApi
-          .addNQuestion(
-            this.difficulty,
-            this.questionText,
-            this.subject,
-            this.correctOption,
-            this.img
-          )
-          .subscribe(() => {
-            this.sucess = 'Sucessfully Added'
+        const formData = new FormData()
+        formData.append('questionText', this.questionText)
+        formData.append('exam', this.exam)
+        formData.append('subject', this.subject)
+        formData.append('difficulty', this.difficulty)
+        formData.append('options', this.options.toString())
+        formData.append('correctOption', this.correctOption.toString())
+        if (img.files.length !== 0) {
+          formData.append('img', img.files[0])
+        }
+        console.log(formData, img.files)
+        this.adminApi.addMQuestion(formData).subscribe(() => {
+          this.sucess = 'Sucessfully Added'
+          this.questionText = ''
+          this.options = ['', '', '', '']
+          this.correctOption = 0
+          setTimeout(() => {
             this.sucess = ''
-            this.questionText = ''
-            this.correctOption = 0
-            this.img = null
-            setTimeout(() => {this.sucess='' }, 5000)
-          })
+          }, 5000)
+        })
+      } else {
+        const formData = new FormData()
+        formData.append('questionText', this.questionText)
+        formData.append('subject', this.subject)
+        formData.append('difficulty', this.difficulty)
+        formData.append('correctOption', this.correctOption.toString())
+        if (img.files.length !== 0) {
+          formData.append('img', img.files[0])
+        }
+        this.adminApi.addNQuestion(formData).subscribe(() => {
+          this.sucess = 'Sucessfully Added'
+          this.sucess = ''
+          this.questionText = ''
+          this.correctOption = 0
+          setTimeout(() => {
+            this.sucess = ''
+          }, 5000)
+        })
       }
     }
     setTimeout(() => {
