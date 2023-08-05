@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,9 +9,14 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
   public isClassAdded:Boolean=false
-  constructor(private router:Router) { }
+  constructor(private router:Router,private adminApi:AdminApiService) { }
 
   ngOnInit(): void {
+    this.adminApi.checkToken().subscribe(d=>{
+      console.log(d.check)
+    },e=>{
+        console.log(e)
+      })
   }
   addClassToElement(b:any): void {
     this.isClassAdded = !this.isClassAdded
@@ -28,5 +34,4 @@ export class AdminComponent implements OnInit {
   goHome():void{
     this.router.navigate(['/'])
   }
-
 }

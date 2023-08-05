@@ -21,7 +21,19 @@ export class CorsInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token')
     const adminToken = localStorage.getItem('admintoken')
 
-    if (token) {
+    if (adminToken && this.router.url.slice(0,6) == '/admin') {
+      request = request.clone({
+        setHeaders: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Max-Age': '86400',
+          Authorization: `Bearer ${adminToken}`,
+        },
+      })
+      console.log(adminToken)
+    }
+    else if (token) {
       request = request.clone({
         setHeaders: {
           'Access-Control-Allow-Origin': '*',
@@ -29,19 +41,29 @@ export class CorsInterceptor implements HttpInterceptor {
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
           'Access-Control-Max-Age': '86400',
           Authorization: `Bearer ${token}`,
-          AdminToken: `${adminToken}`,
         },
       })
+    }
+    else{
+      request = request.clone({
+        setHeaders: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Max-Age': '86400',
+        },
+      })
+
     }
 
     return next.handle(request).pipe(
       catchError((error: any) => {
-        if (this.router.url.slice(0,5) == '/admin') {
+        if (this.router.url.slice(0,6) == '/admin') {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
               localStorage.removeItem('admintoken')
               this.router.navigate(['/adminlogin'])
-              return new Observable<HttpEvent<any>>()
+              return throwError(error)
             } else {
               this.router.navigate(['/'])
               return throwError(error)
