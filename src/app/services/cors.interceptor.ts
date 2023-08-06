@@ -31,7 +31,6 @@ export class CorsInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${adminToken}`,
         },
       })
-      console.log(adminToken)
     }
     else if (token) {
       request = request.clone({

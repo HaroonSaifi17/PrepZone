@@ -13,7 +13,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminApi.checkToken().subscribe(d=>{
-      console.log(d.check)
     },e=>{
         console.log(e)
       })

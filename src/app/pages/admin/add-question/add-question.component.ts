@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { OnInit , Component } from '@angular/core'
+import { NgForm } from '@angular/forms'
 import { AdminApiService } from 'src/app/services/admin-api.service'
 
 @Component({
@@ -7,7 +8,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service'
   styleUrls: ['./add-question.component.scss'],
 })
 export class AddQuestionComponent implements OnInit {
-  questionText: string = ' '
+  questionText: string = ''
   options: [string, string, string, string] = ['', '', '', '']
   exam: string = 'jee'
   subject: string = 'physics'
@@ -39,7 +40,7 @@ export class AddQuestionComponent implements OnInit {
   sucess: string = ''
   timeout: boolean = true
   ngOnInit(): void {}
-  addQuestion(img: any): void {
+  addQuestion(form: NgForm, img: any): void {
     if (this.timeout) {
       this.timeout = false
       if (this.multipleType) {
@@ -53,12 +54,12 @@ export class AddQuestionComponent implements OnInit {
         if (img.files.length !== 0) {
           formData.append('img', img.files[0])
         }
-        console.log(formData, img.files)
         this.adminApi.addMQuestion(formData).subscribe(() => {
           this.sucess = 'Sucessfully Added'
           this.questionText = ''
           this.options = ['', '', '', '']
           this.correctOption = 0
+          form.resetForm()
           setTimeout(() => {
             this.sucess = ''
           }, 5000)
@@ -74,9 +75,9 @@ export class AddQuestionComponent implements OnInit {
         }
         this.adminApi.addNQuestion(formData).subscribe(() => {
           this.sucess = 'Sucessfully Added'
-          this.sucess = ''
           this.questionText = ''
           this.correctOption = 0
+          form.resetForm()
           setTimeout(() => {
             this.sucess = ''
           }, 5000)

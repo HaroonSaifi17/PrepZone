@@ -14,7 +14,7 @@ export class AdminAuthGuard implements CanActivate {
     if (token) {
       return true;
     } else {
-      window.location.href=environment.trinityApiUrl + '/login'
+      this.router.navigate(['adminlogin'])
       return false;
     }
   }
