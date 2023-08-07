@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms'
 import { MathjaxModule } from 'mathjax-angular'
 import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin-routing.module';
-import { AddQuestionComponent } from './add-question/add-question.component'
+import { AddQuestionComponent } from './add-question/add-question.component';
+import { AddPaperComponent } from './add-paper/add-paper.component'
 
 @NgModule({
   declarations: [
     AddQuestionComponent,
+    AddPaperComponent,
   ],
   imports: [
     CommonModule,
