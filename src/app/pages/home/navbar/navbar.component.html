@@ -1,22 +1,23 @@
-<nav class="max-w-screen-xl flex p-4 justify-between mx-auto items-center">
+<nav id="home" class="max-w-screen-xl flex p-4 justify-between mx-auto items-center">
   <div><a href="#home">Trinity</a></div>
   <div
     #list
-    class="max-sm:fixed max-sm:w-3/4 max-sm:top-0 max-sm:-right-full duration-100 max-sm:bg-gray-100 max-sm:h-[100vh]"
+    class="max-sm:fixed max-sm:w-1/2 max-sm:top-0 max-sm:-right-full duration-100 max-sm:bg-gray-100 max-sm:h-[100vh] z-10"
   >
     <ul
       class="flex max-sm:flex-col max-sm:w-full max-sm:justify-start max-sm:items-stretch max-sm:h-full max-sm:py-20 max-sm:px-4 max-sm:space-y-5"
     >
-      <li><a class="m-1 p-2" href="">Home</a></li>
-      <li><a class="m-1 p-2" href="">About</a></li>
-      <li><a class="m-1 p-2" href="">Contact</a></li>
-      <li><a class="m-1 p-2" href="">Experience</a></li>
+      <li><a class="m-1 p-2" >Home</a></li>
+      <li><a class="m-1 p-2" >About</a></li>
+      <li><a class="m-1 p-2" >Contact</a></li>
+      <li><a class="m-1 p-2" >Experience</a></li>
+      <li><a class="m-1 p-2" routerLink='/adminlogin'>Admin</a></li>
     </ul>
   </div>
   <div class="max-sm:ml-auto">
     <button (click)="navigateToRoute()"
       type="button"
-      class="text-gray-900 my-auto bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+      class="text-gray-900 my-auto bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 mr-2"
     >
       Login
     </button>
@@ -25,9 +26,10 @@
     <button
       (click)="toggleClass(list)"
       type="button"
-      class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2.5 py-2.5 mr-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+      class="text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 "
     >
       <i class="fa-solid fa-bars fa-2xl"></i>
     </button>
   </div>
 </nav>
+
