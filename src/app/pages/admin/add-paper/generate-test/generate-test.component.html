@@ -1,1 +1,84 @@
-<p>generate-test works!</p>
+<h1 class="my-2 font-bold text-xl text-center">GENERATE PAPER</h1>
+<p>Exam</p>
+<div class="flex flex-wrap mb-4">
+  <a
+    (click)="exam = 'jee'; subject == 'bio' ? (subject = 'math') : null"
+    [class.dark]="exam == 'jee'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Jee</a
+  >
+  <a
+    (click)="exam = 'neet'; subject == 'math' ? (subject = 'bio') : null"
+    [class.dark]="exam == 'neet'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Neet</a
+  >
+</div>
+<p>Subject</p>
+<div class="flex flex-wrap mb-4">
+  <a
+    (click)="subject = 'all'"
+    [class.dark]="subject == 'all'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >All</a
+  >
+  <a
+    (click)="subject = 'physics'"
+    [class.dark]="subject == 'physics'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Physics</a
+  >
+  <a
+    (click)="subject = 'chemistry'"
+    [class.dark]="subject == 'chemistry'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Chemistry</a
+  >
+  <a
+    (click)="subject = 'math'"
+    *ngIf="exam == 'jee'"
+    [class.dark]="subject == 'math'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Math</a
+  >
+  <a
+    (click)="subject = 'bio'"
+    *ngIf="exam == 'neet'"
+    [class.dark]="subject == 'bio'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >bio</a
+  >
+</div>
+<p>Difficulty</p>
+<div class="flex flex-wrap mb-4">
+  <a
+    (click)="difficulty = 'Easy'"
+    [class.dark]="difficulty == 'Easy'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Easy</a
+  >
+  <a
+    (click)="difficulty = 'Medium'"
+    [class.dark]="difficulty == 'Medium'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Medium</a
+  >
+  <a
+    (click)="difficulty = 'Hard'"
+    [class.dark]="difficulty == 'Hard'"
+    class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+    >Hard</a
+  >
+</div>
+  <p *ngIf="exam=='jee'">Multiple Choice + Numerical = Total Questions</p>
+  <p *ngIf="exam=='neet'">Total Questions</p>
+<div *ngIf="exam=='neet'" >
+  <input #m (input)="Questions(m.value,'0')" class="w-[80px] p-2 rounded-sm border border-gray-600" type="number" value="0" >
+</div>
+<div class="flex flex-wrap mb-4 items-center" *ngIf="exam=='jee'">
+  <input #m (input)='Questions(m.value,n.value)' class="w-[80px] p-2 rounded-sm border border-gray-600" type="number" value="0" >
+    <span> + </span>
+  <input #n (input)='Questions(m.value,n.value)' class="w-[80px] p-2 rounded-sm border border-gray-600" type="number" value="0">
+  <span> = {{totalQuestions}}</span>
+</div>
+<div class="flex justify-center my-4"><a  class="p-4 rounded-full bg-rose-700 text-white">Generate</a></div>
