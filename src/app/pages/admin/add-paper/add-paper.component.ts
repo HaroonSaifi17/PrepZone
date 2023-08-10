@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-add-paper',
@@ -7,9 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPaperComponent implements OnInit {
 
-  constructor() { }
+  exam: string = 'jee'
+  subject: string = 'all'
+  difficulty: string = 'Medium'
+  totalQuestions: number = 0
+  num: number = 0
+  create:boolean=false
 
-  ngOnInit(): void {
+  constructor(private adminApi: AdminApiService) {}
+
+  ngOnInit(): void {}
+
+  Questions(m: string, n: string): void {
+    if (m == '') {
+      m = '0'
+    }
+    if (n == '') {
+      n = '0'
+    }
+    this.num = parseInt(n)
+    this.totalQuestions = parseInt(m) + this.num
   }
-
+  generate(): void {
+    let query: string =
+      '?exam=' +
+      this.exam +
+      '&subject=' +
+      this.subject +
+      '&difficulty=' +
+      this.difficulty +
+      '&totalQuestions=' +
+      this.totalQuestions +
+      '&num=' +
+      this.num
+     this.adminApi.generateTest(query).subscribe()
+  }
 }

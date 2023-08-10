@@ -7,15 +7,11 @@ import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AddPaperComponent } from './add-paper/add-paper.component';
-import { GenerateTestComponent } from './add-paper/generate-test/generate-test.component';
-import { CreateTestComponent } from './add-paper/create-test/create-test.component'
 
 @NgModule({
   declarations: [
     AddQuestionComponent,
     AddPaperComponent,
-    GenerateTestComponent,
-    CreateTestComponent,
   ],
   imports: [
     CommonModule,
