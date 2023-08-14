@@ -47,11 +47,11 @@
     </div>
     <div class="flex justify-center flex-wrap my-4" *ngIf="!create">
       <a (click)="generate()" class="p-4 mr-4 rounded-full bg-rose-700 text-white">Generate</a>
-      <a (click)="create = true; number = totalQuestions" class="p-4 rounded-full bg-yellow-700 text-white">Create</a>
+      <a (click)="emptyData(); number = totalQuestions" class="p-4 rounded-full bg-yellow-700 text-white">Create</a>
     </div>
     <div *ngIf="create">
       <div class="mx-4 border-b-gray-200 border-b-2 mt-8 mb-4 flex flex-wrap justify-center">
-        <span *ngFor="let _ of countArray(); let i = index" (click)="createArray(profileForm, img); questionNumber = i"
+        <span *ngFor="let _ of countArray(); let i = index" (click)="createArray( img); questionNumber = i;checkM();changeInput(i,img)"
           [style.background]="questionNumber == i ? '#0ea5e9' : '#d1d5db'"
           class="aspect-square bg-gray-300 rounded-full mr-3 mb-3">
           {{ i + 1 }}
@@ -84,26 +84,26 @@
       </div>
       <form #profileForm="ngForm" ngNativeValidate>
         <div class="mb-4">
-          <textarea #f required name="questionText" ngModel (input)="questionText = f.value"
+          <textarea #f [value]='questionText' required name="questionText" ngModel (input)="questionText = f.value"
             class="w-full p-2 border border-gray-600 rounded-sm" rows="5"
             [placeholder]="'Question ' + (questionNumber + 1)"></textarea>
         </div>
-        <input class="custom-file-input" ngModel #img name="img " type="file" />
+        <input  class="custom-file-input" ngModel #img name="img " type="file" />
         <div *ngIf="multipleType">
           <div class="mb-2">
-            <input required #f2 name="option1" ngModel (input)="options[0] = f2.value"
+            <input [value]='options[0]' required #f2 name="option1" ngModel (input)="options[0] = f2.value"
               class="min-w-[200px] border border-gray-600 p-2 rounded-sm" placeholder="Option 1" type="text" />
           </div>
           <div class="mb-2">
-            <input required #f3 name="option2" ngModel (input)="options[1] = f3.value"
+            <input [value]='options[1]' required #f3 name="option2" ngModel (input)="options[1] = f3.value"
               class="min-w-[200px] p-2 rounded-sm border border-gray-600" placeholder="Option 2" type="text" />
           </div>
           <div class="mb-2">
-            <input required #f4 name="option2" ngModel (input)="options[2] = f4.value"
+            <input [value]='options[2]' required #f4 name="option2" ngModel (input)="options[2] = f4.value"
               class="min-w-[200px] p-2 rounded-sm border border-gray-600" placeholder="Option 3" type="text" />
           </div>
           <div class="mb-2">
-            <input required #f5 name="option4" ngModel (input)="options[3] = f5.value"
+            <input [value]='options[3]' required #f5 name="option4" ngModel (input)="options[3] = f5.value"
               class="min-w-[200px] p-2 rounded-sm border border-gray-600" placeholder="Option 4" type="text" />
           </div>
           <p>Correct option</p>
@@ -121,15 +121,15 @@
         <div *ngIf="!multipleType">
           <p>Answer</p>
           <div class="mb-2">
-            <input #f7 required name="correctOption" ngModel (input)="correctOption = intCon(f7.value)"
+            <input #f7 [value]='correctOption' required name="correctOption" ngModel (input)="correctOption = intCon(f7.value)"
               class="min-w-[200px] p-2 rounded-sm border border-gray-600" placeholder="Answer" type="number" />
           </div>
         </div>
         <div>
           <a [style.background]="questionNumber === 0 ? '#cbd5e1' : '#475569'"
-            (click)="createArray(profileForm, img); previousQuestion()"
+            (click)="createArray( img); previousQuestion(img)"
             class="bg-gray-600 p-2 rounded-md text-white">Previous</a><a
-            (click)="createArray(profileForm, img); nextQuestion()" [style.background]="
+            (click)="createArray( img); nextQuestion(img)" [style.background]="
               questionNumber === totalQuestions - 1 ? '#cbd5e1' : '#475569'
             " class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>
         </div>
