@@ -1,6 +1,8 @@
 <div class="flex flex-col wpr justify-between">
   <div class="p-4">
     <h1 class="my-2 font-bold text-xl text-center">CREATE PAPER</h1>
+    <div *ngIf="!create">
+
     <p>Exam</p>
     <div class="flex flex-wrap mb-4">
       <a (click)="exam = 'jee'; subject == 'bio' ? (subject = 'math') : null" [class.dark]="exam == 'jee'"
@@ -29,6 +31,7 @@
       <a (click)="difficulty = 'Hard'" [class.dark]="difficulty == 'Hard'"
         class="p-2 bg-gray-300 mr-2 rounded-md mb-2">Hard</a>
     </div>
+    </div>
     <div *ngIf="!create">
       <p *ngIf="exam == 'jee'">Multiple Choice + Numerical = Total Questions</p>
       <p *ngIf="exam == 'neet'">Total Questions</p>
@@ -51,7 +54,7 @@
     </div>
     <div *ngIf="create">
       <div class="mx-4 border-b-gray-200 border-b-2 mt-8 mb-4 flex flex-wrap justify-center">
-        <span *ngFor="let _ of countArray(); let i = index" (click)="createArray( img); questionNumber = i;checkM();changeInput(i,img)"
+        <span *ngFor="let _ of countArray(); let i = index" (click)="createArray( img); questionNumber = i;checkM();changeInput(i,profileForm)"
           [style.background]="questionNumber == i ? '#0ea5e9' : '#d1d5db'"
           class="aspect-square bg-gray-300 rounded-full mr-3 mb-3">
           {{ i + 1 }}
@@ -88,7 +91,13 @@
             class="w-full p-2 border border-gray-600 rounded-sm" rows="5"
             [placeholder]="'Question ' + (questionNumber + 1)"></textarea>
         </div>
-        <input  class="custom-file-input" ngModel #img name="img " type="file" />
+        <div class="relative">
+        <label class="absolute px-[10px] py-[5px] z-0 max-w-[140px] whitespace-nowrap  overflow-hidden" #la>{{imgName}}</label>
+        <input  class="custom-file-input relative z-10"  (input)="img.files!.length==0?remove():imgName=img.files![0].name" ngModel #img name="img " type="file" />
+        <a class="p-2 ml-2 px-3 rounded-full border border-w-1 border-gray-600" (click)="remove()">
+<i class="fa-solid fa-xmark"></i>
+        </a>
+        </div>
         <div *ngIf="multipleType">
           <div class="mb-2">
             <input [value]='options[0]' required #f2 name="option1" ngModel (input)="options[0] = f2.value"
@@ -127,9 +136,9 @@
         </div>
         <div>
           <a [style.background]="questionNumber === 0 ? '#cbd5e1' : '#475569'"
-            (click)="createArray( img); previousQuestion(img)"
+            (click)="createArray( img); previousQuestion(profileForm)"
             class="bg-gray-600 p-2 rounded-md text-white">Previous</a><a
-            (click)="createArray( img); nextQuestion(img)" [style.background]="
+            (click)="createArray( img); nextQuestion(profileForm)" [style.background]="
               questionNumber === totalQuestions - 1 ? '#cbd5e1' : '#475569'
             " class="bg-gray-600 p-2 rounded-md text-white ml-2">Next</a>
         </div>

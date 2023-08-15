@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit} from '@angular/core'
 import { NgForm } from '@angular/forms'
 import { AdminApiService } from 'src/app/services/admin-api.service'
 
@@ -8,7 +8,6 @@ import { AdminApiService } from 'src/app/services/admin-api.service'
   styleUrls: ['./add-paper.component.scss'],
 })
 export class AddPaperComponent implements OnInit {
-  @ViewChild('img', { static: false }) myInputRef!: ElementRef<HTMLInputElement>
   exam: string = 'jee'
   subject: string = 'all'
   difficulty: string = 'Medium'
@@ -22,16 +21,15 @@ export class AddPaperComponent implements OnInit {
   correctOption: number = 0
   multipleType: boolean = true
   questionNumber: number = 0
-  constructor(private adminApi: AdminApiService) { }
+  constructor(private adminApi: AdminApiService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   emptyData(): void {
     if (!this.create) {
       const formData = new FormData()
       formData.append('questionText', '')
       formData.append('options', `["", "", "", ""]`)
       formData.append('correctOption', '0')
-      formData.append('img', '')
       for (let i = 0; i < this.totalQuestions; i++) {
         this.createData[i] = formData
       }
@@ -75,9 +73,14 @@ export class AddPaperComponent implements OnInit {
       formData.append('difficulty', this.difficulty)
       formData.append('options', JSON.stringify(this.options))
       formData.append('correctOption', this.correctOption.toString())
-      if (img.files.length !== 0) {
+      if (img.files.length > 0) {
         formData.append('img', img.files[0])
       }
+      else if (this.imgArray[this.questionNumber] !== null || this.imgArray[this.questionNumber] !== undefined  ) {
+        console.log("wor")
+        formData.append('img', this.imgArray[this.questionNumber])
+      }
+
       this.createData[this.questionNumber] = formData
     } else {
       const formData = new FormData()
@@ -85,8 +88,11 @@ export class AddPaperComponent implements OnInit {
       formData.append('subject', this.subject)
       formData.append('difficulty', this.difficulty)
       formData.append('correctOption', this.correctOption.toString())
-      if (img.files.length !== 0) {
+      if (img.files.length > 0) {
         formData.append('img', img.files[0])
+      }
+      else if (this.imgArray[this.questionNumber] !== null || this.imgArray[this.questionNumber] !== undefined  ) {
+        formData.append('img', this.imgArray[this.questionNumber])
       }
       this.createData[this.questionNumber] = formData
     }
@@ -94,38 +100,36 @@ export class AddPaperComponent implements OnInit {
   intCon(s: string): number {
     return parseInt(s)
   }
-  previousQuestion(f: any): void {
+  previousQuestion(form: NgForm): void {
     if (this.questionNumber > 0) {
       this.questionNumber = this.questionNumber - 1
-      this.changeInput(this.questionNumber, f)
+      this.changeInput(this.questionNumber, form)
     }
     this.checkM()
   }
-  nextQuestion(f: any): void {
+  nextQuestion(form: NgForm): void {
     if (this.questionNumber < this.totalQuestions - 1) {
       this.questionNumber = this.questionNumber + 1
-      this.changeInput(this.questionNumber, f)
+      this.changeInput(this.questionNumber, form)
     }
     this.checkM()
   }
-  changeInput(i: number, img: any): void {
+  public imgName: string = 'No file chosen'
+  public imgArray: any[] = []
+  changeInput(i: number, form: NgForm): void {
     this.questionText = this.createData[i].get('questionText')!.toString()
     this.options = JSON.parse(this.createData[i].get('options')!.toString())
     this.correctOption = parseInt(
       this.createData[i].get('correctOption')!.toString()
     )
-    let img1: File = this.createData[i].get('img') ?
-    if (img1 !== undefined || img1 !== null || img1 !== '') {
-      let fileList = new DataTransfer();
-      fileList.items.add(img1);
-      let files = fileList.files;
-      Object.defineProperty(img, "files", {
-        value: files,
-        writable: true,
-      });
+    let img1: any = this.createData[i].get('img')!
+    if (img1 instanceof File && img1 !== null) {
+      this.imgName = img1.name
+      this.imgArray[i] = img1
     } else {
-      img.value = ''
+      this.imgName = 'No file chosen'
     }
+    form.reset()
   }
   checkM(): void {
     if (this.exam == 'jee') {
@@ -150,5 +154,9 @@ export class AddPaperComponent implements OnInit {
         }
       }
     }
+  }
+  remove():void{
+    this.imgName='No file chosen'
+    this.imgArray[this.questionNumber]=null
   }
 }

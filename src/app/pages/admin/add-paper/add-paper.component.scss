@@ -40,6 +40,9 @@ input[type='file']::file-selector-button {
   opacity: 0;
   position: absolute;
 }
+input[type='file']{
+  color: transparent;
+}
 .aspect-square {
   display: inline-flex;
   align-items: center;
