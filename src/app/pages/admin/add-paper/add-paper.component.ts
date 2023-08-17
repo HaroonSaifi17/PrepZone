@@ -1,5 +1,6 @@
-import { Component, OnInit} from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { NgForm } from '@angular/forms'
+import { forkJoin } from 'rxjs'
 import { AdminApiService } from 'src/app/services/admin-api.service'
 
 @Component({
@@ -9,11 +10,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service'
 })
 export class AddPaperComponent implements OnInit {
   exam: string = 'jee'
-  subject: string = 'all'
+  subject: string[] = ['math', 'physics', 'chemistry']
   difficulty: string = 'Medium'
   totalQuestions: number = 0
   num: number = 0
   create: boolean = false
+  name: string = ''
 
   createData: FormData[] = []
   questionText: string = ''
@@ -21,7 +23,7 @@ export class AddPaperComponent implements OnInit {
   correctOption: number = 0
   multipleType: boolean = true
   questionNumber: number = 0
-  constructor(private adminApi: AdminApiService) {}
+  constructor(private adminApi: AdminApiService) { }
 
   ngOnInit(): void {}
   emptyData(): void {
@@ -57,7 +59,9 @@ export class AddPaperComponent implements OnInit {
       '&totalQuestions=' +
       this.totalQuestions +
       '&num=' +
-      this.num
+      this.num +
+      '&name=' +
+      this.name
     this.adminApi.generateTest(query).subscribe()
   }
   number: number = 0
@@ -69,15 +73,16 @@ export class AddPaperComponent implements OnInit {
       const formData = new FormData()
       formData.append('questionText', this.questionText)
       formData.append('exam', this.exam)
-      formData.append('subject', this.subject)
+      formData.append('subject', this.subject[this.subCheck()])
       formData.append('difficulty', this.difficulty)
       formData.append('options', JSON.stringify(this.options))
       formData.append('correctOption', this.correctOption.toString())
       if (img.files.length > 0) {
         formData.append('img', img.files[0])
-      }
-      else if (this.imgArray[this.questionNumber] !== null || this.imgArray[this.questionNumber] !== undefined  ) {
-        console.log("wor")
+      } else if (
+        this.imgArray[this.questionNumber] !== null ||
+        this.imgArray[this.questionNumber] !== undefined
+      ) {
         formData.append('img', this.imgArray[this.questionNumber])
       }
 
@@ -85,13 +90,15 @@ export class AddPaperComponent implements OnInit {
     } else {
       const formData = new FormData()
       formData.append('questionText', this.questionText)
-      formData.append('subject', this.subject)
+      formData.append('subject', this.subject[this.subCheck()])
       formData.append('difficulty', this.difficulty)
       formData.append('correctOption', this.correctOption.toString())
       if (img.files.length > 0) {
         formData.append('img', img.files[0])
-      }
-      else if (this.imgArray[this.questionNumber] !== null || this.imgArray[this.questionNumber] !== undefined  ) {
+      } else if (
+        this.imgArray[this.questionNumber] !== null ||
+        this.imgArray[this.questionNumber] !== undefined
+      ) {
         formData.append('img', this.imgArray[this.questionNumber])
       }
       this.createData[this.questionNumber] = formData
@@ -133,7 +140,7 @@ export class AddPaperComponent implements OnInit {
   }
   checkM(): void {
     if (this.exam == 'jee') {
-      if (this.subject == 'all') {
+      if (this.subject.length == 3) {
         let num1: number = this.num / 3
         if (
           (this.questionNumber < this.totalQuestions / 3 &&
@@ -155,8 +162,79 @@ export class AddPaperComponent implements OnInit {
       }
     }
   }
-  remove():void{
-    this.imgName='No file chosen'
-    this.imgArray[this.questionNumber]=null
+  subCheck(): number {
+    let sub: number = 0
+    if (this.subject.length == 3) {
+      if (this.questionNumber < this.totalQuestions / 3) {
+        sub = 0
+      } else if (this.questionNumber < this.totalQuestions / 1.5) {
+        sub = 1
+      } else {
+        sub = 2
+      }
+    }
+    return 0
+  }
+  checkB(i: number): boolean {
+    let num: boolean = false
+    if (this.subject.length == 3) {
+      if (
+        i < this.totalQuestions / 3 &&
+        i >= this.totalQuestions / 3 - this.num / 3
+      ) {
+        num = true
+      } else if (
+        i < this.totalQuestions / 1.5 &&
+        i >= this.totalQuestions / 1.5 - this.num / 3
+      ) {
+        num = true
+      } else if (i >= this.totalQuestions - this.num / 3) {
+        num = true
+      }
+    } else if (i >= this.totalQuestions - this.num) {
+      num = true
+    }
+    return num
+  }
+  remove(): void {
+    this.imgName = 'No file chosen'
+    this.imgArray[this.questionNumber] = null
+  }
+  publish(img:any): void {
+    this.createArray(img)
+    let questionIds: string[] = []
+    let answers: number[] = []
+    let observables = [];
+  for (let i = 0; i < this.totalQuestions; i++) {
+    let observable;
+    if (this.checkB(i)) {
+      observable = this.adminApi.addNQuestion(this.createData[i]);
+    } else {
+      observable = this.adminApi.addMQuestion(this.createData[i]);
+    }
+    observables.push(observable);
+    answers[i] = parseInt(this.createData[i].get('correctOption')!.toString());
+  }
+  forkJoin(observables).subscribe((results) => {
+    questionIds = results.map((d: any) => d.id);
+    let data: {
+      name: string
+      subject: string
+      exam: string
+      num: number
+      totalQuestions: number
+      questionIds: string
+      answers: string
+    } = {
+      name: this.name,
+      subject: JSON.stringify(this.subject),
+      exam: this.exam,
+      num: this.num,
+      totalQuestions: this.totalQuestions,
+      questionIds: JSON.stringify(questionIds),
+      answers: JSON.stringify(answers),
+    }
+    this.adminApi.createTest(data).subscribe((d) => { })
+  })
   }
 }
