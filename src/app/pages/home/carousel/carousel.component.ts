@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 
 interface carouselImage {
   imageSrc: string
   imageAlt: string
 }
+
 @Component({
-  selector: 'app-hero-section',
-  templateUrl: './hero-section.component.html',
-  styleUrls: ['./hero-section.component.scss'],
+  selector: 'app-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.scss']
 })
-export class HeroSectionComponent implements OnInit {
+export class CarouselComponent implements OnInit {
+
   constructor() { }
 
   selectedIndex: number = 0
