@@ -47,3 +47,11 @@ a{
     opacity: 1;
   }
 }
+.scroll-effect {
+  transform: translateY(50px);
+  opacity: 0;
+}
+.scroll-effect-anmtn {
+  transition-duration: 600ms;
+  transition-timing-function: ease-in;
+}

@@ -12,7 +12,10 @@ import { NewStudentComponent } from './pages/new-student/new-student.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { CorsInterceptor } from './services/cors.interceptor'
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { CarouselComponent } from './pages/home/carousel/carousel.component'
+import { CarouselComponent } from './pages/home/carousel/carousel.component';
+import { AboutComponent } from './pages/home/about/about.component'
+import { ScrollEffectDirective } from './services/scroll-effect.directive';
+import { FooterComponent } from './pages/home/footer/footer.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { CarouselComponent } from './pages/home/carousel/carousel.component'
     AdminComponent,
     NewStudentComponent,
     HeroComponent,
-    CarouselComponent
+    CarouselComponent,
+    AboutComponent,
+    ScrollEffectDirective,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

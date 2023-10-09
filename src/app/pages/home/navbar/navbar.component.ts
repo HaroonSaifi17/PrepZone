@@ -26,4 +26,8 @@ export class NavbarComponent implements OnInit {
 
     this.router.navigateByUrl('adminlogin')
   }
+  navigate(fregment: string): void {
+    this.router.navigateByUrl('' + fregment)
+  }
+
 }

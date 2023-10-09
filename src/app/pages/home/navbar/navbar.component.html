@@ -1,6 +1,5 @@
-<div class="bg-slate-50 main">
+<div id="home" class="bg-slate-50 main">
   <nav
-    id="home"
     class="max-w-screen-xl flex p-4 justify-between mx-auto items-center"
   >
     <div class="animate_up">
@@ -57,13 +56,13 @@
           <a routerLink="/" routerLinkActive="active" class="m-1 p-2">Home</a>
         </li>
         <li [style.animationDelay]="'200ms'" class="animate_up">
-          <a class="m-1 p-2">About</a>
+          <a (click)="navigate('#about')" class="m-1 p-2">About</a>
         </li>
         <li [style.animationDelay]="'400ms'" class="animate_up">
           <a class="m-1 p-2">Experience</a>
         </li>
         <li [style.animationDelay]="'600ms'" class="animate_up">
-          <a class="m-1 p-2">Contact</a>
+          <a (click)="navigate('#contact')" class="m-1 p-2">Contact</a>
         </li>
         <li [style.animationDelay]="'800ms'" class="animate_up delay-500">
           <a (click)="adminLogin()" class="m-1 p-2">Admin</a>
