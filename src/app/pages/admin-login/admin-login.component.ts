@@ -34,5 +34,8 @@ export class AdminLoginComponent implements OnInit {
       }
     );
   }
+  navigateHome():void{
+    this.router.navigate([''])
+  }
 
 }

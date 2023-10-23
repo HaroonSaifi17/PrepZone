@@ -24,23 +24,23 @@ export class CarouselComponent implements OnInit {
     {
       imageSrc: './assets/carousel1.jpg',
       imageAlt: 'carousel1.jpg',
-      imageHeading: 'This is a Heading1',
+      imageHeading: 'Your Path to JEE & NEET Excellence',
       imageText:
-        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequat suscipit rerum, illum doloremque sed facere nesciunt quas quod! Non,sunt.',
+        'Expert Guidance, Comprehensive Resources, and Personalized Support for Your Academic Triumph',
+    },
+    {
+      imageSrc: './assets/carousel2.jpg',
+      imageAlt: 'carousel2.jpg',
+      imageHeading: 'Ace JEE and NEET with Confidence',
+      imageText:
+        'Join Us for Unparalleled Coaching, Practice, and Results – Your Future Begins Here',
     },
     {
       imageSrc: './assets/carousel1.jpg',
-      imageAlt: 'carousel2.jpg',
-      imageHeading: 'This is a Heading2',
+      imageAlt: 'carousel3.jpg',
+      imageHeading: 'Empowering Your JEE and NEET Journey',
       imageText:
-        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequat suscipit rerum, illum doloremque sed facere nesciunt quas quod! Non,sunt.',
-    },
-    {
-      imageSrc: './assets/carousel1.jpg',
-      imageAlt: 'carousel2.jpg',
-      imageHeading: 'This is a Heading3',
-      imageText:
-        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequat suscipit rerum, illum doloremque sed facere nesciunt quas quod! Non,sunt.',
+        'From Aspirations to Achievements - Experience the Difference of Quality Education and Support',
     },
   ]
   ngOnInit(): void {

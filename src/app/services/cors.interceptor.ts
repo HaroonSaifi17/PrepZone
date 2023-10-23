@@ -64,11 +64,11 @@ export class CorsInterceptor implements HttpInterceptor {
               this.router.navigate(['/adminlogin'])
               return throwError(error)
             } else {
-              this.router.navigate(['/'])
+              this.router.navigate(['/error'],{state:{errorMsg:error.message}})
               return throwError(error)
             }
           } else {
-            this.router.navigate(['/'])
+            this.router.navigate(['/error'],{state:{errorMsg:error.message}})
             return throwError(error)
           }
         } else {
@@ -78,11 +78,11 @@ export class CorsInterceptor implements HttpInterceptor {
               window.location.href = environment.trinityApiUrl + '/login'
               return new Observable<HttpEvent<any>>()
             } else {
-              this.router.navigate(['/'])
+              this.router.navigate(['/error'],{state:{errorMsg:error.message}})
               return throwError(error)
             }
           } else {
-            this.router.navigate(['/'])
+            this.router.navigate(['/error'],{state:{errorMsg:error.message}})
             return throwError(error)
           }
         }

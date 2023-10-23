@@ -1,71 +1,52 @@
 <div id="home" class="bg-slate-50 main">
-  <nav
-    class="max-w-screen-xl flex p-4 justify-between mx-auto items-center"
-  >
+  <nav class="max-w-screen-xl flex p-4 justify-between mx-auto items-center">
     <div class="animate_up">
       <a href="#home" class="flex">
-        <svg
-          width="29.5"
-          height="27.6"
-          viewBox="0 0 950 920"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M949.701 434.5C949.701 674.468 753.826 869 512.201 869C507.333 869 502.485 868.921 497.656 868.764L518.083 833.382C740.78 829.719 920.155 652.038 920.155 433.389C920.155 349.792 893.935 272.184 849.097 208H878.999L879.016 207.972H879.164L882.256 202.617C924.975 269.718 949.701 349.241 949.701 434.5ZM412.017 821.635C233.939 778.331 101.974 620.931 101.974 433.389C101.974 392.271 108.317 352.603 120.099 315.267L101.81 283.59C84.2783 330.597 74.7009 381.438 74.7009 434.5C74.7009 648.488 230.46 826.346 435.524 862.349L412.017 821.635ZM223.528 108H273.022C340.081 61.0029 422.269 33.3376 511.065 33.3376C599.86 33.3376 682.048 61.0029 749.107 108H800.873C723.839 40.7681 622.814 0 512.201 0C401.588 0 300.563 40.7681 223.528 108Z"
-            fill="black"
-          />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M468.367 919.236L468.584 918.861L468.658 918.99L526.393 818.99L526.319 818.861L641.708 619H526.238L468.584 718.861L410.726 618.649L525.993 419H641.708L583.973 519H699.443L814.913 319H729.701H699.443H583.728H483.701H468.258L311.127 591.16L311.57 591.416L295.552 619.161L410.849 818.861L410.632 819.236L468.367 919.236ZM57.7187 207.972H58.1518L237.817 519.161L279.457 447.039L279.484 447.054L353.416 319H237.946L237.835 319.192L237.724 319H237.701V318.96L173.622 207.972H763.545L763.529 208H878.999L879.015 207.972H879.164L936.883 108H0L57.7187 207.972Z"
-            fill="black"
-          />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M512.201 869C753.825 869 949.701 674.468 949.701 434.5C949.701 349.241 924.975 269.718 882.256 202.617L879.164 207.972H879.015L878.999 208H849.097C893.934 272.184 920.155 349.792 920.155 433.389C920.155 652.038 740.78 829.718 518.083 833.382L497.656 868.764C502.485 868.921 507.333 869 512.201 869Z"
-            fill="#EB0000"
-          />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M58.1518 207.972H57.7187L0 108H936.883L879.164 207.972H879.016L878.999 208H763.529L763.545 207.972H173.622L237.701 318.96V319H237.724L237.835 319.192L237.946 319H353.416L279.484 447.054L279.457 447.039L237.817 519.161L58.1518 207.972Z"
-            fill="#EB0000"
-          />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M634.045 16.9875C595.456 5.9268 554.675 0 512.5 0C270.875 0 75 194.532 75 434.5C75 510.456 94.6247 581.86 129.113 643.984L149.019 619.266C119.165 563.729 102.273 500.488 102.273 433.389C102.273 212.447 285.429 33.3376 511.364 33.3376C545.807 33.3376 579.256 37.5002 611.213 45.3389L634.045 16.9875Z"
-            fill="black"
-          />
+        <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 96">
+          <g transform="translate(-8.000000, -2.000000)">
+            <g transform="translate(11.000000, 5.000000)">
+              <path class="path" d="M31.4,30v30v-15h15v-15v30" />
+              <polygon
+                class="polygon"
+                fill="transparent"
+                points="39 0 0 22 0 67 39 90 78 68 78 23"
+              />
+            </g>
+          </g>
         </svg>
-        <span class="font-semibold ml-1">Trinity</span>
       </a>
     </div>
     <div
       #list
-      class="max-sm:fixed max-sm:w-1/2 max-sm:top-0 max-sm:-right-full duration-100 max-sm:bg-slate-100 max-sm:h-[100vh] max-sm:shadow-md z-10"
+      class="max-sm:fixed max-sm:w-1/2 max-sm:top-0 max-sm:-right-full duration-100 max-sm:bg-slate-100 max-sm:h-[100vh] max-sm:shadow-md z-20"
     >
       <ul
         class="flex text-sm max-sm:flex-col max-sm:w-full max-sm:justify-start max-sm:items-stretch max-sm:h-full max-sm:py-20 max-sm:pt-[20vh] max-sm:px-4 max-sm:space-y-5"
       >
         <li class="animate_up delay-100">
-          <a routerLink="/" routerLinkActive="active" class="m-1 p-2">Home</a>
+          <a
+            routerLink="/"
+            (click)="toggleClass(list)"
+            routerLinkActive="active"
+            class="m-1 p-2"
+            >Home</a
+          >
         </li>
         <li [style.animationDelay]="'200ms'" class="animate_up">
-          <a (click)="navigate('#about')" class="m-1 p-2">About</a>
+          <a (click)="navigate('#about'); toggleClass(list)" class="m-1 p-2"
+            >About</a
+          >
         </li>
         <li [style.animationDelay]="'400ms'" class="animate_up">
-          <a class="m-1 p-2">Experience</a>
+          <a (click)="toggleClass(list)" class="m-1 p-2">Experience</a>
         </li>
         <li [style.animationDelay]="'600ms'" class="animate_up">
-          <a (click)="navigate('#contact')" class="m-1 p-2">Contact</a>
+          <a (click)="navigate('#contact'); toggleClass(list)" class="m-1 p-2"
+            >Contact</a
+          >
         </li>
         <li [style.animationDelay]="'800ms'" class="animate_up delay-500">
-          <a (click)="adminLogin()" class="m-1 p-2">Admin</a>
+          <a (click)="adminLogin(); toggleClass(list)" class="m-1 p-2">Admin</a>
         </li>
       </ul>
     </div>
@@ -79,7 +60,7 @@
         Login
       </button>
     </div>
-    <div class="ml-2 block sm:hidden h-[30px] aspect-square my-auto z-10">
+    <div class="ml-2 block sm:hidden h-[30px] aspect-square my-auto z-20">
       <a
         (click)="toggleClass(list)"
         class="flex flex-col justify-around items-end h-full w-full"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { NgForm } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { ApiService } from 'src/app/services/api.service'
 
 @Component({
@@ -10,11 +10,11 @@ import { ApiService } from 'src/app/services/api.service'
 })
 export class NewStudentComponent implements OnInit {
   public name: string = ''
-  constructor(private route: ActivatedRoute,private api:ApiService,private router:Router) { }
+  constructor(private api:ApiService,private router:Router) { }
 
   ngOnInit(): void {
-    const stateData = this.route.snapshot?.data?.['state']
-    this.name = stateData ? stateData.name : ''
+    const state = this.router.getCurrentNavigation()?.extras.state
+    this.name = state ? state?.['name'] : ['']
   }
 
   onSubmit(form: NgForm): void {

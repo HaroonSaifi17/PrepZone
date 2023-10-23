@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { ExtraOptions, RouterModule, Routes } from '@angular/router'
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component'
+import { ErrorComponent } from './pages/error/error.component'
 import { HomeComponent } from './pages/home/home.component'
 import { LoginCallbackComponent } from './pages/login-callback/login-callback.component'
 import { NewStudentComponent } from './pages/new-student/new-student.component'
@@ -32,7 +33,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
   },
-  { path: '**', redirectTo: '' },
+  {
+    path:'error',component:ErrorComponent
+  },
+  { path: '**', component:ErrorComponent },
 ]
 
 const extraOptions: ExtraOptions = {

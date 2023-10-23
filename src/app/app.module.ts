@@ -15,7 +15,8 @@ import { HeroComponent } from './pages/home/hero/hero.component';
 import { CarouselComponent } from './pages/home/carousel/carousel.component';
 import { AboutComponent } from './pages/home/about/about.component'
 import { ScrollEffectDirective } from './services/scroll-effect.directive';
-import { FooterComponent } from './pages/home/footer/footer.component'
+import { FooterComponent } from './pages/home/footer/footer.component';
+import { ErrorComponent } from './pages/error/error.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FooterComponent } from './pages/home/footer/footer.component'
     CarouselComponent,
     AboutComponent,
     ScrollEffectDirective,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
