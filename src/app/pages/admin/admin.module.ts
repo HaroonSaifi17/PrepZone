@@ -7,11 +7,15 @@ import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AddPaperComponent } from './add-paper/add-paper.component';
+import { UploadPdfComponent } from './upload-pdf/upload-pdf.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AddQuestionComponent,
     AddPaperComponent,
+    UploadPdfComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

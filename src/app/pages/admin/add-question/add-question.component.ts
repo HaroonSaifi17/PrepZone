@@ -15,7 +15,7 @@ export class AddQuestionComponent implements OnInit {
   difficulty: string = 'Medium'
   multipleType: boolean = true
   correctOption: number = 0
-  mathEx = [
+  mathEx :string[]= [
     'x^2 + y^2 = r^2$',
     'e^{ipi} + 1 = 0$',
     '\\frac{dy}{dx} = \\sin(x)$',
@@ -25,6 +25,8 @@ export class AddQuestionComponent implements OnInit {
     '\\frac{\\partial f}{\\partial x}$',
     '\\sin^2(x) + \\cos^2(x) = 1$',
     '\\log_b(x) = \\frac{\\log(x)}{\\log(b)}$',
+  ]
+  mathEx2:string[]=[
     '\\int_{0}^{1} x^2 \\, dx$',
     '\\theta = \\arctan\\left(\\frac{y}{x}\\right)$',
     '\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$',
@@ -34,6 +36,7 @@ export class AddQuestionComponent implements OnInit {
     '\\frac{d}{dx}\\left[ \\tan(x) \\right] = \\sec^2(x)$',
     'x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$',
     'P(A|B) = \\frac{P(A \\cap B)}{P(B)}$',
+
   ]
 
   constructor(private adminApi: AdminApiService) {}

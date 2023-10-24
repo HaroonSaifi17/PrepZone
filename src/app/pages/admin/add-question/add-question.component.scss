@@ -1,5 +1,5 @@
 .dark {
-  background: #4b5563;
+  background: #4A55A2;
   color: white;
 }
 .custom-file-input {
@@ -33,4 +33,7 @@ input[type='file']::file-selector-button {
   height: 0;
   opacity: 0;
   position: absolute;
+}
+input, textarea{
+  border: 1px solid lightgray;
 }

@@ -1,6 +1,6 @@
 <div class="gr h-[100vh]">
   <div class="mx-auto max-w-[1440px] flex h-full">
-    <nav class="p-8 bg-[#e8e3d5] font-semibold text text-center flex flex-col justify-between max-sm:hidden">
+    <nav class="p-8 bg-[#C5DFF8] font-semibold text text-center flex flex-col justify-between max-sm:hidden">
       <div>
         <div>
           <a (click)="goHome()">
@@ -21,14 +21,14 @@
           <p class="text-gray-500 text-sm">Developer</p>
         </div>
         <ul class="font-normal">
-          <li class="my-2"><a>Dashboard</a></li>
+          <li class="my-2"><a routerLink="dashboard" routerLinkActive="active">Dashboard</a></li>
           <li class="my-2">
             <a routerLink="add" routerLinkActive="active">Add Questions</a>
           </li>
           <li class="my-2">
             <a routerLink="test" routerLinkActive="active">Add Papers</a>
           </li>
-          <li class="my-2"><a>Upload Pdfs</a></li>
+          <li class="my-2" routerLink="upload" routerLinkActive="active"><a>Upload Pdfs</a></li>
         </ul>
       </div>
       <div>
@@ -40,10 +40,10 @@
     </div>
   </div>
 </div>
-<div class="hidden max-sm:block fixed bottom-0 left-0 bg-[#f5f1e6] p-3 w-full">
+<div class="hidden max-sm:block fixed bottom-0 left-0 bg-[#C5DFF8] p-3 w-full">
   <ul class="flex w-full justify-around text-xs items-center text-center">
     <li>
-      <a href="">
+      <a routerLink="dashboard" routerLinkActive="active1">
         <div class="p-2">
         <svg class=" mx-auto" width="12px" height="12px" viewBox="0 0 15 15" fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -67,10 +67,10 @@
       <a class="w-[61.85px] inline-block" routerLink="add" routerLinkActive="active1"><i class="fa-solid fa-plus block p-2"></i>Add</a>
     </li>
     <li><a class="w-[61.85px] inline-block" routerLink="test" routerLinkActive="active1"><i class="fa-solid fa-file block p-2"></i>Create</a></li>
-    <li><a class="w-[61.85px] inline-block" ><i class="fa-solid fa-arrow-up-from-bracket block p-2"></i>Upload</a></li>
+    <li><a class="w-[61.85px] inline-block" routerLink="upload" routerLinkActive="active1" ><i class="fa-solid fa-arrow-up-from-bracket block p-2"></i>Upload</a></li>
   </ul>
 </div>
-<div class="fixed top-0 left-0 bg-[#f5f1e6] p-3 w-full flex justify-between items-center sm:hidden">
+<div class="fixed top-0 left-0 bg-[#C5DFF8] p-3 w-full flex justify-between items-center sm:hidden">
         <div>
           <a (click)="goHome()">
             <svg class="inline" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 96">

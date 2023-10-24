@@ -1,6 +1,7 @@
-  <div class="p-4 bg-gray-50 rounded-md">
-    <h1 class="my-2 font-bold text-xl text-center">CREATE PAPER</h1>
-    <div *ngIf="!create">
+<div class="p-4 bg-gray-50 rounded-md min-h-full">
+  <h2 class="my-5 text-black font-semibold text-2xl">CREATE PAPER</h2>
+  <div class="text-gray-500 flex gap-x-4 max-[700px]:flex-col" *ngIf="!create">
+    <div>
       <p>Exam</p>
       <div class="flex flex-wrap mb-4">
         <a
@@ -8,7 +9,7 @@
             exam = 'jee'; subject[0] == 'bio' ? (subject[0] = 'math') : null
           "
           [class.dark]="exam == 'jee'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          class="p-2 bg-gray-300 mr-1 rounded-l-md mb-2"
           >Jee</a
         >
         <a
@@ -16,47 +17,8 @@
             exam = 'neet'; subject[0] == 'math' ? (subject[0] = 'bio') : null
           "
           [class.dark]="exam == 'neet'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          class="p-2 bg-gray-300 rounded-r-md mb-2"
           >Neet</a
-        >
-      </div>
-      <p>Subject</p>
-      <div class="flex flex-wrap mb-4">
-        <a
-          (click)="
-            exam == 'jee'
-              ? (subject = ['math', 'physics', 'chemistry'])
-              : (subject = ['bio', 'physics', 'chemistry'])
-          "
-          [class.dark]="subject.length == 3"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-          >All</a
-        >
-        <a
-          (click)="subject = ['physics']"
-          [class.dark]="subject[0]=='physics'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-          >Physics</a
-        >
-        <a
-          (click)="subject = ['chemistry']"
-          [class.dark]="subject[0]=='chemistry'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-          >Chemistry</a
-        >
-        <a
-          (click)="subject = ['math']"
-          *ngIf="exam == 'jee'"
-          [class.dark]="subject.length==1 && subject[0]=='math'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-          >Math</a
-        >
-        <a
-          (click)="subject = ['bio']"
-          *ngIf="exam == 'neet'"
-          [class.dark]="subject.length==1 && subject[0]=='bio'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-          >bio</a
         >
       </div>
       <p>Difficulty</p>
@@ -64,308 +26,353 @@
         <a
           (click)="difficulty = 'Easy'"
           [class.dark]="difficulty == 'Easy'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          class="p-2 bg-gray-300 mr-1 rounded-l-md mb-2"
           >Easy</a
         >
         <a
           (click)="difficulty = 'Medium'"
           [class.dark]="difficulty == 'Medium'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          class="p-2 bg-gray-300 mr-1 mb-2"
           >Medium</a
         >
         <a
           (click)="difficulty = 'Hard'"
           [class.dark]="difficulty == 'Hard'"
-          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          class="p-2 bg-gray-300 rounded-r-md mb-2"
           >Hard</a
         >
       </div>
-      <div class="mb-4">
+    </div>
+    <div>
+      <div class="mb-6">
         <p>Name</p>
         <input
-          class="p-2 min-w-[200px] bg-gray-300 rounded-md"
+          class="p-2 w-full max-sm:max-w-[200px] bg-gray-300 rounded-md"
           #nm
           type="text"
           (input)="name = nm.value"
           placeholder="Name"
         />
       </div>
-    </div>
-    <div *ngIf="!create">
-      <p *ngIf="exam == 'jee'">Multiple Choice + Numerical = Total Questions</p>
-      <p *ngIf="exam == 'neet'">Total Questions</p>
-      <div *ngIf="exam == 'neet'">
-        <input
-          #m
-          (input)="Questions(m.value, '0')"
-          class="w-[80px] p-2 rounded-sm border border-gray-600"
-          type="number"
-          value="0"
-        />
-      </div>
-      <div class="flex flex-wrap mb-4 items-center" *ngIf="exam == 'jee'">
-        <input
-          #m
-          (input)="Questions(m.value, n.value)"
-          class="w-[80px] p-2 rounded-sm border border-gray-600"
-          type="number"
-          value="0"
-        />
-        <span> + </span>
-        <input
-          #n
-          (input)="Questions(m.value, n.value)"
-          class="w-[80px] p-2 rounded-sm border border-gray-600"
-          type="number"
-          value="0"
-        />
-        <span> = {{ totalQuestions }}</span>
-      </div>
-    </div>
-    <div class="flex justify-center flex-wrap my-4" *ngIf="!create">
-      <a
-        (click)="generate()"
-        class="p-4 mr-4 rounded-full bg-rose-700 text-white"
-        >Generate</a
-      >
-      <a
-        (click)="emptyData(); number = totalQuestions"
-        class="p-4 rounded-full bg-yellow-700 text-white"
-        >Create</a
-      >
-    </div>
-    <div *ngIf="create">
-      <div class="flex flex-wrap items-center px-4 py-2 mt-4 bg-slate-200">
-        <h1 class="font-semibold text-2xl">
-          {{ name }}
-        </h1>
-      </div>
-      <div
-        class="mx-4 border-b-gray-200 border-b-2 mt-8 mb-4 flex flex-wrap justify-center"
-      >
-        <span
-          *ngFor="let _ of countArray(); let i = index"
+      <p>Subject</p>
+      <div class="flex flex-wrap">
+        <a
           (click)="
-            createArray(img);
-            questionNumber = i;
-            checkM();
-            changeInput(i, profileForm)
+            exam == 'jee'
+              ? (subject = ['math', 'physics', 'chemistry'])
+              : (subject = ['bio', 'physics', 'chemistry'])
           "
-          [style.background]="questionNumber == i ? '#0ea5e9' : '#d1d5db'"
-          class="aspect-square bg-gray-300 rounded-full mr-3 mb-3"
+          [class.dark]="subject.length == 3"
+          class="p-2 bg-gray-300 mr-1 rounded-l-md mb-2"
+          >All</a
         >
-          {{ i + 1 }}
-        </span>
-      </div>
-      <div class="mb-3" *ngIf="subject.length == 3">
         <a
-          (click)="questionNumber = 0"
-          [style.background]="
-            questionNumber < totalQuestions / 3 ? '#cbd5e1' : 'white'
-          "
-          class="p-2 mr-2 my-1"
-          *ngIf="exam == 'neet'"
-        >
-          Bio
-        </a>
-        <a
-          (click)="questionNumber = 0"
-          [style.background]="
-            questionNumber < totalQuestions / 3 ? '#cbd5e1' : 'white'
-          "
-          class="p-2 mr-2 my-1"
-          *ngIf="exam == 'jee'"
-        >
-          Math
-        </a>
-        <a
-          (click)="questionNumber = totalQuestions / 3"
-          [style.background]="
-            questionNumber < totalQuestions / 1.5 &&
-            questionNumber >= totalQuestions / 3
-              ? '#cbd5e1'
-              : 'white'
-          "
-          class="p-2 mr-2 my-1"
+          (click)="subject = ['physics']"
+          [class.dark]="subject[0] == 'physics'"
+          class="p-2 bg-gray-300 mr-1 mb-2"
           >Physics</a
         >
         <a
-          (click)="questionNumber = totalQuestions / 1.5"
-          [style.background]="
-            questionNumber < totalQuestions &&
-            questionNumber >= totalQuestions / 1.5
-              ? '#cbd5e1'
-              : 'white'
-          "
-          class="p-2 mr-2 my-1"
+          (click)="subject = ['chemistry']"
+          [class.dark]="subject[0] == 'chemistry'"
+          class="p-2 bg-gray-300 mr-1 mb-2"
           >Chemistry</a
         >
-      </div>
-      <div class="bg-gray-300 rounded-sm pt-2 mb-2">
-        <p class="ml-2 text-gray-600">Overview</p>
-        <p class="p-2 bg-gray-300 mb-2 rounded-sm" [mathjax]="questionText"></p>
-        <div *ngIf="multipleType">
-          <div *ngFor="let option of options">
-            <p class="bg-gray-300 p-2 rounded-sm" [mathjax]="option"></p>
-          </div>
-        </div>
-      </div>
-      <form #profileForm="ngForm" ngNativeValidate>
-        <div class="mb-4">
-          <textarea
-            #f
-            [value]="questionText"
-            required
-            name="questionText"
-            ngModel
-            (input)="questionText = f.value"
-            class="w-full p-2 border border-gray-600 rounded-sm"
-            rows="5"
-            [placeholder]="'Question ' + (questionNumber + 1)"
-          ></textarea>
-        </div>
-        <div class="relative">
-          <label
-            class="absolute px-[10px] py-[5px] z-0 max-w-[140px] whitespace-nowrap overflow-hidden"
-            #la
-            >{{ imgName }}</label
-          >
-          <input
-            class="custom-file-input relative z-10"
-            (input)="
-              img.files!.length == 0 ? remove() : (imgName = img.files![0].name)
-            "
-            ngModel
-            #img
-            name="img "
-            type="file"
-          />
-          <a
-            class="p-2 ml-2 px-3 rounded-full border border-w-1 border-gray-600"
-            (click)="remove()"
-          >
-            <i class="fa-solid fa-xmark"></i>
-          </a>
-        </div>
-        <div *ngIf="multipleType">
-          <div class="mb-2">
-            <input
-              [value]="options[0]"
-              required
-              #f2
-              name="option1"
-              ngModel
-              (input)="options[0] = f2.value"
-              class="min-w-[200px] border border-gray-600 p-2 rounded-sm"
-              placeholder="Option 1"
-              type="text"
-            />
-          </div>
-          <div class="mb-2">
-            <input
-              [value]="options[1]"
-              required
-              #f3
-              name="option2"
-              ngModel
-              (input)="options[1] = f3.value"
-              class="min-w-[200px] p-2 rounded-sm border border-gray-600"
-              placeholder="Option 2"
-              type="text"
-            />
-          </div>
-          <div class="mb-2">
-            <input
-              [value]="options[2]"
-              required
-              #f4
-              name="option2"
-              ngModel
-              (input)="options[2] = f4.value"
-              class="min-w-[200px] p-2 rounded-sm border border-gray-600"
-              placeholder="Option 3"
-              type="text"
-            />
-          </div>
-          <div class="mb-2">
-            <input
-              [value]="options[3]"
-              required
-              #f5
-              name="option4"
-              ngModel
-              (input)="options[3] = f5.value"
-              class="min-w-[200px] p-2 rounded-sm border border-gray-600"
-              placeholder="Option 4"
-              type="text"
-            />
-          </div>
-          <p>Correct option</p>
-        </div>
-        <div *ngIf="multipleType" class="flex flex-wrap mb-4">
-          <span
-            (click)="correctOption = 0"
-            [class.dark]="correctOption == 0"
-            class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-            >1</span
-          >
-          <span
-            (click)="correctOption = 1"
-            [class.dark]="correctOption == 1"
-            class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-            >2</span
-          >
-          <span
-            (click)="correctOption = 2"
-            [class.dark]="correctOption == 2"
-            class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-            >3</span
-          >
-          <span
-            (click)="correctOption = 3"
-            [class.dark]="correctOption == 3"
-            class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
-            >4</span
-          >
-        </div>
-        <div *ngIf="!multipleType">
-          <p>Answer</p>
-          <div class="mb-2">
-            <input
-              #f7
-              [value]="correctOption"
-              required
-              name="correctOption"
-              ngModel
-              (input)="correctOption = intCon(f7.value)"
-              class="min-w-[200px] p-2 rounded-sm border border-gray-600"
-              placeholder="Answer"
-              type="number"
-            />
-          </div>
-        </div>
-        <div>
-          <a
-            [style.background]="questionNumber === 0 ? '#cbd5e1' : '#475569'"
-            (click)="createArray(img); previousQuestion(profileForm)"
-            class="bg-gray-600 p-2 rounded-md text-white"
-            >Previous</a
-          ><a
-            (click)="createArray(img); nextQuestion(profileForm)"
-            [style.background]="
-              questionNumber === totalQuestions - 1 ? '#cbd5e1' : '#475569'
-            "
-            class="bg-gray-600 p-2 rounded-md text-white ml-2"
-            >Next</a
-          >
-        </div>
-      </form>
-      <div class="flex justify-center flex-wrap my-4">
         <a
-          (click)="publish(img)"
-          class="p-4 mr-4 rounded-full bg-rose-700 text-white"
-          >Publish</a
+          (click)="subject = ['math']"
+          *ngIf="exam == 'jee'"
+          [class.dark]="subject.length == 1 && subject[0] == 'math'"
+          class="p-2 bg-gray-300 rounded-r-md mb-2"
+          >Math</a
+        >
+        <a
+          (click)="subject = ['bio']"
+          *ngIf="exam == 'neet'"
+          [class.dark]="subject.length == 1 && subject[0] == 'bio'"
+          class="p-2 bg-gray-300 rounded-r-md mb-2"
+          >bio</a
         >
       </div>
     </div>
   </div>
+  <div *ngIf="!create">
+    <p class="text-gray-500" *ngIf="exam == 'jee'">Multiple Choice</p>
+    <p class="text-gray-500"  *ngIf="exam == 'neet'">Total Questions</p>
+    <div *ngIf="exam == 'neet'">
+      <input
+        #m
+        (input)="Questions(m.value, '0')"
+        class="w-[80px] p-2 rounded-md  border-none bg-gray-300 "
+        type="number"
+        value="0"
+      />
+    </div>
+    <div class="mb-4" *ngIf="exam == 'jee'">
+      <div class="mb-2">
+        <input
+          #m
+          (input)="Questions(m.value, n.value)"
+          class="w-[80px] p-2 rounded-md border-none bg-gray-300"
+          type="number"
+          value="0"
+        />
+      </div>
+      <div>
+        <p class="text-gray-500" *ngIf="exam == 'jee'">Numerical</p>
+        <input
+          #n
+          (input)="Questions(m.value, n.value)"
+          class="w-[80px] p-2 rounded-md border-none bg-gray-300  "
+          type="number"
+          value="0"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center flex-wrap my-4 gap-2 mt-9" *ngIf="!create">
+    <a
+      (click)="generate()"
+      class="p-2 px-10 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
+      >Generate</a
+    >
+    <a
+      (click)="emptyData(); number = totalQuestions"
+      class="p-2 px-10 rounded-lg bg-green-500 text-white hover:bg-green-600"
+      >Create</a
+    >
+  </div>
+  <div *ngIf="create">
+    <div class="flex flex-wrap items-center px-4 py-2 mt-4 bg-slate-200">
+      <h1 class="font-semibold text-2xl">
+        {{ name }}
+      </h1>
+    </div>
+    <div
+      class="mx-4 border-b-gray-200 border-b-2 mt-8 mb-4 flex flex-wrap justify-center"
+    >
+      <span
+        *ngFor="let _ of countArray(); let i = index"
+        (click)="
+          createArray(img);
+          questionNumber = i;
+          checkM();
+          changeInput(i, profileForm)
+        "
+        [style.background]="questionNumber == i ? '#0ea5e9' : '#d1d5db'"
+        class="aspect-square bg-gray-300 rounded-full mr-3 mb-3"
+      >
+        {{ i + 1 }}
+      </span>
+    </div>
+    <div class="mb-3" *ngIf="subject.length == 3">
+      <a
+        (click)="questionNumber = 0"
+        [style.background]="
+          questionNumber < totalQuestions / 3 ? '#cbd5e1' : 'white'
+        "
+        class="p-2 mr-2 my-1"
+        *ngIf="exam == 'neet'"
+      >
+        Bio
+      </a>
+      <a
+        (click)="questionNumber = 0"
+        [style.background]="
+          questionNumber < totalQuestions / 3 ? '#cbd5e1' : 'white'
+        "
+        class="p-2 mr-2 my-1"
+        *ngIf="exam == 'jee'"
+      >
+        Math
+      </a>
+      <a
+        (click)="questionNumber = totalQuestions / 3"
+        [style.background]="
+          questionNumber < totalQuestions / 1.5 &&
+          questionNumber >= totalQuestions / 3
+            ? '#cbd5e1'
+            : 'white'
+        "
+        class="p-2 mr-2 my-1"
+        >Physics</a
+      >
+      <a
+        (click)="questionNumber = totalQuestions / 1.5"
+        [style.background]="
+          questionNumber < totalQuestions &&
+          questionNumber >= totalQuestions / 1.5
+            ? '#cbd5e1'
+            : 'white'
+        "
+        class="p-2 mr-2 my-1"
+        >Chemistry</a
+      >
+    </div>
+    <div class="bg-gray-300 rounded-sm pt-2 mb-2">
+      <p class="ml-2 text-gray-600">Overview</p>
+      <p class="p-2 bg-gray-300 mb-2 rounded-sm" [mathjax]="questionText"></p>
+      <div *ngIf="multipleType">
+        <div *ngFor="let option of options">
+          <p class="bg-gray-300 p-2 rounded-sm" [mathjax]="option"></p>
+        </div>
+      </div>
+    </div>
+    <form #profileForm="ngForm" ngNativeValidate>
+      <div class="mb-4">
+        <textarea
+          #f
+          [value]="questionText"
+          required
+          name="questionText"
+          ngModel
+          (input)="questionText = f.value"
+          class="w-full p-2 border border-gray-600 rounded-sm"
+          rows="5"
+          [placeholder]="'Question ' + (questionNumber + 1)"
+        ></textarea>
+      </div>
+      <div class="relative">
+        <label
+          class="absolute px-[10px] py-[5px] z-0 max-w-[140px] whitespace-nowrap overflow-hidden"
+          #la
+          >{{ imgName }}</label
+        >
+        <input
+          class="custom-file-input relative z-10"
+          (input)="
+            img.files!.length == 0 ? remove() : (imgName = img.files![0].name)
+          "
+          ngModel
+          #img
+          name="img "
+          type="file"
+        />
+        <a
+          class="p-2 ml-2 px-3 rounded-full border border-w-1 border-gray-600"
+          (click)="remove()"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </a>
+      </div>
+      <div *ngIf="multipleType">
+        <div class="mb-2">
+          <input
+            [value]="options[0]"
+            required
+            #f2
+            name="option1"
+            ngModel
+            (input)="options[0] = f2.value"
+            class="min-w-[200px] border border-gray-600 p-2 rounded-sm"
+            placeholder="Option 1"
+            type="text"
+          />
+        </div>
+        <div class="mb-2">
+          <input
+            [value]="options[1]"
+            required
+            #f3
+            name="option2"
+            ngModel
+            (input)="options[1] = f3.value"
+            class="min-w-[200px] p-2 rounded-sm border border-gray-600"
+            placeholder="Option 2"
+            type="text"
+          />
+        </div>
+        <div class="mb-2">
+          <input
+            [value]="options[2]"
+            required
+            #f4
+            name="option2"
+            ngModel
+            (input)="options[2] = f4.value"
+            class="min-w-[200px] p-2 rounded-sm border border-gray-600"
+            placeholder="Option 3"
+            type="text"
+          />
+        </div>
+        <div class="mb-2">
+          <input
+            [value]="options[3]"
+            required
+            #f5
+            name="option4"
+            ngModel
+            (input)="options[3] = f5.value"
+            class="min-w-[200px] p-2 rounded-sm border border-gray-600"
+            placeholder="Option 4"
+            type="text"
+          />
+        </div>
+        <p>Correct option</p>
+      </div>
+      <div *ngIf="multipleType" class="flex flex-wrap mb-4">
+        <span
+          (click)="correctOption = 0"
+          [class.dark]="correctOption == 0"
+          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          >1</span
+        >
+        <span
+          (click)="correctOption = 1"
+          [class.dark]="correctOption == 1"
+          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          >2</span
+        >
+        <span
+          (click)="correctOption = 2"
+          [class.dark]="correctOption == 2"
+          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          >3</span
+        >
+        <span
+          (click)="correctOption = 3"
+          [class.dark]="correctOption == 3"
+          class="p-2 bg-gray-300 mr-2 rounded-md mb-2"
+          >4</span
+        >
+      </div>
+      <div *ngIf="!multipleType">
+        <p>Answer</p>
+        <div class="mb-2">
+          <input
+            #f7
+            [value]="correctOption"
+            required
+            name="correctOption"
+            ngModel
+            (input)="correctOption = intCon(f7.value)"
+            class="min-w-[200px] p-2 rounded-sm border border-gray-600"
+            placeholder="Answer"
+            type="number"
+          />
+        </div>
+      </div>
+      <div>
+        <a
+          [style.background]="questionNumber === 0 ? '#cbd5e1' : '#475569'"
+          (click)="createArray(img); previousQuestion(profileForm)"
+          class="bg-gray-600 p-2 rounded-md text-white"
+          >Previous</a
+        ><a
+          (click)="createArray(img); nextQuestion(profileForm)"
+          [style.background]="
+            questionNumber === totalQuestions - 1 ? '#cbd5e1' : '#475569'
+          "
+          class="bg-gray-600 p-2 rounded-md text-white ml-2"
+          >Next</a
+        >
+      </div>
+    </form>
+    <div class="flex justify-center flex-wrap my-4">
+      <a
+        (click)="publish(img)"
+        class="p-4 mr-4 rounded-full bg-rose-700 text-white"
+        >Publish</a
+      >
+    </div>
+  </div>
+</div>
