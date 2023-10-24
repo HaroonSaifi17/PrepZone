@@ -1,16 +1,31 @@
-.left-nav {
-  height: calc(100vh - 64px);
+#logo {
+  height: 40px;
+  width: 40px;
 }
-.main-content {
-  height: calc(100vh - 64px);
+.path {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 5;
 }
-.navToggle{
-  display: inline;
+.polygon {
+  fill: transparent;
+  stroke: red;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.active{
-  background: #212A3E;
+.active {
+  font-weight: 600;
 }
-a{
-  color: white;
-  border-radius: 5px;
+.active1 > i {
+  border-radius: 1000px;
+  background: #fdba74;
+}
+.gr {
+  background: rgb(232, 227, 213);
+  background: linear-gradient(
+    90deg,
+    rgba(232, 227, 213, 1) 41%,
+    rgba(229, 231, 235, 1) 42%
+  );
 }

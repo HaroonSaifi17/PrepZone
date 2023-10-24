@@ -1,17 +1,17 @@
 .left {
-  left: -100%;
+  transform: translateX(-100%);
   z-index: 5;
-  transition-duration: 400ms;
+  transition-duration: 500ms;
 }
 .center {
-  left: 0;
+  transform: translateX(0);
   z-index: 10;
-  transition-duration: 400ms;
+  transition-duration: 500ms;
 }
 .right {
-  left: 100%;
   z-index: 0;
-  transition-duration: 400ms;
+  transform: translateX(100%);
+  transition-duration: 500ms;
 }
 .gr {
   background: rgb(0, 0, 0);
