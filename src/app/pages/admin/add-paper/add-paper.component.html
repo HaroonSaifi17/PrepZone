@@ -1,4 +1,6 @@
-<div class="p-4 bg-gray-50 rounded-md min-h-full">
+<div
+  class="p-4 max-sm:pt-[80px] max-sm:pb-[84px] bg-gray-50 rounded-md min-h-full"
+>
   <h2 class="my-5 text-black font-semibold text-2xl">CREATE PAPER</h2>
   <div class="text-gray-500 flex gap-x-4 max-[700px]:flex-col" *ngIf="!create">
     <div>
@@ -97,12 +99,12 @@
   </div>
   <div *ngIf="!create">
     <p class="text-gray-500" *ngIf="exam == 'jee'">Multiple Choice</p>
-    <p class="text-gray-500"  *ngIf="exam == 'neet'">Total Questions</p>
+    <p class="text-gray-500" *ngIf="exam == 'neet'">Total Questions</p>
     <div *ngIf="exam == 'neet'">
       <input
         #m
         (input)="Questions(m.value, '0')"
-        class="w-[80px] p-2 rounded-md  border-none bg-gray-300 "
+        class="w-[80px] p-2 rounded-md border-none bg-gray-300"
         type="number"
         value="0"
       />
@@ -122,7 +124,7 @@
         <input
           #n
           (input)="Questions(m.value, n.value)"
-          class="w-[80px] p-2 rounded-md border-none bg-gray-300  "
+          class="w-[80px] p-2 rounded-md border-none bg-gray-300"
           type="number"
           value="0"
         />

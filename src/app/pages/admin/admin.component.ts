@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AdminApiService } from 'src/app/services/admin-api.service';
+import {
+  Component,
+  OnInit,
+} from '@angular/core'
+import { Router } from '@angular/router'
+import { AdminApiService } from 'src/app/services/admin-api.service'
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  public isClassAdded:Boolean=false
-  constructor(private router:Router,private adminApi:AdminApiService) { }
+  public isClassAdded: Boolean = false
+  public height: number = 0
+  public hi1:string=''
+  constructor(private router: Router, private adminApi: AdminApiService) {
+    this.height = window.innerHeight
+    this.hi1=`${this.height}px`
+  }
 
   ngOnInit(): void {
-    this.adminApi.checkToken().subscribe(d=>{
-    },e=>{
+    this.adminApi.checkToken().subscribe(
+      (d) => { },
+      (e) => {
         console.log(e)
-      })
+      }
+    )
   }
-  logout():void{
+  logout(): void {
     localStorage.removeItem('admintoken')
     this.router.navigate(['adminlogin'])
   }
-  goHome():void{
+  goHome(): void {
     this.router.navigate(['/'])
   }
 }

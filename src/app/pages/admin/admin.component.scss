@@ -9,7 +9,7 @@
 }
 .polygon {
   fill: transparent;
-  stroke: #4A55A2;
+  stroke: #4a55a2;
   stroke-width: 5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -17,15 +17,11 @@
 .active {
   font-weight: 600;
 }
-.active1 > i {
+.active1 > i,
+.active1 > div {
   border-radius: 1000px;
-  background: #A0BFE0;
+  background: #a0bfe0;
 }
-.gr {
-  background: rgb(232, 227, 213);
-  background: linear-gradient(
-    90deg,
-    rgba(232, 227, 213, 1) 41%,
-    rgba(229, 231, 235, 1) 42%
-  );
-}
+// .hide-scrollbar::-webkit-scrollbar {
+//     display: none;
+// }
