@@ -23,9 +23,19 @@ export class AddPaperComponent implements OnInit {
   correctOption: number = 0
   multipleType: boolean = true
   questionNumber: number = 0
+  isCreate: boolean = true
+  error = ''
   constructor(private adminApi: AdminApiService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+  onSubmit(): void {
+    if (this.isCreate) {
+      this.emptyData()
+      this.number = this.totalQuestions
+    } else {
+      this.generate()
+    }
+  }
   emptyData(): void {
     if (!this.create) {
       const formData = new FormData()
@@ -62,7 +72,14 @@ export class AddPaperComponent implements OnInit {
       this.num +
       '&name=' +
       this.name
-    this.adminApi.generateTest(query).subscribe()
+    this.adminApi.generateTest(query).subscribe(
+      (d) => {
+        null
+      },
+      (e) => {
+        this.error = e.message
+      }
+    )
   }
   number: number = 0
   countArray(): any[] {
@@ -200,41 +217,41 @@ export class AddPaperComponent implements OnInit {
     this.imgName = 'No file chosen'
     this.imgArray[this.questionNumber] = null
   }
-  publish(img:any): void {
+  publish(img: any): void {
     this.createArray(img)
     let questionIds: string[] = []
     let answers: number[] = []
-    let observables = [];
-  for (let i = 0; i < this.totalQuestions; i++) {
-    let observable;
-    if (this.checkB(i)) {
-      observable = this.adminApi.addNQuestion(this.createData[i]);
-    } else {
-      observable = this.adminApi.addMQuestion(this.createData[i]);
+    let observables = []
+    for (let i = 0; i < this.totalQuestions; i++) {
+      let observable
+      if (this.checkB(i)) {
+        observable = this.adminApi.addNQuestion(this.createData[i])
+      } else {
+        observable = this.adminApi.addMQuestion(this.createData[i])
+      }
+      observables.push(observable)
+      answers[i] = parseInt(this.createData[i].get('correctOption')!.toString())
     }
-    observables.push(observable);
-    answers[i] = parseInt(this.createData[i].get('correctOption')!.toString());
-  }
-  forkJoin(observables).subscribe((results) => {
-    questionIds = results.map((d: any) => d.id);
-    let data: {
-      name: string
-      subject: string
-      exam: string
-      num: number
-      totalQuestions: number
-      questionIds: string
-      answers: string
-    } = {
-      name: this.name,
-      subject: JSON.stringify(this.subject),
-      exam: this.exam,
-      num: this.num,
-      totalQuestions: this.totalQuestions,
-      questionIds: JSON.stringify(questionIds),
-      answers: JSON.stringify(answers),
-    }
-    this.adminApi.createTest(data).subscribe((d) => { })
-  })
+    forkJoin(observables).subscribe((results) => {
+      questionIds = results.map((d: any) => d.id)
+      let data: {
+        name: string
+        subject: string
+        exam: string
+        num: number
+        totalQuestions: number
+        questionIds: string
+        answers: string
+      } = {
+        name: this.name,
+        subject: JSON.stringify(this.subject),
+        exam: this.exam,
+        num: this.num,
+        totalQuestions: this.totalQuestions,
+        questionIds: JSON.stringify(questionIds),
+        answers: JSON.stringify(answers),
+      }
+      this.adminApi.createTest(data).subscribe((d) => { })
+    })
   }
 }

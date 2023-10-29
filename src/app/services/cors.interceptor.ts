@@ -59,6 +59,7 @@ export class CorsInterceptor implements HttpInterceptor {
       catchError((error: any) => {
         if (this.router.url.slice(0,6) == '/admin') {
           if (error instanceof HttpErrorResponse) {
+            console.log(error)
             if (error.status === 401) {
               localStorage.removeItem('admintoken')
               this.router.navigate(['/adminlogin'])

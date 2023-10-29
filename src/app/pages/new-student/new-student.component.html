@@ -6,11 +6,10 @@
     <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm" ngNativeValidate>
       <label for="input" class="text-gray-500">Name</label>
       <input
-        ngModel
+      [ngModel]="name"
         class="mb-2 w-full rounded-sm p-1"
         type="text"
         name="name"
-        [value]="name"
         required
       />
       <label for="input" class="text-gray-500">Phone Number</label>

@@ -1,6 +1,9 @@
 .active {
   filter: brightness(0.9);
 }
+input, textarea{
+  border: 1px solid lightgray;
+}
 .dark {
   background: #4A55A2;
   color: white;
