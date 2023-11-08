@@ -22,8 +22,8 @@ export class ApiService {
       environment.trinityApiUrl + '/student/profileData'
     )
   }
-  userImg(): Observable<{ profileImg: string }> {
-    return this.http.get<{ profileImg: string }>(
+  userImg(): Observable<{ profileImg: string ,name:string}> {
+    return this.http.get<{ profileImg: string,name:string }>(
       environment.trinityApiUrl + '/student/profileImg'
     )
   }

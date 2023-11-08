@@ -10,7 +10,6 @@ import { StudentNotesComponent } from './student-notes/student-notes.component';
 import { StudentSettingsComponent } from './student-settings/student-settings.component';
 import { NeetDashboardComponent } from './student-dashboard/neet-dashboard/neet-dashboard.component';
 import { JeeDashboardComponent } from './student-dashboard/jee-dashboard/jee-dashboard.component';
-import { StudentFooterComponent } from './student-footer/student-footer.component';
 import { StudentResultComponent } from './student-result/student-result.component';
 import { StudentTestListComponent } from './student-test/student-test-list/student-test-list.component';
 import { StudentGiveTestComponent } from './student-test/student-give-test/student-give-test.component';
@@ -32,7 +31,6 @@ import { CommonModule } from '@angular/common';
     StudentSettingsComponent,
     NeetDashboardComponent,
     JeeDashboardComponent,
-    StudentFooterComponent,
     StudentResultComponent,
     StudentTestListComponent,
     StudentGiveTestComponent,

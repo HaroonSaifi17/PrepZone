@@ -1,31 +1,60 @@
-<div class="flex flex-col wpr justify-between">
-  <div *ngIf="profileData$ | async as profileData" class="p-4">
-    <div class="max-w-[400px] p-3 sm:p-6 m-auto mt-5 boxS rounded-lg pb-9 text-gray-500">
-      <img
-        class="mx-auto p-1 rounded-full ring-2 ring-gray-300 mb-8"
-        [src]="profileData.profileImg"
-        alt=""
-      />
-      <p class="my-3">
-        <span class="text-gray-700 font-semibold">Name: </span>
-        {{ profileData.name }}
+<div
+  class="p-4 max-sm:pt-[80px] bg-gray-50 rounded-sm min-h-full max-sm:pb-[134px]"
+>
+  <h2 class="text-2xl font-semibold mb-5 text-blue-950">
+    Sudent Profile Details
+  </h2>
+  <ng-template #loadingSkeleton>
+    <div
+
+    class="p-4 skeleton-loader flex max-sm:flex-col gap-10 "
+    >
+    <div>
+      <div class="w-[96px] mx-auto h-[96px] bg-gray-300"></div>
+      <div class="w-[96px] h-[20px] mx-auto my-3 bg-gray-300"></div>
+      <div class="w-[96px] h-[20px] mx-auto bg-gray-300"></div>
+    </div>
+    <div>
+
+      <div class="w-[266px] h-[50px]  bg-gray-300"></div>
+      <div class="w-[266px] h-[50px] my-3 bg-gray-300"></div>
+      <div class="w-[266px] h-[50px]  bg-gray-300"></div>
+    </div>
+    </div>
+  </ng-template>
+  <div
+    *ngIf="profileData$ | async as profileData; else loadingSkeleton"
+    class="p-4 bg-gray-200 flex max-sm:flex-col gap-10"
+  >
+    <div>
+      <img class="mx-auto rounded-md" [src]="profileData.profileImg" alt="" />
+      <p class="mt-3 text-center">
+        <strong>
+          {{ profileData.name }}
+        </strong>
       </p>
-      <p class="my-3">
-        <span class="text-gray-700 font-semibold">Email: </span>
+      <p class="text-center">Student</p>
+    </div>
+    <div>
+      <p class="text-gray-700 font-semibold">EMAL ADDRESS</p>
+      <p class="mb-3">
         {{ profileData.email }}
       </p>
-      <p class="my-3">
-        <span class="text-gray-700 font-semibold">Phone Number: </span
-        >{{ profileData.phoneNumber }}
+      <p class="text-gray-700 font-semibold">PHONE NUMBER</p>
+      <p class="mb-3">
+        {{ profileData.phoneNumber }}
       </p>
-      <p class="my-3 mb-8">
-        <span class="text-gray-700 font-semibold">Preparing For: </span
-        >{{ profileData.prep }}
-      </p>
-      <a (click)="logout()" class="bg-darkNavy text-white p-3 rounded-lg">Logout</a>
+      <p class="text-gray-700 font-semibold">PREPARING FOR</p>
+      <p class="mb-3">{{ profileData.prep }} Exam</p>
     </div>
   </div>
-  <div>
-    <app-student-footer></app-student-footer>
+  <div class="sm:hidden my-6 flex justify-center">
+    <a
+      (click)="logout()"
+      class="bg-blue-500 hover:bg-blue-700 text-white p-2 px-5 rounded-full"
+    >
+      <i class="fa-solid fa-right-from-bracket mr-2"></i>
+      Logout</a
+    >
   </div>
 </div>

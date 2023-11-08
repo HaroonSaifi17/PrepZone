@@ -10,6 +10,7 @@ import { ProfileData } from 'src/app/services/profileData.interface'
 })
 export class StudentSettingsComponent implements OnInit {
   public profileData$: Observable<ProfileData> | undefined
+  check=true
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
