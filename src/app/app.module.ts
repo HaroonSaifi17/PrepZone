@@ -17,9 +17,7 @@ import { AboutComponent } from './pages/home/about/about.component'
 import { ScrollEffectDirective } from './services/scroll-effect.directive';
 import { FooterComponent } from './pages/home/footer/footer.component';
 import { ErrorComponent } from './pages/error/error.component'
-import { LoadingBarModule } from '@ngx-loading-bar/core'
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client'
 
 @NgModule({
   declarations: [
@@ -42,9 +40,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client'
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    LoadingBarModule,
     LoadingBarRouterModule,
-    LoadingBarHttpClientModule
   ],
   providers: [
     {

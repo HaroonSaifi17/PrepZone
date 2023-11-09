@@ -1,31 +1,31 @@
-<div class="w-full h-[100vh] relative p-2">
+<div class="w-full h-[100vh] relative p-2 bg-sky-50">
   <div
-    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 p-4 pb-6 rounded-md max-w-[400px] w-[80vw]"
+    class="absolute top-1/2 left-1/2 rounded-2xl text-white transform -translate-x-1/2 -translate-y-1/2 bg-blue-950 p-8   max-w-[400px] w-[90vw]"
   >
-    <h3 class="my-5 text-xl font-bold text-center">Complete your profile</h3>
+    <h3 class="mb-10 text-3xl   text-center">Account Details</h3>
     <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm" ngNativeValidate>
-      <label for="input" class="text-gray-500">Name</label>
       <input
       [ngModel]="name"
-        class="mb-2 w-full rounded-sm p-1"
+        class="my-4 w-full bg-navy rounded-sm p-3"
         type="text"
         name="name"
         required
+        placeholder="Name"
       />
-      <label for="input" class="text-gray-500">Phone Number</label>
       <input
         ngModel
-        class="mb-3 w-full rounded-sm p-1"
+        class="my-4  mb-6 w-full bg-navy rounded-sm p-3"
         type="number"
         name="phoneNumber"
         value=""
         required
+        placeholder="Phone Number"
         min="1000000000"
         max="10000000000"
       />
-      <label class="text-gray-500" for=""> Preparing For </label>
       <div class="mb-6 mt-2">
-        <span class="bg-gray-400 p-2 px-0 rounded-l-sm">
+        <span class="mr-3 inline-block mb-4">PREPARING FOR: </span>
+        <span class="bg-gray-100 p-2 px-0 mx-1 text-black rounded-l-md">
           <input
             ngModel
             class="peer hidden appearance-none outline-none"
@@ -35,12 +35,12 @@
             id="neet"
           />
           <label
-            class="cursor-pointer select-none p-2 rounded-l-sm text-center peer-checked:bg-gray-800 peer-checked:font-bold peer-checked:text-white"
+            class="cursor-pointer select-none p-2 rounded-l-md text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
             for="neet"
             >Neet</label
           >
         </span>
-        <span class="bg-gray-400 p-2 px-0 rounded-r-sm">
+        <span class="bg-gray-100 p-2 px-0 rounded-r-md text-black">
           <input
             ngModel
             class="peer hidden appearance-none outline-none"
@@ -50,13 +50,13 @@
             id="jee"
           />
           <label
-            class="cursor-pointer select-none p-2 rounded-r-sm text-center peer-checked:bg-gray-800 peer-checked:font-bold peer-checked:text-white"
+            class="cursor-pointer select-none p-2 rounded-r-md text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
             for="jee"
             >Jee</label
           >
         </span>
       </div>
-      <button type="submit" class="p-2 bg-slate-800 text-white mt-4 rounded-md">
+      <button type="submit" class="p-2 text-white w-full bg-blue-600 hover:bg-blue-500 mt-10 rounded-sm">
         Continue
       </button>
     </form>
