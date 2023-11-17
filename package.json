@@ -1,6 +1,6 @@
 {
   "name": "trinity",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,42 +10,44 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.3.0",
-    "@angular/common": "^14.1.0",
-    "@angular/compiler": "^14.1.0",
-    "@angular/core": "^14.1.0",
-    "@angular/forms": "^14.1.0",
-    "@angular/platform-browser": "^14.1.0",
-    "@angular/platform-browser-dynamic": "^14.1.0",
-    "@angular/router": "^14.1.0",
+    "@angular/animations": "^17.0.3",
+    "@angular/common": "^17.0.3",
+    "@angular/compiler": "^17.0.3",
+    "@angular/core": "^17.0.3",
+    "@angular/forms": "^17.0.3",
+    "@angular/platform-browser": "^17.0.3",
+    "@angular/platform-browser-dynamic": "^17.0.3",
+    "@angular/router": "^17.0.3",
     "@ngx-loading-bar/core": "^6.0.2",
     "@ngx-loading-bar/http-client": "^6.0.2",
     "@ngx-loading-bar/router": "^6.0.2",
-    "angular-oauth2-oidc": "^14.0.1",
-    "angular-oauth2-oidc-jwks": "^15.0.1",
-    "chart.js": "^3.4.0",
-    "eruda": "^3.0.0",
+    "chart.js": "^4.4.0",
     "mathjax-angular": "^2.1.1",
-    "ng2-charts": "^3.1.2",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "ng2-charts": "^5.0.3",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "~0.14.2"
+  },
+  "overrides": {
+    "mathjax-angular": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core"
+    }
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.1.0",
-    "@angular/cli": "^14.2.12",
-    "@angular/compiler-cli": "^14.1.0",
-    "@types/jasmine": "~4.0.0",
-    "autoprefixer": "^10.4.14",
-    "daisyui": "^3.0.2",
-    "jasmine-core": "~4.2.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.2.0",
+    "@angular-devkit/build-angular": "^17.0.1",
+    "@angular/cli": "^17.0.1",
+    "@angular/compiler-cli": "^17.0.3",
+    "@types/jasmine": "~5.1.2",
+    "autoprefixer": "^10.4.16",
+    "jasmine-core": "~5.1.1",
+    "karma": "~6.4.2",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.0.0",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2",
-    "typescript": "~4.7.2"
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "~5.2.2"
   }
 }

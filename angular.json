@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Trinity:build:production"
+              "buildTarget": "Trinity:build:production"
             },
             "development": {
-              "browserTarget": "Trinity:build:development"
+              "buildTarget": "Trinity:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Trinity:build"
+            "buildTarget": "Trinity:build"
           }
         },
         "test": {
