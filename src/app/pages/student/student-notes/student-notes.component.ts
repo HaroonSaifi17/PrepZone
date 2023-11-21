@@ -8,6 +8,8 @@ import { ApiService } from 'src/app/services/api.service'
   styleUrls: ['./student-notes.component.scss'],
 })
 export class StudentNotesComponent implements OnInit {
+  displayDiv: boolean = false
+  sortBy: number = 1
   public pdfData$:
     | Observable<{
       error: boolean
@@ -31,8 +33,11 @@ export class StudentNotesComponent implements OnInit {
   ngOnInit(): void {
     this.getData()
   }
+  toggleDisplay() {
+    this.displayDiv = !this.displayDiv
+  }
   getData():void{
-    let query:string='?search=' + this.search + '&subject=' + this.subject + '&page=' + this.page  
+    let query:string='?search=' + this.search + '&subject=' + this.subject + '&page=' + this.page + '&sort=' + this.sortBy
     this.pdfData$=this.api.pdfData(query)
   }
   pdfDownload(url:string):void{

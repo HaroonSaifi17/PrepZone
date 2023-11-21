@@ -30,21 +30,21 @@
   </div>
   <div class="flex flex-wrap mt-3 mb-6 gap-1">
     <a [class.dark]="subject == 'All'" (click)="subject = 'All'; page = 1; getData()"
-      class="p-2 bg-gray-200 rounded-full">All</a>
+      class="p-2 bg-gray-200 mb-2  rounded-full">All</a>
     <a [class.dark]="subject == 'physics'" (click)="subject = 'physics'; page = 1; getData()"
-      class="p-2 bg-gray-200 rounded-full">Physics</a>
+      class="p-2 bg-gray-200 mb-2  rounded-full">Physics</a>
     <a [class.dark]="subject == 'bio'" (click)="subject = 'bio'; page = 1; getData()"
-      class="p-2 bg-gray-200  rounded-full">Biology</a>
+      class="p-2 bg-gray-200 mb-2   rounded-full">Biology</a>
     <a [class.dark]="subject == 'chemistry'" (click)="subject = 'chemistry'; page = 1; getData()"
-      class="p-2 bg-gray-200 rounded-full">Chemistry</a>
+      class="p-2 bg-gray-200  mb-2 rounded-full">Chemistry</a>
     <a [class.dark]="subject == 'math'" (click)="subject = 'math'; page = 1; getData()"
-      class="p-2 bg-gray-200 rounded-full">Math</a>
+      class="p-2 bg-gray-200  mb-2 rounded-full">Math</a>
   </div>
   <div *ngIf="resultList$ | async as resultList; else loadingSkeleton">
-    <div (click)="navigate(result._id)" class="p-2 m-1 bg-slate-200" *ngFor="let result of resultList.results">
+    <div (click)="navigate(result._id)" class="p-2 py-4 m-1 capitalize my-2 bg-slate-200" *ngFor="let result of resultList.results">
       <div class="flex justify-between items-center">
-        <span class="font-semibold text-l">{{ result.name }}</span>
-        <span class="text-gray-600 text-sm">{{
+        <span class="font-semibold text-gray-800 text-l">{{ result.name }}</span>
+        <span class="text-gray-600 text-xs">{{
           result.date | beforeComma
           }}</span>
       </div>
@@ -52,9 +52,9 @@
     <div *ngIf="!resultList.results.length">
       <h4 class="text-center text-2xl my-4 font-bold">No Result Found</h4>
     </div>
-    <div class="flex justify-center mt-4 flex-wrap">
+    <div class="flex justify-center mt-4 flex-wrap gap-1">
       <a *ngFor="let page1 of resultList.pageno" [class.dark]="page1 == page" (click)="page = page1; getData()"
-        class="rounded-full mx-2 bg-gray-200"><span class="m-2 aspect-square">{{ page1 }}</span></a>
+        class="rounded-full mb-2  bg-gray-200"><span class="m-2 aspect-square">{{ page1 }}</span></a>
     </div>
   </div>
   <ng-template #loadingSkeleton>
