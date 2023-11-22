@@ -1,68 +1,46 @@
-<h1 class="font-bold text-2xl my-4">Welcome {{ name }}</h1>
-<h1 class="font-bold text-xl my-4">Performance</h1>
-<div class="flex flex-wrap flex-1 justify-around">
-  <div class="w-1/4 min-w-[100px] max-w-[160px]">
-    <div class="w-full aspect-square relative">
-      <canvas id="MyChart">{{ topChart }}</canvas>
-      <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        {{ topMarks }}/{{ totalMarks }}
+<div *ngIf="data$ | async as student" class="mt-5">
+  <div class="flex gap-4 flex-wrap text-center">
+    <div
+      class="flex-1 p-4 flex flex-col justify-around items-center font-semibold text-lg rounded-3xl bg-amber-400 text-white">
+      <p>{{ student.topMarks }}/300</p>
+      <p class="text-sm font-normal">Top Marks</p>
+    </div>
+    <div
+      class="flex-1 p-4 flex flex-col justify-around items-center font-semibold text-lg rounded-3xl bg-rose-500 text-white">
+      <p>{{ student.averageMarks }}/300</p>
+      <p class="text-sm font-normal">Average Marks</p>
+    </div>
+    <div
+      class="flex-1 p-4 flex flex-col justify-around items-center font-semibold text-lg rounded-3xl bg-indigo-500 text-white">
+      <p>
+        {{
+        getOverollAccuracy(
+        student.physicsAccuracy,
+        student.mathAccuracy,
+        student.chemistryAccuracy
+        )
+        }}%
       </p>
+      <p class="text-sm font-normal">Average Accuracy</p>
     </div>
-    <p class="text-xs text-center">Highest Score</p>
   </div>
-  <div class="w-1/4 min-w-[100px] max-w-[160px]">
-    <div class="w-full aspect-square relative">
-      <canvas id="MyChart2">{{ averageChart }}</canvas>
-      <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        {{ averageMarks }}/{{ totalMarks }}
-      </p>
-    </div>
-    <p class="text-xs text-center">Average Score</p>
-  </div>
-</div>
-<h1 class="font-bold text-xl my-4">Accuracy</h1>
-<div>
-  <div class="w-1/4 min-w-[100px] max-w-[160px] mx-auto mb-4">
-    <div class="w-full aspect-square relative">
-      <canvas id="MyChart3">{{ overollAccuracyChart }}</canvas>
-      <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        {{ totalAccuracy }}%
-      </p>
-    </div>
-    <p class="text-xs text-center">overoll</p>
-  </div>
-  <div class="flex flex-wrap flex-1 justify-around">
-    <div class="w-1/4 min-w-[100px] max-w-[160px]">
-      <div class="w-full aspect-square relative">
-        <canvas id="MyChart4">{{ physicsAccuracyChart }}</canvas>
-        <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {{ physicsAccuracy }}%
-        </p>
+  <div class="flex flex-wrap gap-4 h-56 mt-5 ">
+    <div class="flex-1 bg-white shadow rounded-3xl p-5">
+      <h2 class="font-semibold text-sm">Precision by Subject</h2>
+      <div class="mt-5">
+        <canvas class="w-[200px] mx-auto sm:w-[300px]" baseChart [labels]="doughnutChartLabels" [datasets]="doughnutChartDatasets"
+          [options]="doughnutChartOptions" [legend]="true" [type]="'doughnut'">
+          {{dataSet()}}
+        </canvas>
       </div>
-      <p class="text-xs text-center">Physics</p>
     </div>
-    <div class="w-1/4 min-w-[100px] max-w-[160px]">
-      <div class="w-full aspect-square relative">
-        <canvas id="MyChart5">{{ chemistryAccuracyChart }}</canvas>
-        <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {{ chemistryAccuracy }}%
-        </p>
+    <div class="flex-1 bg-white shadow rounded-3xl p-5">
+      <h2 class="font-semibold text-sm">Subject-Specific Timing</h2>
+      <div class="mt-5">
+        <canvas class="w-[200px] mx-auto sm:w-[300px]" baseChart [labels]="doughnutChartLabels" [datasets]="doughnutChartDatasets"
+          [options]="doughnutChartOptions" [legend]="true" [type]="'doughnut'">
+        </canvas>
       </div>
-      <p class="text-xs text-center">Chemistry</p>
-    </div>
-    <div class="w-1/4 min-w-[100px] max-w-[160px]">
-      <div class="w-full aspect-square relative">
-        <canvas id="MyChart6">{{ mathAccuracyChart }}</canvas>
-        <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {{ mathAccuracy }}%
-        </p>
-      </div>
-      <p class="text-xs text-center">Math</p>
     </div>
   </div>
 </div>
-<h1 class="font-bold text-xl my-4">Timming</h1>
-<div class="aspect-[3/2] max-w-[500px] mx-auto">
-  <canvas id="MyChart7">{{ timmingChart }}</canvas>
-</div>
-<p class="text-center p-2 text-gray-600">Average time per question</p>
