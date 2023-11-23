@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Chart } from 'chart.js'
-import { Subscription } from 'rxjs'
+import { Component, OnInit } from '@angular/core'
+import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service'
-import { JeeData } from 'src/app/services/jeeData.interface'
 import { NeetData } from 'src/app/services/neetData.interface'
 
 @Component({
@@ -10,221 +8,17 @@ import { NeetData } from 'src/app/services/neetData.interface'
   templateUrl: './neet-dashboard.component.html',
   styleUrls: ['./neet-dashboard.component.scss'],
 })
-export class NeetDashboardComponent implements OnInit, OnDestroy {
-  public averageChart: any
-  public topChart: any
-  public overollAccuracyChart: any
-  public bioAccuracyChart: any
-  public physicsAccuracyChart: any
-  public chemistryAccuracyChart: any
-  public timmingChart: any
-  public dataSubscription: Subscription | undefined
-
-  public name:string=''
-  public topMarks: number = 0
-  public averageMarks: number = 0
-  public totalMarks: number = 720
-  public physicsAccuracy: number = 0
-  public chemistryAccuracy: number = 0
-  public bioAccuracy: number = 0
-  public bioTime: number = 0
-  public chemistryTime: number = 0
-  public physicsTime: number = 0
-  public totalAccuracy = 0
-
-  constructor(private api:ApiService){}
-
+export class NeetDashboardComponent implements OnInit {
+  data$: Observable<NeetData> | undefined;
+  constructor(private api: ApiService) { }
   ngOnInit(): void {
-    this.dataSubscription = this.api.neetData().subscribe((data:NeetData) => {
-      this.name=data.name
-      this.topMarks = Math.floor(data.topMarks)
-      this.averageMarks = Math.floor(data.averageMarks)
-      this.physicsAccuracy = Math.floor(data.physicsAccuracy)
-      this.chemistryAccuracy = Math.floor(data.chemistryAccuracy)
-      this.bioAccuracy = Math.floor(data.bioAccuracy)
-      this.bioTime = Math.floor(data.bioTime)
-      this.chemistryTime = Math.floor(data.chemistryTime)
-      this.physicsTime = Math.floor(data.physicsTime)
-      this.totalAccuracy = Math.round(
-        (this.physicsAccuracy + this.chemistryAccuracy + this.bioAccuracy) / 3
-      )
-    this.createAverageChart()
-    this.createTopChart()
-    this.overollAccChart()
-    this.physicsAccChart()
-    this.chemistryAccChart()
-    this.bioAccChart()
-    this.timeChart()
-    })
+    this.data$ = this.api.neetData();
   }
-
-  createTopChart() {
-    const remainingMarks = this.totalMarks - this.topMarks
-    this.topChart = new Chart('MyChart', {
-      type: 'doughnut',
-      data: {
-        labels: ['Marks Obtained', 'Remaining Marks'],
-        datasets: [
-          {
-            data: [this.topMarks, remainingMarks],
-            backgroundColor: ['red', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '80%',
-      },
-    })
+  getOverollAccuracy(i: number, j: number, k: number): number {
+    return Math.floor((i + j + k) / 3);
   }
-  createAverageChart() {
-    const remainingMarks = this.totalMarks - this.averageMarks
-    this.averageChart = new Chart('MyChart2', {
-      type: 'doughnut',
-      data: {
-        labels: ['Marks Obtained', 'Remaining Marks'],
-        datasets: [
-          {
-            data: [this.averageMarks, remainingMarks],
-            backgroundColor: ['red', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '80%',
-      },
-    })
-  }
-  overollAccChart() {
-    const wrong = 100 - this.totalAccuracy
-    this.overollAccuracyChart = new Chart('MyChart3', {
-      type: 'doughnut',
-      data: {
-        labels: ['Correct', 'Wrong'],
-        datasets: [
-          {
-            data: [this.totalAccuracy, wrong],
-            backgroundColor: ['blue', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '70%',
-      },
-    })
-  }
-  physicsAccChart() {
-    const wrong = 100 - this.physicsAccuracy
-    this.physicsAccuracyChart = new Chart('MyChart4', {
-      type: 'doughnut',
-      data: {
-        labels: ['Correct', 'Wrong'],
-        datasets: [
-          {
-            data: [this.physicsAccuracy, wrong],
-            backgroundColor: ['#f43f5e', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '80%',
-      },
-    })
-  }
-  chemistryAccChart() {
-    const wrong = 100 - this.chemistryAccuracy
-    this.chemistryAccuracyChart = new Chart('MyChart5', {
-      type: 'doughnut',
-      data: {
-        labels: ['Correct', 'Wrong'],
-        datasets: [
-          {
-            data: [this.chemistryAccuracy, wrong],
-            backgroundColor: ['#a855f7', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '80%',
-      },
-    })
-  }
-  bioAccChart() {
-    const wrong = 100 - this.bioAccuracy
-    this.bioAccuracyChart = new Chart('MyChart6', {
-      type: 'doughnut',
-      data: {
-        labels: ['Correct', 'Wrong'],
-        datasets: [
-          {
-            data: [this.bioAccuracy, wrong],
-            backgroundColor: ['#0ea5e9', 'gray'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        cutout: '80%',
-      },
-    })
-  }
-  timeChart() {
-    this.timmingChart = new Chart('MyChart7', {
-      type: 'bar',
-      data: {
-        labels: ['Physics', 'Chemistry', 'bio'],
-        datasets: [
-          {
-            data: [this.physicsTime, this.chemistryTime, this.bioTime],
-            backgroundColor: ['#f43f5e', '#a855f7', '#0ea5e9'],
-          },
-        ],
-      },
-      options: {
-        aspectRatio: 1.5,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    })
-  }
-  ngOnDestroy(): void {
-    this.dataSubscription?.unsubscribe()
+  roundOff(i: number): number {
+    return Math.floor(i);
   }
 }
+
