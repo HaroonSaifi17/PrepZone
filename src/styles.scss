@@ -87,3 +87,24 @@ a {
     background-position: -200% 0;
   }
 }
+
+.load{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  animation: hideElement 500ms ease forwards;
+  z-index: 1000;
+  background: white;
+}
+@keyframes hideElement {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+

@@ -19,25 +19,25 @@
         >
           <h3
             [style.animationDelay]="'300ms'"
-            class="font-semibold text-2xl drop-shadow-md animate_down"
+            class="font-semibold text-2xl -translate-y-8 drop-shadow-lg animate_down"
           >
             {{ image.imageHeading }}
           </h3>
           <p
             [style.animationDelay]="'600ms'"
-            class="text-sm drop-shadow-sm animate_down"
+            class="text-sm -translate-y-8 drop-shadow-lg animate_down"
           >
             {{ image.imageText }}
           </p>
         </div>
       </div>
     </div>
-    <div class="absolute left-0 bottom-4 z-[15] w-full flex justify-center gap-2">
+    <div class="absolute left-0 pl-8  bottom-16 z-[15] w-full flex justify-start gap-2">
       <a
         *ngFor="let image of images; index as i"
         (click)="selectedIndex = i"
         [style.background]="selectedIndex == i ? '#e11d48' : 'white'"
-        class="inline-block w-[10px] h-[10px] rounded-full bg-white drop-shadow-md"
+        class="inline-block w-[10px] h-[10px] rounded-full bg-white drop-shadow-lg"
       >
       </a>
     </div>
