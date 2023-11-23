@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 
 interface carouselImage {
-  imageSrc: string
-  imageAlt: string
-  imageHeading: string
-  imageText: string
+  imageSrc: string;
+  imageAlt: string;
+  imageHeading: string;
+  imageText: string;
 }
 
 @Component({
@@ -15,11 +15,11 @@ interface carouselImage {
 export class CarouselComponent implements OnInit {
   constructor() { }
 
-  height: string = '400px'
-  selectedIndex: number = 0
-  indicators: boolean = true
-  controls: boolean = true
-  autoScroll: boolean = true
+  height: string = '400px';
+  selectedIndex: number = 0;
+  indicators: boolean = true;
+  controls: boolean = true;
+  autoScroll: boolean = true;
   images: carouselImage[] = [
     {
       imageSrc: './assets/carousel1.jpg',
@@ -42,38 +42,66 @@ export class CarouselComponent implements OnInit {
       imageText:
         'From Aspirations to Achievements - Experience the Difference of Quality Education and Support',
     },
-  ]
+  ];
   ngOnInit(): void {
     if (this.autoScroll) {
       setInterval(() => {
-        this.onNextClick()
-      }, 8000)
+        this.onNextClick();
+      }, 8000);
     }
   }
   selectImage(index: number): string {
     if (index == this.selectedIndex) {
-      return 'center'
+      return 'center';
+    } else if (index == this.images.length - 1 && this.selectedIndex == 0) {
+      return 'left';
+    } else if (index == this.selectedIndex - 1) {
+      return 'left';
     }
-    else if(index==this.images.length -1  && this.selectedIndex==0){
-      return 'left'
-    }
-    else if (index==this.selectedIndex-1) {
-       return 'left'
-    }
-    return 'right'
+    return 'right';
   }
   onPrevClick(): void {
     if (this.selectedIndex === 0) {
-      this.selectedIndex = this.images.length - 1
+      this.selectedIndex = this.images.length - 1;
     } else {
-      this.selectedIndex--
+      this.selectedIndex--;
     }
   }
   onNextClick(): void {
     if (this.selectedIndex === this.images.length - 1) {
-      this.selectedIndex = 0
+      this.selectedIndex = 0;
     } else {
-      this.selectedIndex++
+      this.selectedIndex++;
+    }
+  }
+  private swipeCoord: [number, number] = [0, 0];
+  private swipeTime: number = 0;
+  swipe(e: TouchEvent, when: string): void {
+    const coord: [number, number] = [
+      e.changedTouches[0].pageX,
+      e.changedTouches[0].pageY,
+    ];
+    const time = new Date().getTime();
+    if (when === 'start') {
+      this.swipeCoord = coord;
+      this.swipeTime = time;
+    } else if (when === 'end') {
+      const direction = [
+        coord[0] - this.swipeCoord[0],
+        coord[1] - this.swipeCoord[1],
+      ];
+      const duration = time - this.swipeTime;
+      if (
+        duration < 1000 &&
+        Math.abs(direction[0]) > 30 &&
+        Math.abs(direction[0]) > Math.abs(direction[1] * 3)
+      ) {
+        if (direction[0] < 0) {
+          this.onNextClick();
+        } else {
+          this.onPrevClick();
+        }
+      }
     }
   }
 }

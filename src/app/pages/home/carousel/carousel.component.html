@@ -1,6 +1,7 @@
 <div class="bg-black" [style.height]="height">
   <div
-    class="relative max-w-screen-2xl h-full mx-auto w-full text-white overflow-hidden"
+    class="relative z-40 max-w-screen-2xl h-full mx-auto w-full text-white overflow-hidden"
+    (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')"
   >
     <div
       *ngFor="let image of images; index as i"
@@ -19,25 +20,25 @@
         >
           <h3
             [style.animationDelay]="'300ms'"
-            class="font-semibold text-2xl -translate-y-8 drop-shadow-lg animate_down"
+            class="font-semibold text-2xl drop-shadow-md animate_down"
           >
             {{ image.imageHeading }}
           </h3>
           <p
             [style.animationDelay]="'600ms'"
-            class="text-sm -translate-y-8 drop-shadow-lg animate_down"
+            class="text-sm drop-shadow-sm animate_down"
           >
             {{ image.imageText }}
           </p>
         </div>
       </div>
     </div>
-    <div class="absolute left-0 pl-8  bottom-16 z-[15] w-full flex justify-start gap-2">
+    <div class="absolute left-0 bottom-4 z-[15] w-full flex justify-start pl-6 gap-2">
       <a
         *ngFor="let image of images; index as i"
         (click)="selectedIndex = i"
         [style.background]="selectedIndex == i ? '#e11d48' : 'white'"
-        class="inline-block w-[10px] h-[10px] rounded-full bg-white drop-shadow-lg"
+        class="inline-block w-[10px] h-[10px] rounded-full bg-white drop-shadow-md"
       >
       </a>
     </div>
