@@ -18,6 +18,8 @@ import { ScrollEffectDirective } from './services/scroll-effect.directive';
 import { FooterComponent } from './pages/home/footer/footer.component';
 import { ErrorComponent } from './pages/error/error.component'
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
+import { ContactComponent } from './pages/home/contact/contact.component'
+import { ServiceComponent } from './pages/home/service/service.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
     AboutComponent,
     ScrollEffectDirective,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    ContactComponent,
+    ServiceComponent,
   ],
   imports: [
     BrowserModule,
