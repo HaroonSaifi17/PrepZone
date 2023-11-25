@@ -7,6 +7,7 @@ import { JeeData } from './jeeData.interface'
 import { NeetData } from './neetData.interface'
 import { ProfileData } from './profileData.interface'
 import { map } from 'rxjs/operators'
+import { NgForm } from '@angular/forms'
 
 @Injectable({
   providedIn: 'root',
@@ -247,5 +248,8 @@ export class ApiService {
         time: number
       }
     }>(environment.trinityApiUrl + '/student/getResult/' + id)
+  }
+  sendContactUsMsg(data:NgForm){
+      return this.http.post(environment.trinityApiUrl + '/contactForm',data.value)
   }
 }

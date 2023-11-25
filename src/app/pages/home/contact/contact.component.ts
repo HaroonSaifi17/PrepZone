@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,16 @@ import { NgForm } from '@angular/forms';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  constructor(private api:ApiService){}
   submit:boolean=false
   onSubmit(form:NgForm):void{
-   console.log(form.value)
+    this.api.sendContactUsMsg(form).subscribe(d=>{
+       this.submit=true
+       form.resetForm()
+       setTimeout(()=>{
+         this.submit=false
+       },10000)
+    })
   }
 
 }
