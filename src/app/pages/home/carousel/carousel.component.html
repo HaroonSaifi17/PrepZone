@@ -15,25 +15,24 @@
           [alt]="image.imageAlt"
         />
         <div
-          class="absolute z-10 top-0 left-0 h-full flex-col flex justify-center gr px-8"
-          [style.width]="height"
+          class="absolute max-w-[700px] z-10 overflow-x-hidden top-0 left-0 h-full flex-col flex justify-center gr px-[5vw]"
         >
           <h3
             [style.animationDelay]="'300ms'"
-            class="font-semibold text-2xl drop-shadow-md animate_down"
+            class="font-semibold sm:text-4xl text-2xl drop-shadow-md animate_down"
           >
             {{ image.imageHeading }}
           </h3>
           <p
             [style.animationDelay]="'600ms'"
-            class="text-sm drop-shadow-sm animate_down"
+            class="text-sm sm:text-lg mt-2 drop-shadow-sm animate_down"
           >
             {{ image.imageText }}
           </p>
         </div>
       </div>
     </div>
-    <div class="absolute left-0 bottom-4 z-[15] w-full flex justify-start pl-6 gap-2">
+    <div class="absolute left-0 bottom-4 z-[15] w-full flex justify-start pl-[5vw] gap-2">
       <a
         *ngFor="let image of images; index as i"
         (click)="selectedIndex = i"
