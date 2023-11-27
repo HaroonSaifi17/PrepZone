@@ -39,4 +39,40 @@ export class AdminApiService {
   }){
     return this.http.post(environment.trinityApiUrl + '/admin/CreatePaper',data)
   }
+  testList(query: string): Observable<{
+    error: boolean
+    total: number
+    page: number
+    limit: number
+    tests: [
+      {
+        name: string
+        exam: string
+        date: string
+        totalQuestions: number
+        _id: string
+      }
+    ]
+    pageno: [number]
+  }> {
+    return this.http.get<{
+      error: boolean
+      total: number
+      page: number
+      limit: number
+      tests: [
+        {
+          name: string
+          exam: string
+          date: string
+          totalQuestions: number
+          _id: string
+        }
+      ]
+      pageno: [number]
+    }>(environment.trinityApiUrl + '/admin/getTests' + query)
+  }
+  deleteTest(id: string) {
+    return this.http.get(environment.trinityApiUrl + '/admin/deleteTest/' + id)
+  }
 }

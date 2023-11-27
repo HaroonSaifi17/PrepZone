@@ -1,4 +1,4 @@
-<div  [style.height]="hi1"  class="fixed top-0 left-0 w-full pointer-events-none">
+<div  [style.height]="hi1"  class="fixed z-10  top-0 left-0 w-full pointer-events-none">
   <div
     class="hidden max-sm:block overflow-hidden absolute bottom-0 left-0 bg-[#d8e5f2] p-3 pb-[112px] -mb-[100px] w-full pointer-events-auto"
   >
@@ -48,22 +48,22 @@
           class="w-[61.85px] inline-block"
           routerLink="test"
           routerLinkActive="active1"
-          ><i class="fa-solid fa-file block p-2"></i>Create</a
+          ><i class="fa-solid fa-file block p-2"></i>Test</a
         >
       </li>
       <li>
         <a
           class="w-[61.85px] inline-block"
-          routerLink="upload"
+          routerLink="notes"
           routerLinkActive="active1"
-          ><i class="fa-solid fa-arrow-up-from-bracket block p-2"></i>Upload</a
+          ><i class="fa-solid fa-arrow-up-from-bracket block p-2"></i>Notes</a
         >
       </li>
     </ul>
   </div>
 </div>
 <div
-  class="fixed top-0 left-0 bg-[#d8e5f2] p-3 w-full flex justify-between items-center sm:hidden"
+  class="fixed top-0 z-10 left-0 bg-[#d8e5f2] p-3 w-full flex justify-between items-center sm:hidden"
 >
   <div>
     <a (click)="goHome()">
@@ -138,10 +138,10 @@
             <a routerLink="add" routerLinkActive="active">Add Questions</a>
           </li>
           <li class="my-2">
-            <a routerLink="test" routerLinkActive="active">Add Papers</a>
+            <a routerLink="test" routerLinkActive="active">Tests</a>
           </li>
-          <li class="my-2" routerLink="upload" routerLinkActive="active">
-            <a>Upload Pdfs</a>
+          <li class="my-2" routerLink="notes" routerLinkActive="active">
+            <a>Notes</a>
           </li>
         </ul>
       </div>

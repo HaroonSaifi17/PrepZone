@@ -6,6 +6,8 @@ import { AddPaperComponent } from './add-paper/add-paper.component'
 import { AdminComponent } from './admin.component'
 import { UploadPdfComponent } from './upload-pdf/upload-pdf.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
+import { TestListComponent } from './add-paper/test-list/test-list.component'
+import { TestAddComponent } from './add-paper/test-add/test-add.component'
 
 const routes: Routes = [
   {
@@ -21,9 +23,21 @@ const routes: Routes = [
       {
         path: 'test',
         component: AddPaperComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: TestListComponent,
+          },
+          {
+            path: 'add',
+            component: TestAddComponent,
+          },
+          { path: '**', redirectTo: 'list' },
+        ],
       },
       {
-        path:'upload',
+        path:'notes',
         component: UploadPdfComponent,
       },
       {

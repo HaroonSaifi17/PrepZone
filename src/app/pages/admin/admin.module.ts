@@ -9,6 +9,9 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { AddPaperComponent } from './add-paper/add-paper.component';
 import { UploadPdfComponent } from './upload-pdf/upload-pdf.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TestListComponent } from './add-paper/test-list/test-list.component'
+import { TestAddComponent } from './add-paper/test-add/test-add.component'
+import { BeforeCommaPipe2 } from 'src/app/services/before-comma2.pipe'
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AddPaperComponent,
     UploadPdfComponent,
     DashboardComponent,
+    TestListComponent,
+    TestAddComponent,
+    BeforeCommaPipe2
   ],
   imports: [
     CommonModule,

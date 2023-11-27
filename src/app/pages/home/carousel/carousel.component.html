@@ -41,5 +41,11 @@
       >
       </a>
     </div>
+    <div class="max-md:hidden flex h-full absolute top-0 left-[1vw] z-[15]  items-center justify-center ">
+      <a (click)="onPrevClick()"><i class="fa-solid fa-chevron-left p-2 drop-shadow-sm  fa-xl"></i></a>
+    </div>
+    <div class="max-md:hidden flex h-full absolute top-0 right-[1vw] z-[15]  items-center justify-center ">
+      <a (click)="onNextClick()"><i class="fa-solid fa-chevron-right drop-shadow-sm p-2 fa-xl"></i></a>
+    </div>
   </div>
 </div>
