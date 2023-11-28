@@ -1,3 +1,9 @@
-<div class="bg-gray-50 rounded-md p-4  max-sm:pt-[80px] max-sm:pb-[84px] ">
-  <p>Dashboard works. This section is work in progress</p>
+<div class="bg-gray-50 rounded-md p-4 min-h-full  max-sm:pt-[80px] max-sm:pb-[84px] ">
+  <div class="md:px-4">
+    <h2 class="my-4 font-semibold text-2xl">Dashboard</h2>
+    <div *ngIf="dashboardData$ | async as data">
+      {{data.totalStudent}}
+      {{data.jeeChemistry}}
+    </div>
+  </div>
 </div>

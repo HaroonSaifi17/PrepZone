@@ -10,7 +10,7 @@
       </a>
     </div>
   </div>
-  <div class="flex flex-wrap my-3 gap-1">
+  <div class="flex flex-wrap mt-3 gap-1">
     <a [class.dark]="subject == 'All'" (click)="subject = 'All'; page = 1; getData()"
       class="p-2 bg-gray-200 mb-2 rounded-full">All</a>
     <a [class.dark]="subject == 'physics'" (click)="subject = 'physics'; page = 1; getData()"
@@ -39,10 +39,10 @@
         </span>
       </span>
     </div>
-    <a class="p-2 px-3 rounded-full bg-blue-600 text-white " (click)="navigateAdd()"><i class="fa-solid fa-plus fa-lg mr-1"></i>Add New</a>
+    <a class="p-2 px-3 text-sm  rounded-full bg-blue-600 text-white " (click)="navigateAdd()"><i class="fa-solid fa-plus mr-1"></i>Add New</a>
   </div>
   <div *ngIf="testList$ | async as testList; else loadingSkeleton">
-    <div  class="p-2 py-4 clickDiv m-2 mx-1 bg-slate-200" *ngFor="let test of testList.tests">
+    <div  class="p-2 py-4  m-2 mx-1 bg-slate-200" *ngFor="let test of testList.tests">
       <div class="flex justify-between items-center">
         <div class="flex-1">
 
@@ -60,12 +60,12 @@
           }}</p>
         </div>
         <div>
-    <a class="p-2 px-3 rounded-full bg-red-600 text-white " (click)="deleteTest(test._id)">Delete</a>
+    <a class="p-2 px-3 rounded-full text-sm  bg-red-600 text-white " (click)="deleteTest(test._id)">Delete</a>
         </div>
       </div>
     </div>
-    <div *ngIf="!testList.tests.length">
-      <h4 class="text-center text-2xl my-4 font-bold">No Result Found</h4>
+    <div *ngIf="!testList.tests.length" >
+      <h4 class="text-center text-2xl my-[10vh] font-semibold">No Result Found</h4>
     </div>
     <div class="flex justify-center mt-4 flex-wrap gap-1">
       <a *ngFor="let page1 of testList.pageno" [class.dark]="page1 == page" (click)="page = page1; getData()"

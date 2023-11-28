@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [AdminAuthGuard],
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'add', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'add',
         component: AddQuestionComponent,
