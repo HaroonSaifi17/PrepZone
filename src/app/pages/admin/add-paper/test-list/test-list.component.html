@@ -67,7 +67,7 @@
     <div *ngIf="!testList.tests.length" >
       <h4 class="text-center text-2xl my-[10vh] font-semibold">No Result Found</h4>
     </div>
-    <div class="flex justify-center mt-4 flex-wrap gap-1">
+    <div *ngIf="testList.tests.length"  class="flex justify-center mt-4 flex-wrap gap-1">
       <a *ngFor="let page1 of testList.pageno" [class.dark]="page1 == page" (click)="page = page1; getData()"
         class="rounded-full mb-2  bg-gray-200"><span class="m-2 aspect-square">{{ page1 }}</span></a>
     </div>
