@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -74,5 +74,50 @@ export class AdminApiService {
   }
   deleteTest(id: string) {
     return this.http.get(environment.trinityApiUrl + '/admin/deleteTest/' + id)
+  }
+  deletePdf(id: string) {
+    return this.http.get(environment.trinityApiUrl + '/admin/deletePdf/' + id)
+  }
+  pdfData(query: string): Observable<{
+    error: boolean
+    total: number
+    page: number
+    limit: number
+    pdfs: [
+      {
+        name: string
+        url: string
+      }
+    ]
+    pageno: [number]
+  }> {
+    return this.http.get<{
+      error: boolean
+      total: number
+      page: number
+      limit: number
+      pdfs: [
+        {
+          name: string
+          url: string
+        }
+      ]
+      pageno: [number]
+    }>(environment.trinityApiUrl + '/admin/pdfs' + query)
+  }
+  pdfDownload(url: string): Observable<void> {
+    return this.http
+      .get(environment.trinityApiUrl + '/notes/pdf/' + url, {
+        responseType: 'blob',
+      })
+      .pipe(
+        map((data: Blob) => {
+          const downloadLink = document.createElement('a')
+          downloadLink.href = URL.createObjectURL(data)
+          downloadLink.download = 'notes.pdf'
+          downloadLink.click()
+          URL.revokeObjectURL(downloadLink.href)
+        })
+      )
   }
 }

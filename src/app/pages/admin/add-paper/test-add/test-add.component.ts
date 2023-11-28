@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
+import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs'
 import { AdminApiService } from 'src/app/services/admin-api.service'
 
@@ -25,7 +26,7 @@ export class TestAddComponent implements OnInit {
   questionNumber: number = 0
   isCreate: boolean = true
   error = ''
-  constructor(private adminApi: AdminApiService) { }
+  constructor(private adminApi: AdminApiService ,private router:Router) { }
 
   ngOnInit(): void { }
   onSubmit(): void {
@@ -251,7 +252,9 @@ export class TestAddComponent implements OnInit {
         questionIds: JSON.stringify(questionIds),
         answers: JSON.stringify(answers),
       }
-      this.adminApi.createTest(data).subscribe((d) => { })
+      this.adminApi.createTest(data).subscribe((d) => {
+        this.router.navigate(['/admin/test/list'])
+      })
     })
   }
 }
