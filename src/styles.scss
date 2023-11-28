@@ -18,6 +18,9 @@ a {
   cursor: pointer;
   text-decoration: none !important;
 }
+.clickDiv{
+  cursor: pointer;
+}
 .animate_up {
   opacity: 0;
   animation: up 700ms ease-in;

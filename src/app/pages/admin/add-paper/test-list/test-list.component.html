@@ -1,4 +1,4 @@
-<div class="p-4 min-h-full 6 max-sm:px-0">
+<div class="p-4 6 max-sm:px-0">
   <h2 class="font-semibold text-3xl mb-5 text-center">TESTS</h2>
   <div class="flex justify-center">
     <div class="bg-gray-200 p-1 rounded-full">
@@ -42,7 +42,7 @@
     <a class="p-2 px-3 rounded-full bg-blue-600 text-white " (click)="navigateAdd()"><i class="fa-solid fa-plus fa-lg mr-1"></i>Add New</a>
   </div>
   <div *ngIf="testList$ | async as testList; else loadingSkeleton">
-    <div  class="p-2 py-4 m-2 mx-1 bg-slate-200" *ngFor="let test of testList.tests">
+    <div  class="p-2 py-4 clickDiv m-2 mx-1 bg-slate-200" *ngFor="let test of testList.tests">
       <div class="flex justify-between items-center">
         <div class="flex-1">
 

@@ -42,7 +42,7 @@
         class="p-2 bg-gray-200 my-1 rounded-full">Math</a>
     </div>
     <div *ngIf="pdfData$ | async as pdfData; else loadingSkeleton">
-      <div class="p-2 px-4 my-2 m-1 bg-slate-200" *ngFor="let pdf of pdfData.pdfs" (click)="pdfDownload(pdf.url)">
+      <div class="p-2 clickDiv  px-4 my-2 m-1 bg-slate-200" *ngFor="let pdf of pdfData.pdfs" (click)="pdfDownload(pdf.url)">
         <i class="fa-solid fa-file-pdf mx-3"></i>
         <span class="capitalize font-semibold text-l text-gray-700">{{
           pdf.name

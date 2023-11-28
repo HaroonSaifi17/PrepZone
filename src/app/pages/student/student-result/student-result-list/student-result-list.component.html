@@ -41,7 +41,7 @@
       class="p-2 bg-gray-200  mb-2 rounded-full">Math</a>
   </div>
   <div *ngIf="resultList$ | async as resultList; else loadingSkeleton">
-    <div (click)="navigate(result._id)" class="p-2 py-4 m-1 capitalize my-2 bg-slate-200" *ngFor="let result of resultList.results">
+    <div (click)="navigate(result._id)" class="p-2 clickDiv  py-4 m-1 capitalize my-2 bg-slate-200" *ngFor="let result of resultList.results">
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-800 text-l">{{ result.name }}</span>
         <span class="text-gray-600 text-xs">{{

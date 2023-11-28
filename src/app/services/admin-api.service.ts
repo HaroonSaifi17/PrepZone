@@ -120,4 +120,7 @@ export class AdminApiService {
         })
       )
   }
+  uploadPdf(form:FormData){
+    return this.http.post(environment.trinityApiUrl + '/notes',form)
+  }
 }
