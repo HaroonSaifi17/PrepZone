@@ -22,13 +22,19 @@ export class DashboardComponent implements OnInit {
         neetBio:number
       }>
     | undefined;
+  search:string=''
+  page:number=1
+  exam:string='jee'
+  displayDiv: boolean = false;
+  sortBy:number=1
   constructor(private api: AdminApiService) {
   }
-  log(d:any){
-    console.log(d)
+  getData():void{
+
+
   }
-  string(d:number):string{
-    return d.toString()
+  toggleDisplay() {
+    this.displayDiv = !this.displayDiv;
   }
 
   ngOnInit(): void {
