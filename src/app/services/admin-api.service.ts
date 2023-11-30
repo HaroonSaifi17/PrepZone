@@ -139,28 +139,65 @@ export class AdminApiService {
     return this.http.post(environment.trinityApiUrl + '/notes', form);
   }
   dashboardData(): Observable<{
-       totalStudent:number,
-        jeePhysics:number,
-        jeeChemistry:number,
-        jeeMath:number,
-        numPhysics:number,
-        numChemistry:number,
-        numMath:number,
-        neetPhysics:number,
-        neetChemistry:number,
-        neetBio:number
+    totalStudent: number;
+    jeePhysics: number;
+    jeeChemistry: number;
+    jeeMath: number;
+    numPhysics: number;
+    numChemistry: number;
+    numMath: number;
+    neetPhysics: number;
+    neetChemistry: number;
+    neetBio: number;
   }> {
     return this.http.get<{
-       totalStudent:number,
-        jeePhysics:number,
-        jeeChemistry:number,
-        jeeMath:number,
-        numPhysics:number,
-        numChemistry:number,
-        numMath:number,
-        neetPhysics:number,
-        neetChemistry:number,
-        neetBio:number
+      totalStudent: number;
+      jeePhysics: number;
+      jeeChemistry: number;
+      jeeMath: number;
+      numPhysics: number;
+      numChemistry: number;
+      numMath: number;
+      neetPhysics: number;
+      neetChemistry: number;
+      neetBio: number;
     }>(environment.trinityApiUrl + '/admin/dashboard');
+  }
+  studentData(query: string): Observable<{
+    error: boolean;
+    total: number;
+    page: number;
+    limit: number;
+    students: [
+      {
+        name: string;
+        topMarks: [number, number];
+        averageMarks: [number, number];
+        phoneNumber: number;
+        prep: string;
+        email: string;
+        profileImg: string;
+      }
+    ];
+    pageno: [number];
+  }> {
+    return this.http.get<{
+      error: boolean;
+      total: number;
+      page: number;
+      limit: number;
+      students: [
+        {
+          name: string;
+          topMarks: [number, number];
+          averageMarks: [number, number];
+          phoneNumber: number;
+          prep: string;
+          email: string;
+          profileImg: string;
+        }
+      ];
+      pageno: [number];
+    }>(environment.trinityApiUrl + '/admin/studentList' + query);
   }
 }

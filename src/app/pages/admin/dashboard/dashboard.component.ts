@@ -24,14 +24,41 @@ export class DashboardComponent implements OnInit {
     | undefined;
   search:string=''
   page:number=1
-  exam:string='jee'
+  exam:string='Jee'
   displayDiv: boolean = false;
-  sortBy:number=1
+  sortBy:number=-1
+  loadingArray:number[]=[0,0,0,0,0,0,0,0,0,0,0,0]
+  studentData$:Observable<{
+      error: boolean;
+      total: number;
+      page: number;
+      limit: number;
+      students: [{
+        name: string;
+        topMarks: [number,number];
+        averageMarks: [number,number];
+        phoneNumber: number;
+        prep: string;
+        email: string;
+        profileImg: string;
+      }];
+      pageno: [number];
+  }> | undefined
   constructor(private api: AdminApiService) {
   }
   getData():void{
+    let query: string =
+      '?search=' +
+      this.search +
+      '&exam=' +
+      this.exam +
+      '&page=' +
+      this.page +
+      '&sort=' +
+      this.sortBy +
+      '&limit=12';
 
-
+    this.studentData$ = this.api.studentData(query)
   }
   toggleDisplay() {
     this.displayDiv = !this.displayDiv;
@@ -39,5 +66,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardData$ = this.api.dashboardData();
+    this.getData()
   }
 }
