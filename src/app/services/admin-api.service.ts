@@ -30,11 +30,6 @@ export class AdminApiService {
       formData
     );
   }
-  checkToken(): Observable<{ check: boolean }> {
-    return this.http.get<{ check: boolean }>(
-      environment.trinityApiUrl + '/admin/check'
-    );
-  }
   generateTest(query: string): Observable<void> {
     return this.http.get<void>(
       environment.trinityApiUrl + '/admin/GeneratePaper' + query

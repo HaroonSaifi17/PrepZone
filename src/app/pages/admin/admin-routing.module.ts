@@ -8,6 +8,8 @@ import { UploadPdfComponent } from './upload-pdf/upload-pdf.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { TestListComponent } from './add-paper/test-list/test-list.component'
 import { TestAddComponent } from './add-paper/test-add/test-add.component'
+import { AttemptComponent } from './add-paper/attempt/attempt.component'
+import { ResultInfoComponent } from './add-paper/result-info/result-info.component'
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
           {
             path: 'add',
             component: TestAddComponent,
+          },
+          {
+            path: 'resultList/:id',
+            component: AttemptComponent,
+          },
+          {
+            path: 'resultInfo/:id',
+            component:ResultInfoComponent ,
           },
           { path: '**', redirectTo: 'list' },
         ],

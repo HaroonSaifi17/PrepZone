@@ -11,7 +11,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 export class UploadPdfComponent implements OnInit {
   addPopup: boolean = false;
   displayDiv: boolean = false;
-  sortBy: number = 1;
+  sortBy: number = -1;
   public pdfData$:
     | Observable<{
         error: boolean;

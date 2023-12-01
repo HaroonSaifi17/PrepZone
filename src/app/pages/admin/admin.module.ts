@@ -12,6 +12,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestListComponent } from './add-paper/test-list/test-list.component'
 import { TestAddComponent } from './add-paper/test-add/test-add.component'
 import { BeforeCommaPipe2 } from 'src/app/services/before-comma2.pipe'
+import { ResultInfoComponent } from './add-paper/result-info/result-info.component'
+import { AttemptComponent } from './add-paper/attempt/attempt.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { BeforeCommaPipe2 } from 'src/app/services/before-comma2.pipe'
     DashboardComponent,
     TestListComponent,
     TestAddComponent,
+    ResultInfoComponent,
+    AttemptComponent,
     BeforeCommaPipe2
   ],
   imports: [

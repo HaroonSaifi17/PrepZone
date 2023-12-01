@@ -44,7 +44,7 @@
   <div *ngIf="testList$ | async as testList; else loadingSkeleton">
     <div  class="p-2 py-4  m-2 mx-1 bg-slate-200" *ngFor="let test of testList.tests">
       <div class="flex justify-between items-center">
-        <div class="flex-1">
+        <div (click)="navigateStudent(test._id)" class="flex-1 clickDiv">
 
         <span class="font-semibold text-l capitalize text-gray-800">{{ test.name }}</span>
           <p>

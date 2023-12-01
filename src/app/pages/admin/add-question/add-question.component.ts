@@ -52,7 +52,7 @@ export class AddQuestionComponent implements OnInit {
         formData.append('exam', this.exam)
         formData.append('subject', this.subject)
         formData.append('difficulty', this.difficulty)
-        formData.append('options', this.options.toString())
+        formData.append('options',JSON.stringify(this.options))
         formData.append('correctOption', this.correctOption.toString())
         if (img.files.length !== 0) {
           formData.append('img', img.files[0])

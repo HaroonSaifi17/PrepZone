@@ -75,10 +75,7 @@ export class TestAddComponent implements OnInit {
       this.name
     this.adminApi.generateTest(query).subscribe(
       (d) => {
-        null
-      },
-      (e) => {
-        this.error = e.message
+        this.router.navigate(['/admin/test/list'])
       }
     )
   }

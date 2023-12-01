@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service'
 })
 export class StudentNotesComponent implements OnInit {
   displayDiv: boolean = false
-  sortBy: number = 1
+  sortBy: number = -1
   public pdfData$:
     | Observable<{
       error: boolean

@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service'
 })
 export class StudentTestListComponent implements OnInit {
   displayDiv: boolean = false
-  sortBy: number = -1
+  sortBy: number = 1
   public testList$:
     | Observable<{
       error: boolean

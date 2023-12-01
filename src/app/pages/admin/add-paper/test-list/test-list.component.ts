@@ -10,7 +10,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 })
 export class TestListComponent {
   displayDiv: boolean = false
-  sortBy: number = -1
+  sortBy: number = 1
   public testList$:
     | Observable<{
       error: boolean
@@ -54,6 +54,9 @@ export class TestListComponent {
   }
   navigateAdd():void{
      this.router.navigate(['admin/test/add'])
+  }
+  navigateStudent(id:string):void{
+     this.router.navigate(['admin/test/resultList/' + id])
   }
   deleteTest(id:string):void{
     this.api.deleteTest(id).subscribe(e=>{

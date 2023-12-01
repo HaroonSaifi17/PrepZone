@@ -14,18 +14,12 @@ export class AdminComponent implements OnInit {
   public isClassAdded: Boolean = false
   public height: number = 0
   public hi1:string=''
-  constructor(private router: Router, private adminApi: AdminApiService) {
+  constructor(private router: Router) {
     this.height = window.innerHeight
     this.hi1=`${this.height}px`
   }
 
   ngOnInit(): void {
-    this.adminApi.checkToken().subscribe(
-      (d) => { },
-      (e) => {
-        console.log(e)
-      }
-    )
   }
   logout(): void {
     localStorage.removeItem('admintoken')

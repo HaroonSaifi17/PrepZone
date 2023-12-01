@@ -19,10 +19,10 @@
         </span>
         <span [style.display]="displayDiv ? 'flex' : 'none'"
           class="absolute top-7 w-[92.39px] left-0 flex rounded-md flex-col bg-gray-400 text-white">
-          <p [class.light]="-1 == sortBy" (click)="sortBy = -1; getData()" class="p-1 px-2 rounded-t-md">
+          <p [class.light]="1 == sortBy" (click)="sortBy = 1; getData()" class="p-1 px-2 rounded-t-md">
             Oldest
           </p>
-          <p [class.light]="1 == sortBy" (click)="sortBy = 1; getData()" class="p-1 px-2 rounded-b-md">
+          <p [class.light]="-1 == sortBy" (click)="sortBy = -1; getData()" class="p-1 px-2 rounded-b-md">
             Latest
           </p>
         </span>
