@@ -62,20 +62,6 @@ a {
 .scroll-lock {
   overflow: hidden;
 }
-.ngx-spinner-icon {
-  border: solid 5px blue !important;
-  border-top-color: inherit !important;
-  border-left-color: inherit !important;
-}
-.ngx-spinner{
-  position: fixed !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  display: flex !important;
-  z-index: 100;
-  justify-content: center;
-  align-items: center;
-}
 .skeleton-loader {
   background: linear-gradient(90deg, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%);
   background-size: 200% 100%;
