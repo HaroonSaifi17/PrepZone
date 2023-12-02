@@ -195,4 +195,110 @@ export class AdminApiService {
       pageno: [number];
     }>(environment.trinityApiUrl + '/admin/studentList' + query);
   }
+  attemptData(query: string): Observable<{
+    error: boolean;
+    total: number;
+    page: number;
+    limit: number;
+    students: [
+      {
+        _id:string
+        name: string;
+        profileImg: string;
+        results: [
+          {
+            name: string;
+            date: string;
+            _id: string;
+            marks: number;
+          }
+        ];
+      }
+    ];
+    pageno: [number];
+  }> {
+    return this.http.get<{
+      error: boolean;
+      total: number;
+      page: number;
+      limit: number;
+      students: [
+        {
+          _id:string
+          name: string;
+          profileImg: string;
+          results: [
+            {
+              name: string;
+              date: string;
+              _id: string;
+              marks: number;
+            }
+          ];
+        }
+      ];
+      pageno: [number];
+    }>(environment.trinityApiUrl + '/admin/attemptList' + query);
+  }
+  getresult(query:string): Observable<{
+    test: {
+      exam: string
+      questionIds: [string]
+      totalQuestions: number
+      answers: [number]
+        num:number
+    }
+    results: {
+      name: string
+      subject: [string]
+      date: string
+      marks: number
+      correct: [number]
+      wrong: [number]
+      result: [number]
+      time: number
+    }
+  }> {
+    return this.http.get<{
+      test: {
+        exam: string
+        questionIds: [string]
+        totalQuestions: number
+        answers: [number]
+        num:number
+      }
+      results: {
+        name: string
+        subject: [string]
+        date: string
+        marks: number
+        correct: [number]
+        wrong: [number]
+        result: [number]
+        time: number
+      }
+    }>(environment.trinityApiUrl + '/admin/getResult' + query )
+  }
+  getquestion(query: string): Observable<{
+    questionText: string
+    options: [string]
+    img: string
+  }> {
+    return this.http.get<{
+      questionText: string
+      options: [string]
+      img: string
+    }>(environment.trinityApiUrl + '/admin/getQuestion' + query)
+  }
+  getnquestion(query: string): Observable<{
+    questionText: string
+    options: [string]
+    img: string
+  }> {
+    return this.http.get<{
+      questionText: string
+      options: [string]
+      img: string
+    }>(environment.trinityApiUrl + '/admin/getnQuestion' + query)
+  }
 }

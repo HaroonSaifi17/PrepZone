@@ -4,24 +4,11 @@ import { Chart } from 'chart.js'
 import { Observable, Subscription } from 'rxjs'
 import { ApiService } from 'src/app/services/api.service'
 import { environment } from 'src/environments/environment'
-import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'app-student-result-detail',
   templateUrl: './student-result-detail.component.html',
   styleUrls: ['./student-result-detail.component.scss'],
-  animations: [
-    trigger('in', [
-      transition(':enter', [
-        style({ height: 0, opacity: 0 }),
-        animate('100ms 50ms ease-in', style({ height: '*', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ height: '*', opacity: 0 }),
-        animate('50ms ease-in', style({ height: 0, opacity: 0 })),
-      ]),
-    ]),
-  ],
 })
 export class StudentResultDetailComponent implements OnInit, OnDestroy {
   public scoreChart: any

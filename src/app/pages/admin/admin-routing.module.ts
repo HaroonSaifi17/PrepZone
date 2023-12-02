@@ -40,7 +40,7 @@ const routes: Routes = [
             component: AttemptComponent,
           },
           {
-            path: 'resultInfo/:id',
+            path: 'resultInfo/:id1/:id2/:id3',
             component:ResultInfoComponent ,
           },
           { path: '**', redirectTo: 'list' },
