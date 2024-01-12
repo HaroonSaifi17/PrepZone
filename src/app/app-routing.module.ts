@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'newStudent',
     component: NewStudentComponent,
-    canActivate: [NewStudentGuard],
+    // canActivate: [NewStudentGuard],
   },
   {
     path: 'student',

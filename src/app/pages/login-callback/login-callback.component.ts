@@ -46,6 +46,7 @@ export class LoginCallbackComponent implements OnInit, OnDestroy {
             queryParamsHandling: 'merge',
           })
         } else {
+          console.log(data)
           this.router.navigate(['/newStudent'], {
             state: {
               viaNavigate: true,
