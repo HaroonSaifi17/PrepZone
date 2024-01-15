@@ -23,22 +23,22 @@ export class CarouselComponent implements OnInit {
   autoScroll: boolean = true;
   images: carouselImage[] = [
     {
-      imageSrc: './assets/carousel1.jpg',
-      imageAlt: 'carousel1.jpg',
+      imageSrc: './assets/carousel1.webp',
+      imageAlt: 'carousel1.webp',
       imageHeading: 'Your Path to JEE & NEET Excellence',
       imageText:
         'Expert Guidance, Comprehensive Resources, and Personalized Support for Your Academic Triumph',
     },
     {
-      imageSrc: './assets/carousel2.jpg',
-      imageAlt: 'carousel2.jpg',
+      imageSrc: './assets/carousel2.webp',
+      imageAlt: 'carousel2.webp',
       imageHeading: 'Ace JEE and NEET with Confidence',
       imageText:
         'Join Us for Unparalleled Coaching, Practice, and Results – Your Future Begins Here',
     },
     {
-      imageSrc: './assets/carousel1.jpg',
-      imageAlt: 'carousel3.jpg',
+      imageSrc: './assets/carousel1.webp',
+      imageAlt: 'carousel3.webp',
       imageHeading: 'Empowering Your JEE and NEET Journey',
       imageText:
         'From Aspirations to Achievements - Experience the Difference of Quality Education and Support',
@@ -48,7 +48,7 @@ export class CarouselComponent implements OnInit {
     if (this.autoScroll) {
       setInterval(() => {
         this.onNextClick();
-      }, 8000);
+      }, 10000);
     }
   }
   selectImage(index: number): string {
