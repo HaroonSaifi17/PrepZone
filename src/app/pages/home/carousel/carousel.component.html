@@ -13,6 +13,9 @@
           class="w-full h-full object-cover"
           [src]="image.imageSrc"
           [alt]="image.imageAlt"
+          loading="lazy"
+          (load)="loadIndex=loadIndex+1"
+          *ngIf="loadIndex>=i"
         />
         <div
           class="absolute max-w-[700px] z-10 overflow-x-hidden top-0 left-0 h-full flex-col gap-4 flex justify-center gr px-[5vw]"

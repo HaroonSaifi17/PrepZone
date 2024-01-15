@@ -17,6 +17,7 @@ export class CarouselComponent implements OnInit {
 
   height: string = '400px';
   selectedIndex: number = 0;
+  loadIndex: number = 0;
   indicators: boolean = true;
   controls: boolean = true;
   autoScroll: boolean = true;
