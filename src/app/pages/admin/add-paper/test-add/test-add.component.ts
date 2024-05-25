@@ -64,7 +64,7 @@ export class TestAddComponent implements OnInit {
       '?exam=' +
       this.exam +
       '&subject=' +
-      this.subject +
+      JSON.stringify(this.subject) +
       '&difficulty=' +
       this.difficulty +
       '&totalQuestions=' +
