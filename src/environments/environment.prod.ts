@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  trinityApiUrl:"https://server.haroonsaifi.site"
+  trinityApiUrl:"https://server.prepzone.tech"
 };
